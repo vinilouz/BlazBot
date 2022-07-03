@@ -1,0 +1,238 @@
+.s-footer {
+  position: relative;
+  background-color: $color-brand-orange;
+  color: $color-mono-white;
+  padding: 25rem 0 32rem;
+  z-index: -1;
+  background: url(../images/footer-bg.png) center / cover no-repeat;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 10rem;
+    background: $color-mono-white;
+    
+    @include mq('md', 'max') {
+      height: 10.8rem;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 1.8rem;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 6rem;
+    background: url(../images/footer-detail.svg) center / contain repeat-x;
+    
+    @include mq('md', 'max') {
+      background-size: cover;
+      bottom: 2.3rem;
+      height:4.5rem;
+    }
+  }
+  
+  @include mq('md', 'max') {
+    height: auto;
+    padding: 6rem 0 16.6rem;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    @include mq('md', 'max') {
+      display: block;
+    }
+  }
+
+  &__column-1 {
+    max-width: 50.8rem;
+    width: 100%;
+    margin-right: 3rem;
+    
+    @include mq('md', 'max') {
+      max-width: unset;
+    }
+
+    .btn-secondary {
+      margin-top: 6rem;
+      
+      @include mq('md', 'max') {
+        margin-top: 3rem;
+      }
+
+      @include mq('xs', 'max') {
+        width: 100%;
+      }
+    }
+  }
+
+  &__title {
+    margin-bottom: 3rem;
+    @include others-large-title-bold;
+
+    @include mq('md', 'max') {
+      @include heading-h2-bold;
+    }
+  }
+
+  &__text {
+    @include body-medium;
+    color: $color-brand-light-10;
+    
+    @include mq('md', 'max') {
+      @include mb-body-medium;
+    }
+  }
+
+  &__column-2 {
+    max-width: 104.3rem;
+    width: 100%;
+    
+    @include mq('md', 'max') {
+      max-width: unset;
+      margin-top: 6rem;
+    }
+  }
+  
+  &__top {
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__content {
+      max-width: 31.4rem;
+      width: 100%;
+      margin-right: 3rem;
+      
+      @include mq('sm', 'max') {
+        max-width: unset;
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__subtitle {
+    margin-bottom: 2rem;
+    @include body-big-bold;
+
+    @include mq('md', 'max') {
+      display: none;
+    }
+  }
+
+  &__work {
+    max-width: 62.9rem;
+    width: 100%;
+
+    @include mq('md', 'max') {
+      display: none;
+    }
+
+    &__wrapper {
+      display: flex;
+      align-items: flex-start;
+
+      @include mq('sm', 'max') {
+        display: none;
+      }
+
+      @include mq('xl', 'max') {
+        display: block;
+      }
+    }
+
+    .btn-secondary {
+      flex-shrink: 0;
+      margin-left: 6rem;
+      
+      @include mq('xl', 'max') {
+        margin: 2rem 0 0;
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 6rem;
+
+    @include mq('md', 'max') {
+      margin-top: 2rem;
+      display: block;
+    }
+
+    &__content {
+
+      &:nth-of-type(2) {
+        display: none;
+
+        @include mq('md', 'max') {
+          display: block;
+        }
+      }
+      &:not(:last-of-type) {
+        margin-right: 25.5rem;
+
+        @include mq('md', 'max') {
+          margin-bottom: 2rem;
+        }
+        
+        @include mq('xl', 'max') {
+          margin-right: 7rem;
+        }
+      }
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    @include body-medium;
+    color: $color-brand-light-10;
+
+    svg {
+      width: 2.4rem;
+      height: 2.4rem;
+      margin-right: 1rem;
+    }
+  }
+
+  .btn-secondary {
+    color: $color-mono-white !important;
+    border-color: $color-mono-white !important;
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+
+    &__item {
+      &:not(:last-of-type) {
+        margin-right: 3rem;
+      }
+    }
+
+    &__link {
+
+      &:hover {
+        color: $color-brand-dark;
+      }
+      
+      svg {
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+    }
+  }
+}
+
+.grecaptcha-badge { display: none; }

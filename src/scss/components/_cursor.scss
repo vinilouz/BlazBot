@@ -1,0 +1,43 @@
+.cursor {
+  position: fixed;
+  left: -6rem;
+  top: -6rem;
+  z-index: 10000000;
+  transform: translate3d(0, 0, 0) scale(.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12rem;
+  height: 12rem;
+  will-change: transform;
+  pointer-events: none;
+  backdrop-filter: blur(2rem);
+  background-color: rgba($color-brand-orange, .5);
+  overflow: hidden;
+  border-radius: 50%;
+  transform-origin: center;
+  opacity: 0;
+  mix-blend-mode: hard-light;
+  transition: all .1s;
+
+  &__text {
+    position: relative;
+    z-index: 10;
+    font-size: 1.8rem;
+    color: $color-mono-white;
+    transition: all .2s ease-out;
+  }
+
+  
+  &.cursor-active {
+    opacity: 1;
+  }
+}
+
+// a {
+//   cursor: none;
+// }
+
+a {
+  cursor: none;
+}

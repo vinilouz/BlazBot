@@ -1,0 +1,345 @@
+// Main GPS
+.main-gps {
+  // Hero GPS
+  .s-hero {
+    &--gps {
+      @include mq("md", "max") {
+        min-height: 58.9rem;
+      }
+
+      &::before {
+        display: none;
+      }
+
+      .s-hero__flex {
+        align-items: flex-end;
+      }
+
+      .s-hero__content {
+        max-width: 30.2rem;
+        width: 100%;
+        margin-right: 20.6rem;
+
+        @include mq("md", "max") {
+          max-width: unset;
+          margin-right: 0;
+        }
+      }
+
+      .s-hero__title {
+        @include others-large-title-bold;
+        color: $color-mono-black;
+
+        @include mq("md", "max") {
+          @include heading-h2-bold;
+          color: $color-brand-orange;
+        }
+      }
+
+      .s-hero__subtitle {
+        color: $color-brand-orange;
+
+        @include mq("md", "max") {
+          @include mb-body-big-bold;
+          color: $color-mono-black;
+        }
+      }
+
+      .s-hero__text {
+        max-width: 92.5rem;
+        @include mq("md", "max") {
+          max-width: unset;
+        }
+        p {
+          color: $color-mono-black-light;
+        }
+      } 
+    }
+  }
+
+  // Gps Image
+  .s-gps-image {
+    position: relative;
+    z-index: 1000;
+    display: flex;
+    align-items: flex-end;
+    background-size: cover;
+    // background: url(../images/gps-bg.png) center / cover no-repeat;
+
+    &-desktop {
+      display: block;
+    }
+
+    &-mobile {
+      display: none;
+    }
+
+    @include mq("sm", "max") {
+      &-desktop {
+        display: none;
+      }
+  
+      &-mobile {
+        display: block;
+      }
+    }
+
+    @include mq("md", "max") {}
+
+    &__wrapper {
+      max-width: 145.9rem;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    &__figure {
+      margin: auto;
+    }
+
+    &__img {
+      height: auto; 
+      margin: 0px auto;
+
+      @include mq("sm", "max") {}
+    }
+  }
+
+  .full-box-content {
+    padding: 16rem 0;
+
+    @include mq("md", "max") {
+      padding: 8rem 0;
+    }
+
+    &__title {
+      max-width: 32.8rem;
+      margin-right: 2.9rem;
+
+      @include heading-h2-bold;
+
+      @include mq("md", "max") {
+        max-width: unset;
+        margin-right: 0;
+        @include heading-h3-bold;
+      }
+    }
+
+    &__text {
+      max-width: 80.7rem;
+      display: flex;
+      align-items: flex-end;
+
+      @include mq("md", "max") {
+        max-width: unset;
+        margin-top: 3rem;
+
+        p {
+          @include mb-body-medium;
+        }
+      }
+    }
+  }
+
+  // Content
+  .s-gps-content {
+    background-color: $color-mono-white;
+
+    &__primary {
+      padding: 13.7rem 0 16rem;
+
+      @include mq("md", "max") {
+        padding: 8rem 0 17rem;
+      }
+    }
+
+    &__wrapper {
+      max-width: 80.6rem;
+      width: 100%;
+
+      @include mq("md", "max") {
+        max-width: unset;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        @include heading-h3-bold;
+        color: $color-brand-orange;
+        margin-bottom: 4rem;
+
+        @include mq("md", "max") {
+          margin-bottom: 3rem;
+        }
+      }
+
+      p {
+        @include body-medium;
+        color: $color-mono-black-light;
+
+        @include mq("md", "max") {
+          @include mb-body-medium;
+        }
+      }
+    }
+
+    &__secondary {
+      position: relative;
+      width: 100%;
+      height: 51.7rem;
+      background: url(../images/gps-content-bg.png) center / cover no-repeat;
+
+      @include mq("md", "max") {
+        height: 36.5rem;
+      }
+    }
+
+    &__img {
+      position: absolute;
+      right: 0;
+      top: -23.1rem;
+      width: 76.6rem;
+      height: auto;
+
+      @include mq("3xl", "max") {
+        right: -20rem;
+      }
+
+      @include mq("xl", "max") {
+        right: -25rem;
+      }
+
+      @include mq("md", "max") {
+        right: 0;
+        top: -9.7rem;
+        width: 30.3rem;
+      }
+    }
+  }
+
+  // GPS Módulos
+  .s-gps-modules {
+    padding: 16rem 0;
+    background: $color-mono-white;
+
+    @include mq("md", "max") {
+      padding: 8rem 0;
+    }
+
+    &__title {
+      @include heading-h2-bold;
+
+      @include mq("md", "max") {
+        @include heading-h3-bold;
+      }
+    }
+
+    &__items {
+      display: grid;
+      gap: 6rem;
+      margin-top: 6rem;
+    }
+
+    &__item {
+      &:not(:last-of-type) {
+        padding-bottom: 6rem;
+        border-bottom: 0.2rem solid $color-mono-gray-light;
+      }
+
+      &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+
+        @include mq("md", "max") {
+          display: block;
+        }
+      }
+
+      &__primary {
+        max-width: 59.7rem;
+        width: 100%;
+        margin-right: 3rem;
+
+        @include mq("md", "max") {
+          max-width: unset;
+        }
+
+        p {
+          @include body-medium;
+          color: $color-mono-black-light;
+
+          @include mq("md", "max") {
+            @include mb-body-medium;
+          }
+        }
+      }
+
+      &__title {
+        @include body-big-bold;
+        color: $color-brand-orange;
+
+        @include mq("md", "max") {
+          @include mb-body-big-bold;
+        }
+      }
+
+      &__secondary {
+        max-width: 47.8rem;
+        width: 100%;
+        color: $color-mono-black-light;
+
+        @include mq("md", "max") {
+          max-width: unset;
+          margin-top: 3rem;
+        }
+
+        ul,
+        p {
+          @include body-medium;
+          color: $color-mono-black-light;
+
+          @include mq("md", "max") {
+            @include mb-body-medium;
+          }
+        }
+
+        ul {
+          list-style: disc inside;
+        }
+      }
+    }
+  }
+
+  // Uma metodologia proprietária
+  .s-proprietary-methodology {
+    padding: 10rem 0;
+    background: $color-mono-gray-light;
+
+    @include mq("md", "max") {
+      padding: 8rem 0;
+    }
+
+    .content-i {
+      &__title {
+        @include heading-h2-bold;
+
+        @include mq("md", "max") {
+          @include heading-h3-bold;
+        }
+      }
+
+      &__text {
+        @include mq("md", "max") {
+          margin-top: 2.9rem;
+        }
+      }
+
+      &__item__title {
+        font-weight: 700;
+      }
+    }
+  }
+}

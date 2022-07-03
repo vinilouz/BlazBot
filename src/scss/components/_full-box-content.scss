@@ -1,0 +1,44 @@
+.full-box-content {
+  padding: 10rem 0;
+  background-color: $color-mono-gray-light;
+  
+  @include mq('md', 'max') {
+    padding: 6rem 0;
+  }
+
+  &__wrapper {
+    display: flex;
+    
+    @include mq('md', 'max') {
+      display: block;
+    }
+  }
+
+  &__title {
+    max-width: 27.9rem;
+    width: 100%;
+    margin-right: 4.9rem;
+    @include heading-h3;
+    
+    @include mq('md', 'max') {
+      max-width: unset;
+    }
+  }
+
+  &__text {
+    flex-grow: 1;
+
+    @include mq('md', 'max') {
+      margin-top: 2rem;
+    }
+
+    p {
+      @include body-medium;
+      color: $color-mono-black-light;
+
+      &:not(:last-of-type) {
+        margin-bottom: 2.8rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,197 @@
+/**
+ * Headings
+ */
+@mixin heading-h1 {
+  font-size: 6.4rem;
+  font-weight: 400;
+  line-height: 6.6rem;
+  letter-spacing: -.3rem;
+}
+
+@mixin heading-h1-bold {
+  @include heading-h1;
+  font-weight: 700;
+}
+
+@mixin heading-h2 {
+  font-size: 4.8rem;
+  font-weight: 400;
+  line-height: 4.8rem;
+  letter-spacing: -.2rem;
+}
+
+@mixin heading-h2-bold {
+  @include heading-h2;
+  font-weight: 700;
+}
+
+@mixin heading-h3 {
+  font-size: 3.2rem;
+  font-weight: 400;
+  line-height: 3.8rem;
+  letter-spacing: -.1rem;
+}
+
+@mixin heading-h3-bold {
+  @include heading-h3;
+  font-weight: 700;
+}
+
+/********************
+**************** Body
+********************/
+
+/**
+ * Small
+ */
+@mixin body-small {
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2.1rem;
+}
+
+@mixin body-small-bold {
+  @include body-small;
+  font-weight: 700;
+}
+
+@mixin body-small-underline-bold {
+  @include body-small-bold;
+  text-decoration: underline;
+}
+
+/**
+ * Default
+ */
+@mixin body-default {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  letter-spacing: -.02rem;
+}
+
+@mixin body-default-bold {
+  @include body-default;
+  font-weight: 700;
+}
+
+@mixin body-default-underline-bold {
+  @include body-default-bold;
+  text-decoration: underline;
+}
+
+/**
+ * Medium
+ */
+@mixin body-medium {
+  font-size: 2rem;
+  line-height: 2.8rem;
+  letter-spacing: -.05rem;
+}
+
+@mixin body-medium-bold {
+  @include body-medium;
+  font-weight: 700;
+}
+
+@mixin body-medium-underline-bold {
+  @include body-medium-bold;
+  text-decoration: underline;
+}
+
+/**
+ * Big
+ */
+@mixin body-big {
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  letter-spacing: -.08rem;
+}
+
+@mixin body-big-bold {
+  @include body-big;
+  font-weight: 700;
+}
+
+@mixin body-big-underline-bold {
+  @include body-big-bold;
+  text-decoration: underline;
+}
+
+/**
+ * Caption
+ */
+@mixin caption-small {
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+}
+
+@mixin caption-small-bold {
+  @include caption-small;
+  font-weight: 700;
+}
+
+/**
+ * Others
+ */
+@mixin others-buttons {
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 1.8rem;
+  letter-spacing: -0.02em;
+}
+
+@mixin others-buttons-small {
+  @include others-buttons;
+  font-size: 1.4rem;
+  line-height: 1.5rem;
+}
+
+@mixin others-large-title-bold {
+  font-weight: 700;
+  font-size: 10rem;
+  line-height: 9rem;
+  letter-spacing: -0.5rem;
+}
+
+@mixin others-x-large-title-bold {
+  font-weight: 700;
+  font-size: 16rem;
+  line-height: 11rem;
+  letter-spacing: -0.8rem;
+}
+
+/**
+ * Mobile
+ */
+ @mixin mb-body-big {
+  font-size: 2.2rem;
+  line-height: 3rem;
+  letter-spacing: -.08rem;
+}
+
+@mixin mb-body-big-bold {
+  @include mb-body-big;
+  font-weight: 700;
+}
+
+@mixin mb-body-big-underline-bold {
+  @include mb-body-big-bold;
+  line-height: 3.4rem;
+  text-decoration: underline;
+}
+
+@mixin mb-body-medium {
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 2.6rem;
+  letter-spacing: -.05rem;
+}
+
+@mixin mb-body-default {
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  letter-spacing: -.02rem;
+}

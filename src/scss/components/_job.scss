@@ -1,0 +1,68 @@
+.job { 
+  &__figure { 
+    width: 100%;
+    height: 60rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    
+    @include mq('lg', 'max') {
+      height: 40rem;
+    }
+
+    @include mq('md', 'max') {
+      height: 34rem;
+      padding: 2rem;
+    }
+
+    >[data-scroll] {
+      height: 100%;
+    }
+  }
+
+  &__img { 
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+
+  &__content { 
+    padding: 4rem 4rem 0;
+    display: flex;
+    flex-direction: column;
+    
+    @include mq('md', 'max') {
+      padding: 2.5rem 2.5rem 0;
+    }
+  }
+
+  &__client { 
+    @include body-medium;
+    color: $color-brand-orange;
+    
+    @include mq('md', 'max') {
+      @include mb-body-default;
+    }
+  }
+
+  &__name { 
+    margin-top: .5rem;
+    @include heading-h3-bold;
+    
+    @include mq('md', 'max') {
+      margin-top: 0;
+      @include mb-body-big-bold;
+    }
+  }
+
+  &__text { 
+    margin-top: 3rem;
+    @include body-medium;
+    color: $color-mono-black-light;
+    
+    @include mq('md', 'max') {
+      margin-top: 2rem;
+      @include mb-body-medium;
+    }
+  }
+}

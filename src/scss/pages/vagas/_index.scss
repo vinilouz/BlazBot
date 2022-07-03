@@ -1,0 +1,289 @@
+.main-jobs-offer {
+  // ###################################################################
+  // ############## Jobs Text ##########################################
+  // ###################################################################
+  .s-jobs-text {
+    position: relative;
+    z-index: 1000;
+    padding-top: 16rem;
+    background-color: $color-mono-white;
+    
+    @include mq('md', 'max') {
+      padding-top: 8rem;
+    }
+  
+    &__primary {
+      p {
+        @include heading-h3;
+        
+        @include mq('md', 'max') {
+          @include mb-body-big;
+        }
+      }
+    }
+  
+    &__secondary {
+      margin-top: 5rem;
+      
+      @include mq('md', 'max') {
+        margin-top: 3rem;
+      }
+  
+      p {
+        @include body-big;
+        color: $color-mono-black-light;
+  
+        @include mq('md', 'max') {
+          @include mb-body-medium;
+        }
+      }
+    }
+  }
+  
+  // ###################################################################
+  // ############## Galeria ############################################
+  // ###################################################################
+  .s-jobs-gallery {
+    margin-top: 16rem;
+    
+    @include mq('md', 'max') {
+      margin-top: 8rem;
+    }
+  
+    &__img {
+      height: auto;
+    }
+
+    &__figure,
+    &__img {
+      width: 100%;
+    }
+  }
+  
+  // ###################################################################
+  // ############## O que te oferecemos ################################
+  // ###################################################################
+  .s-jobs-offer {
+    margin-top: 18rem;
+    
+    @include mq('md', 'max') {
+      margin-top: 12rem;
+    }
+  
+    &__wrapper {
+      display: flex;
+      align-items: flex-end;
+  
+      @include mq('md', 'max') {
+        display: block;
+      }
+    }
+  
+    &__title {
+      flex-shrink: 0;
+      max-width: 32.8rem;
+      width: 100%;
+      @include heading-h2;
+      margin-right: 2.9rem;
+      
+      @include mq('md', 'max') {
+        max-width: unset;
+        @include heading-h3-bold;
+      }
+    }
+  
+    &__text {
+      flex-grow: 1;
+  
+      @include mq('md', 'max') {
+        margin-top: 1rem;
+      }
+  
+      p {
+        @include body-medium;
+        color: $color-mono-black-light;
+      }
+    }
+  
+    &__items {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7.5rem 4.1rem;
+      margin-top: 6rem;
+      padding-top: 6.7rem;
+      border-top: .2rem solid $color-mono-gray;
+      
+      @include mq('md', 'max') {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4rem;
+        margin-top: 4rem;
+        padding-top: 4rem;
+      }
+      
+      @include mq('sm', 'max') {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+    &__item {
+      &__title {
+        margin-top: 1.5rem;
+        @include body-big;
+      }
+      &__text {
+        margin-top: .5rem;
+        @include body-medium;
+        color: $color-mono-black-light;
+      }
+    }
+  }
+  
+  // ###################################################################
+  // ############## Nossas vagas #######################################
+  // ###################################################################
+  .s-jobs {
+    margin: 23.5rem 0 23.5rem;
+    
+    @include mq('md', 'max') {
+      margin: 12rem 0 0;
+    }
+  
+    &__wrapper {
+      max-width: 83.8rem;
+      width: 100%;
+      margin-left: 9rem;
+      
+      @include mq('md', 'max') {
+        margin-left: 0;
+      }
+    }
+  
+    &__title {
+      @include heading-h1-bold;
+      color: $color-brand-orange;
+      
+      @include mq('md', 'max') {
+        @include heading-h3-bold;
+      }
+    }
+  
+    &__text {
+      margin-top: 2rem;
+  
+  
+      p {
+        @include body-medium;
+        color: $color-mono-black-light;
+        
+        @include mq('md', 'max') {
+          @include mb-body-medium;
+        }
+  
+        &:not(:last-of-type) {
+          margin-bottom: 2rem;
+        }
+      }
+    }
+    
+    &__box {
+      margin-top: 6rem;
+      padding: 9rem;
+      background: $color-mono-gray-light;
+      border-radius: 1rem;
+      
+      @include mq('md', 'max') {
+        margin-top: 4rem;
+        padding: 6rem 2.5rem 12rem;
+        width: calc(100% + (#{$container-padding} * 2));
+        margin-left: -#{$container-padding};
+      }
+  
+      @include mq('xl', 'max') {
+        padding: 6rem 4rem;
+      }
+    }
+  
+    &__items {
+      display: grid;
+      gap: 6rem;
+      
+      @include mq('md', 'max') {
+        gap: 4rem;
+      }
+    }
+  
+    &__item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      
+      @include mq('md', 'max') {
+        display: block;
+      }
+      
+      &:not(:last-of-type) {
+        padding-bottom: 6rem;
+        border-bottom: .2rem solid $color-mono-gray;
+        
+        @include mq('md', 'max') {
+          padding-bottom: 4rem;
+        }
+      }
+  
+      &__content {
+        max-width: 50.8rem;
+        width: 100%;
+        margin-right: 3rem;
+        
+        @include mq('md', 'max') {
+          max-width: unset;
+        }
+      }
+  
+      &__title {
+        @include heading-h3;
+        
+        @include mq('md', 'max') {
+          @include mb-body-big;
+        }
+      }
+  
+      &__type {
+        display: block;
+        margin-top: 1rem;
+        @include body-medium;
+        color: $color-mono-black-light;
+        
+        @include mq('md', 'max') {
+          margin-top: .5rem;
+          @include mb-body-default;
+        }
+      }
+  
+      &__text {
+        max-width: 71.9rem;
+        width: 100%;
+        margin-right: 3rem;
+        @include body-medium;
+        color: $color-mono-black-light;
+  
+        @include mq('md', 'max') {
+          max-width: unset;
+          margin-top: 3rem;
+          @include mb-body-medium;
+        }
+      }
+  
+      .btn-secondary {
+        flex-shrink: 0;
+        @include mq('md', 'max') {
+          margin-top: 3rem;
+        }
+  
+        @include mq('xs', 'max') {
+          width: 100%;
+        }      
+      }
+    }
+  }
+}

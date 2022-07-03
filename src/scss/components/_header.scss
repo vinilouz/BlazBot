@@ -1,0 +1,313 @@
+.s-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1000000;
+  width: 100%;
+  padding-top: 5rem;
+  background-color: transparent;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    cursor: pointer !important;
+    
+    &__img {
+      width: 11rem;
+      @include mq("md", "max") {
+        width: 8.6rem;
+      }
+    }
+  }
+
+  &__nav {
+    @include mq("md", "max") {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transform: translateX(100%);
+      background-color: $color-brand-orange;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: all 0.6s cubic-bezier(0.34, 0.07, 0.095, 0.995) 0.4s;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+
+    @include mq("md", "max") {
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    &__item {
+      &:not(:last-of-type) {
+        margin-right: 5rem;
+
+        @include mq("md", "max") {
+          margin: 0 0 3rem;
+        }
+      }
+
+      &.active {
+        .s-header__menu__link {
+          font-weight: 700;
+          
+          &::before {
+            width: 100%;
+          }
+        }
+      }
+
+      &--jobs {
+        .s-header__menu__link {
+          display: inline-flex;
+          align-items: center;
+        }
+      }
+
+      &--talk {
+        @include mq("md", "max") {
+          position: relative;
+          padding-top: 3.8rem;
+
+          &::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 0.8rem;
+            height: 0.8rem;
+            background: $color-brand-dark;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 1s 1s;
+          }
+
+          .s-header__menu__link {
+            display: block;
+            max-width: 18rem;
+            width: 100%;
+            @include heading-h3-bold;
+            color: $color-mono-white;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    &__link {
+      position: relative;
+      cursor: default;
+      @include body-big;
+      color: $color-mono-white;
+
+      @include mq("md", "max") {
+        display: block;
+        @include heading-h3;
+        color: $color-brand-light-10;
+        overflow: hidden;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        z-index: -1;
+        width: 0;
+        height: 0.2rem;
+        background: $color-mono-white;
+        transition: width 0.3s;
+
+        @include mq("md", "max") {
+          display: none;
+          background: $color-brand-light-10;
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+        
+        &::before {
+          width: 100%;
+        }
+      }
+
+      span {
+        @include mq("md", "max") {
+          transform: translateY(120%);
+          display: block;
+          will-change: transition;
+          transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+      }
+    }
+
+    &__qty {
+      flex-shrink: 0;
+      position: relative;
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-left: 1rem;
+      @include body-small-bold;
+      color: $color-mono-white;
+      background-color: $color-brand-orange;
+      border-radius: 50%;
+
+      @include mq("md", "max") {
+        width: 2.8rem;
+        height: 2.8rem;
+        background-color: $color-brand-dark;
+      }
+    }
+  }
+
+  &__btn-mobile {
+    display: none;
+    width: 3.6rem;
+    height: 3.6rem;
+    color: $color-mono-white;
+
+    @include mq("md", "max") {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      &.btn-menu-close {
+        display: none;
+      }
+    }
+  }
+}
+
+/* Logo branco */
+// Trabalhos
+// Trabalhos Detalhes V1
+// Trabalhos Detalhes V2
+// Vagas
+// Vagas Detalhes
+.page-template-page-servicos,
+.page-template-page-trabalhos,
+.page-template-page-contato,
+.page-template-page-vagas {
+  .s-header__logo {
+    filter: brightness(0) invert(1);
+  }
+
+  .s-header__menu__qty {
+    background: $color-brand-dark;
+  }
+}
+
+/* Textos pretos */
+.page-template-page-servicos-detalhes,
+.page-template-page-gps {
+  .s-header__menu__link {
+    color: $color-mono-black;
+
+    @include mq('sm', 'max') {
+      color: $color-brand-light-10;
+    }
+
+    &:before {
+      background-color: $color-mono-black;
+    }
+  }
+
+  .s-header__btn-mobile {
+    @include mq("md", "max") {
+      color: $color-brand-orange;
+    }
+  }
+}
+
+body {
+  &.menu-opened {
+    .s-header {
+      &__nav {
+        @include mq("md", "max") {
+          transform: translate(0);
+          pointer-events: all;
+          transition: all 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+      }
+
+      &__menu {
+        opacity: 1;
+
+        &__link {
+          span {
+            transform: translateY(0);
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1) 300ms;
+          }
+        }
+
+        &__item {
+          &--talk {
+            &::before {
+              opacity: 1;
+            }
+          }
+        }
+      }
+
+      &__btn-mobile {
+        @include mq("md", "max") {
+          position: fixed;
+          top: 5.2rem;
+          right: 2.5rem;
+          color: $color-brand-dark;
+
+          svg {
+            &.btn-menu-open {
+              display: none;
+            }
+      
+            &.btn-menu-close {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.menu-opened-left {
+    .s-header {
+      &__nav {
+        @include mq("md", "max") {
+          transform: translate(-100%);
+        }
+      }
+    }
+  }
+
+  &.menu-hide {
+    .s-header {
+      &__nav {
+        display: none;
+      }
+    }
+  }
+}

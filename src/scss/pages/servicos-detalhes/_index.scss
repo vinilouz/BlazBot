@@ -1,0 +1,433 @@
+.main-services-details {
+  .s-hero.s-hero--services-details {
+    min-height: 59.3rem;
+    background-color: $color-mono-white;
+
+    &::before {
+      display: none;
+    }
+
+    .s-hero__flex {
+      align-items: flex-end;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .s-hero__title {
+      position: relative;
+      margin-right: 3rem;
+      padding-left: 8rem;
+      @include others-large-title-bold;
+      color: $color-mono-black;
+
+      @include mq("md", "max") {
+        margin-right: 0;
+        padding-left: 3.5rem;
+        @include heading-h2-bold;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3rem;
+        height: 3rem;
+        background: $color-brand-orange;
+        border-radius: 50%;
+        transition: all $duration-300;
+
+        @include mq("md", "max") {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+
+      span {
+        font-weight: 450;
+        font-size: 2.6rem;
+        line-height: 3.3rem;
+        color: $color-brand-orange;
+      }
+    }
+
+    .s-hero__text {
+      max-width: 83.6rem;
+      p {
+        color: $color-mono-black-light;
+
+        @include mq("md", "max") {
+          @include mb-body-big;
+        }
+      }
+    }
+  }
+
+  .s-services-details {
+    position: relative;
+    z-index: 1000;
+    padding: 20rem 0 22.4rem;
+    // background: $color-mono-black-dark;
+    background: url(../images/bg-unities.png) no-repeat 0 0 transparent;
+    background-size: cover;
+    color: $color-mono-white;
+    
+
+    @include mq("md", "max") {
+      padding: 10rem 0;
+    }
+
+    &__grid {
+      display: grid;
+      // gap: 25.6rem;
+
+      // @include mq("md", "max") {
+      //   gap: 6rem;
+      // }
+    }
+
+    &__item {
+      display: flex;
+      margin-bottom: 25.6rem;
+
+      @include mq("md", "max") {
+        margin-bottom: 6rem;
+      }
+
+      @include mq("md", "max") {
+        display: block;
+      }
+
+      &:first-of-type {
+        .s-services-details__label { 
+          color: $color-brand-orange;
+        }
+      }
+
+      &.services-final {
+        margin-bottom: 50px;
+
+        @include mq("sm", "max") {
+          margin-bottom: 0; 
+        }
+      }
+
+      &.services2 {
+        padding-left: 269px;
+        margin-bottom: 0;
+
+        @include mq("md", "max") {
+          padding-left: 0;
+
+          .s-services-details__content {  
+            margin-top: 6rem; 
+          }
+        }
+      }
+    }
+
+    &__label-container {
+      width: 26.9rem;
+
+      @include mq("md", "max") {
+        width: 100%;
+      }
+    }
+
+    &__label {
+      width: 11.7rem;
+      @include body-big;
+
+      @include mq("md", "max") {
+        width: 100%;
+        @include mb-body-medium;
+      }
+    }
+
+    &__content {
+      flex-grow: 1;
+
+      @include mq("md", "max") {
+        margin-top: 3rem;
+      }
+    }
+
+    &__title {
+      max-width: 116.4rem;
+      width: 100%;
+      @include heading-h2-bold;
+
+      @include mq("md", "max") {
+        @include mb-body-big-bold;
+      }
+    }
+
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+      max-width: 116.4rem;
+      width: 100%;
+
+      @include mq("md", "max") {
+        display: block;
+        max-width: unset;
+      }
+    }
+
+    &__inner {
+      max-width: 52rem;
+      width: 100%;
+
+      @include mq("md", "max") {
+        max-width: unset;
+      }
+
+      &:last-child {
+        margin: 11.9rem 0 0 3rem;
+
+        @include mq("md", "max") {
+          margin: 6rem 0 0;
+        }
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        @include heading-h2;
+        color: $color-brand-orange;
+        margin-bottom: 6rem;
+
+        @include mq("md", "max") {
+          @include mb-body-big-bold;
+          margin-bottom: 2rem;
+        }
+      }
+
+      p {
+        @include body-medium;
+
+        @include mq("md", "max") {
+          @include mb-body-medium;
+        }
+      }
+
+      ul,
+      ol {
+        margin-top: 4rem;
+        list-style: disc inside;
+
+        @include mq("md", "max") {
+          margin-top: 2rem;
+        }
+
+        li {
+          @include body-medium;
+
+          @include mq("md", "max") {
+            @include mb-body-medium;
+          }
+
+          &:not(:last-of-type) {
+            margin-bottom: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .s-marquee-container {
+    padding-top: 4rem;
+  }
+
+  .s-marquee {
+    position: relative;
+    display:flex; 
+    align-items:center;
+    overflow-x: hidden;
+
+    @include mq('md', 'max') {
+      display: none;
+    }
+
+    .s-marquee__title {
+      position: relative;
+      white-space: nowrap;
+      padding: 0;
+      will-change: transform;
+      font-weight: 700;
+      font-size: 16rem;
+      line-height: 1.1;
+      letter-spacing: -8px;
+    }
+    .s-marquee__title__plain {
+      color: $color-brand-orange;
+    }
+    
+    .s-marquee__title__outline {
+      color: $color-mono-white;
+      -webkit-text-stroke-width: 0.2rem;
+      -webkit-text-stroke-color: $color-mono-gray;
+    }
+    
+    .s-marquee__title span {
+      display: inline-block;
+      margin-right: 3rem;
+    }
+  }
+
+  .s-services-content {
+    padding: 14rem 0 18rem;
+
+    @include mq("md", "max") {
+      padding: 0 0 12rem;
+    }
+
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      @include mq("md", "max") {
+        flex-direction: column;
+      }
+
+      &:nth-child(even) {
+        margin-top: 14rem;
+
+        @include mq("md", "max") {
+          margin-top: 12rem;
+          flex-direction: column-reverse;
+        }
+
+        .s-services-content__inner-01 {
+          margin: 0 0 0 3rem;
+
+          @include mq("md", "max") {
+            margin: 0;
+          }
+        }
+
+        .s-services-content__inner-02 {
+          margin: 17.5rem 0 0;
+
+          @include mq("md", "max") {
+            margin: 6rem 0 0;
+          }
+        }
+
+        .s-services-content__texts {
+          align-self: unset;
+        }
+      }
+    }
+
+    &__texts {
+      max-width: 80.6rem;
+      width: 100%;
+      align-self: flex-end;
+
+      @include mq("md", "max") {
+        max-width: unset;
+        margin-top: 6rem;
+      }
+    }
+
+    &__title {
+      @include heading-h3-bold;
+    }
+
+    &__text {
+      margin-top: 5rem;
+      p {
+        @include body-medium;
+        color: $color-mono-black-light;
+
+        &:not(:last-of-type) {
+          margin-bottom: 2.8rem;
+        }
+      }
+    }
+
+    &__inner-01 {
+      display: flex;
+      flex-direction: column-reverse;
+      max-width: 107.5rem;
+      width: 100%;
+      margin: 10rem 3rem 0 0;
+
+      @include mq("md", "max") {
+        max-width: unset;
+        display: block;
+        margin: 0;
+      }
+
+      .s-services-content__figure {
+        margin-top: 12rem;
+
+        @include mq("md", "max") {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &__inner-02 {
+      max-width: 50.8rem;
+      width: 100%;
+
+      @include mq("md", "max") {
+        max-width: unset;
+        margin-top: 6rem;
+      }
+
+      p {
+        margin-top: 6rem;
+        @include body-medium;
+        color: $color-mono-black-light;
+
+        @include mq("md", "max") {
+          margin-top: 3rem;
+        }
+      }
+    }
+
+    &__figure {
+      overflow: hidden; 
+      width: 100%;
+      border-radius: 1rem;
+      padding: 0 25px;
+
+      @include mq("md", "max") { 
+        width: calc(100% + (#{$container-padding} * 2));
+        margin-left: -#{$container-padding};
+      }
+
+      img {
+        width: 100%;
+        border-radius: 1rem;
+      }
+    }
+  }
+}
+
+@keyframes backward-infinite {
+  0% {
+    transform: translate3D(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3D(calc((-100% / 3) - 0.125em), 0, 0);
+  }
+}
+
+@keyframes front-infinite {
+  0% {
+    transform: translate3D(calc((-100% / 3) - 0.125em), 0, 0);
+  }
+
+  100% {
+    transform: translate3D(0, 0, 0);
+  }
+}

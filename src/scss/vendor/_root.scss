@@ -1,0 +1,77 @@
+[data-scroll-container], [data-scroll-section] { transform-style: preserve-3d; will-change: transform; }
+
+[data-scroll-container] {
+  width: 100%;
+  position: fixed; 
+  overflow-y: unset !important;
+  
+  @include mq('md', 'max') {
+    position: unset; 
+    overflow-y: auto !important;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+  height: auto;
+}
+
+html {
+  font-size: 62.5%;
+
+  @include mq('3xl', 'max') {
+    font-size: 55%;
+  }
+
+  @include mq('2xl', 'max') {
+    font-size: 52%;
+  }
+
+  @include mq('xl', 'max') {
+    font-size: 48%;
+  }
+
+  @include mq('md', 'max') {
+    font-size: 60%;
+  }
+
+  @include mq('sm', 'max') {
+    font-size: 62.5%;
+  } 
+}
+
+body {
+  font-family: 'Circular Std', sans-serif;
+  color: $color-mono-black;
+  @include body-default;
+}
+
+strong {
+  font-weight: 700;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}
+
+a, button {
+  cursor: pointer;
+  transition: color .3s, background-color .3s, border-color .3s;
+}
+
+p {
+  line-height: 2.2rem;
+  font-weight: 400;
+}
+
+svg {
+  width: 2rem;
+  height: 2rem;
+}
