@@ -1,4 +1,4 @@
-<?php
+<?
 
 class Controller_Scripts
 {
@@ -33,25 +33,25 @@ class Controller_Scripts
     wp_dequeue_style('wp-block-library');
     wp_dequeue_style('wp-block-library-theme');
     wp_dequeue_style('wc-blocks-style'); // Remove WooCommerce block CSS
-    wp_enqueue_style('swiper-css', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
-    wp_enqueue_style('toasty-css', 'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css');
-    wp_enqueue_style('aos-css', 'https://unpkg.com/aos@2.3.1/dist/aos.css');
-    wp_enqueue_style('locomotive-css', 'https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css');
-    wp_enqueue_style('theme-style', get_theme_file_uri('/public/css/style.css'), [], date('his'));
+    // wp_enqueue_style('swiper-css', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
+    // wp_enqueue_style('toasty-css', 'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css');
+    // wp_enqueue_style('aos-css', 'https://unpkg.com/aos@2.3.1/dist/aos.css');
+    // wp_enqueue_style('locomotive-css', 'https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css');
+    // wp_enqueue_style('theme-style', get_theme_file_uri('/public/css/style.css'), [], date('his'));
 
     /**
      * JS
      */
     wp_deregister_script('jquery');
-    wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.2.1.min.js', array(), null);
-    wp_enqueue_script('swiper-js', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', [], '1.0.0');
-    wp_enqueue_script('toasty-js', 'https://cdn.jsdelivr.net/npm/toastify-js', [], '1.0.0');
-    wp_enqueue_script('aos-js', 'https://unpkg.com/aos@2.3.1/dist/aos.js', [], '1.0.0');
-    wp_enqueue_script('gsap', "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js", [], '1.0.0');
-    wp_enqueue_script('ScrollTrigger', "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js", [], '1.0.0');
-    wp_enqueue_script('locomotive', "https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js", [], '1.0.0');
-    wp_enqueue_script('isotope', 'https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js', [], '1.0.0');
-    wp_enqueue_script('theme-script', get_theme_file_uri('/public/js/script.js'), array('jquery'), date('his'));
+    // wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.2.1.min.js', array(), null);
+    // wp_enqueue_script('swiper-js', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', [], '1.0.0');
+    // wp_enqueue_script('toasty-js', 'https://cdn.jsdelivr.net/npm/toastify-js', [], '1.0.0');
+    // wp_enqueue_script('aos-js', 'https://unpkg.com/aos@2.3.1/dist/aos.js', [], '1.0.0');
+    // wp_enqueue_script('gsap', "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js", [], '1.0.0');
+    // wp_enqueue_script('ScrollTrigger', "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js", [], '1.0.0');
+    // wp_enqueue_script('locomotive', "https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js", [], '1.0.0');
+    // wp_enqueue_script('isotope', 'https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js', [], '1.0.0');
+    // wp_enqueue_script('theme-script', get_theme_file_uri('/public/js/script.js'), array('jquery'), date('his'));
   }
 
   public function custom_gutenberg_script()
@@ -100,35 +100,22 @@ class Controller_Scripts
 
   public function acf_start()
   {
+    // acf_add_options_page(array(
+    //   'page_title' => 'Dados Gerais',
+    //   'menu_title' => 'Dados Gerais',
+    //   'menu_slug'  => 'dados-gerais',
+    //   'update_button'   => __('Atualizar', 'blazerobot'),
+    //   'updated_message' => __("Informações Atualizadas", 'blazerobot'),
+    //   'capability' => 'edit_posts'
+    // ));
+
     acf_add_options_page(array(
-      'page_title' => 'Dados Gerais',
-      'menu_title' => 'Dados Gerais',
-      'menu_slug'  => 'dados-gerais',
+      'page_title' => 'Sinais',
+      'menu_title' => 'Sinais',
+      'menu_slug'  => 'signals-list',
       'update_button'   => __('Atualizar', 'blazerobot'),
       'updated_message' => __("Informações Atualizadas", 'blazerobot'),
       'capability' => 'edit_posts'
-    ));
-
-    acf_add_options_page(array(
-      'page_title' => 'Clientes',
-      'menu_title' => 'Clientes',
-      'menu_slug'  => 'clientes',
-      'update_button'   => __('Atualizar', 'blazerobot'),
-      'updated_message' => __("Clientes Atualizados", 'blazerobot'),
-      'capability' => 'edit_posts',
-      'icon_url' => 'dashicons-id-alt',
-      'position' => '9.8',
-    ));
-
-    acf_add_options_page(array(
-      'page_title' => 'Depoimentos',
-      'menu_title' => 'Depoimentos',
-      'menu_slug'  => 'depoimentos',
-      'update_button'   => __('Atualizar', 'blazerobot'),
-      'updated_message' => __("Depoimentos Atualizados", 'blazerobot'),
-      'capability' => 'edit_posts',
-      'icon_url' => 'dashicons-admin-comments',
-      'position' => '9.8',
     ));
   }
 }

@@ -1,4 +1,4 @@
-<?php
+<?
 
 
 class CPT_Contact_Record

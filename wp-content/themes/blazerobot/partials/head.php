@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * Head - Tudo dentro da tag <head>
@@ -21,4 +21,4 @@ if (!defined('WPINC')) {
 <meta name="theme-color" content="#ffffff">
 
 
-<?php wp_head() ?>
+<? wp_head() ?>

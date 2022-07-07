@@ -1,4 +1,4 @@
-<?php
+<?
 class Controller_Common
 {
 
@@ -23,11 +23,6 @@ class Controller_Common
      * Depois de ativar o tema
      */
     add_action('after_setup_theme', array($this, 'setup_features'));
-
-    /*
-     * Buscar página que utiliza determinado template
-     */
-    add_filter('get_page_by_template', array($this, 'get_page_by_template'), 10, 1);
 
     //Generate Numeric Pagination Base on Query
     add_filter('generateNumericPaginationFromQuery', array($this, 'generateNumericPaginationFromQuery'), 10, 2);
@@ -100,26 +95,6 @@ class Controller_Common
      */
     add_theme_support('title-tag');
   } // setup_features
-
-  // -----------------------------------------------------------------------------
-
-  public function get_page_by_template($template_name)
-  {
-    $pages = get_pages(
-      array(
-        'meta_key' => '_wp_page_template',
-        'meta_value' => $template_name
-      )
-    );
-
-    $page = null;
-
-    if ($pages) {
-      $page = array_shift($pages);
-    }
-
-    return $page;
-  } // get_page_by_template
 
   // -----------------------------------------------------------------------------
 

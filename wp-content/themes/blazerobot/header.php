@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * Header (Cabeçalho do site)
@@ -14,10 +14,10 @@ if (!defined('WPINC')) {
 <html lang="pt-br" dir="ltr">
 
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
-  <?php inc('partials/head') ?>
+  <? inc('partials/head') ?>
 </head>
 
-<body <?php body_class() ?> data-baseurl="<?= site_url() ?>">
+<body <? body_class() ?> data-baseurl="<?= site_url() ?>">
 
   <header class="s-header">
     <div class="container">
