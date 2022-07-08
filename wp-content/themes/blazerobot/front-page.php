@@ -1,4 +1,4 @@
-<?
+<?php
 if (!defined('WPINC')) {
   header('Location: /');
   exit;
@@ -14,4 +14,4 @@ get_header() ?>
   </section>
 </main>
 
-<? get_footer() ?>
+<?php get_footer() ?>

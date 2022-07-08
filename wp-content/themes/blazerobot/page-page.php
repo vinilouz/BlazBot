@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  *
@@ -19,4 +19,4 @@ get_header(); ?>
 
 <div class="container"></div>
 
-<? get_footer(); ?>
+<?php get_footer(); ?>

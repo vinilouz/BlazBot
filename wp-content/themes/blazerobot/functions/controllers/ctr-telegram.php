@@ -1,4 +1,4 @@
-<?
+<?php
 
 class CTR_Telegram
 {

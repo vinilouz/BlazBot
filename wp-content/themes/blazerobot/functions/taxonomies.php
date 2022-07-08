@@ -1,4 +1,4 @@
-<?
+<?php
 if (!defined('TAXS_DIR')) {
     define('TAXS_DIR', FUNCTIONS_DIR . '/taxonomies');
 }

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Footer (Rodapé do site)
@@ -16,7 +16,7 @@ if (!defined('WPINC')) {
 
 </div>
 
-<? wp_footer() ?>
+<?php wp_footer() ?>
 
 </body>
 

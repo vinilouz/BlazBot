@@ -1,0 +1,31 @@
+#login-blaze.loading {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0eWxlPSJtYXJnaW46YXV0bztiYWNrZ3JvdW5kOjAgMCIgd2lkdGg9IjMxIiBoZWlnaHQ9IjMxIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiIGRpc3BsYXk9ImJsb2NrIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMTAiIHI9IjM1IiBzdHJva2UtZGFzaGFycmF5PSIxNjQuOTMzNjE0MzEzNDY0MTUgNTYuOTc3ODcxNDM3ODIxMzgiPjxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgdHlwZT0icm90YXRlIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgZHVyPSIxcyIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCIga2V5VGltZXM9IjA7MSIvPjwvY2lyY2xlPjwvc3ZnPg==");
+  color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#login-blaze {
+  /* order: 1; */
+  margin: 0 12px 12px 12px !important;
+}
+
+.label-login {
+  padding: 8px 14px;
+  margin: 0 12px 12px 0 !important;
+  display: inline-flex;
+  /* flex-grow: 1; */
+  align-items: center;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.label-login.-error {
+  color: #ffffff;
+  background-color: #b71c1c;
+}
+
+.label-login.-success {
+  color: #1b5e20;
+  background-color: #aed581;
+}

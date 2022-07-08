@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Template default para páginas sem template

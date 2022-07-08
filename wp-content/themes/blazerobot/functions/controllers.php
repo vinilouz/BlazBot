@@ -1,4 +1,4 @@
-<?
+<?php
 if (!defined('WPINC')) {
   header('Location: /');
   exit;
@@ -11,7 +11,7 @@ if (!defined('CONTROLLERS_DIR')) {
 }
 
 //Carrega todos os arquivos no diretório
-foreach (glob(CONTROLLERS_DIR . "/*.php") as $arquivo) {
+foreach (glob(CONTROLLERS_DIR . "**/*.php") as $arquivo) {
   require_once  $arquivo;
 }
 
