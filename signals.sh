@@ -1,0 +1,1 @@
+cd telegram/ && py init.py

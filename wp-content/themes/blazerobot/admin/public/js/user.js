@@ -1,53 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
-  (function ($) {
+const init = () => {
 
-    // Create button
-    $('[data-name="blaze"] .acf-fields')
-      .attr('style', 'display:flex;flex-wrap:wrap;')
-      .append(`<button name="login-blaze" id="login-blaze" class="button button-primary">Verificar credenciais</button>`)
+  let $ = jQuery.noConflict();
 
-    // Call function on click
-    $('body').on('click', '#login-blaze', (e) => {
-      e.preventDefault();
+  const icon = `<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 460" xmlns:v="https://vecta.io/nano"><path d="M230 0C102.975 0 0 102.975 0 230s102.975 230 230 230 230-102.974 230-230S357.025 0 230 0zm38.333 377.36c0 8.676-7.034 15.71-15.71 15.71h-43.101c-8.676 0-15.71-7.034-15.71-15.71V202.477c0-8.676 7.033-15.71 15.71-15.71h43.101c8.676 0 15.71 7.033 15.71 15.71V377.36zM230 157c-21.539 0-39-17.461-39-39s17.461-39 39-39 39 17.461 39 39-17.461 39-39 39z"/></svg>`,
+    token_field = acf.getField('field_62c7823aeb86a'),
+    wallet_id = acf.getField('field_62c7843724502'),
+    status_field = acf.getField('field_62c65d03a74bb'),
+    license_field = acf.getField('field_62c8ce6bd90a0');
 
-      // clean errors
-      $('.label-login').remove()
+  // Create button
+  $('[data-name="blaze"] .acf-fields')
+    .attr('style', 'display:flex;flex-wrap:wrap;')
+    .append(`<button name="login-blaze" id="login-blaze" class="button button-primary">Verificar credenciais</button>`)
 
-      // init loading
-      $(e.currentTarget).addClass('loading')
+  // Call function on click
+  $('body').on('click', '#login-blaze', (e) => {
+    e.preventDefault();
 
-      $.ajax({
-        type: "POST",
-        url: `http://${window.location.hostname + ajaxurl}`,
-        data: {
-          action: 'login_blaze',
-          user: $('[data-name="email"] input').val(),
-          pass: $('[data-name="password"] input').val()
-        },
-        success: ({ success, data }) => {
-          console.log('s', success);
-          if (success) {
-            console.log('s', data);
-            $('[data-name="token"] input').val(data.token)
-            $('[data-name="wallet_id"] input').val(data.wallet_id)
-            $('[data-name="blaze"] .acf-fields').append(`<p class="label-login -success">${data.msg}</p>`)
-          } else {
-            $('[data-name="blaze"] .acf-fields').append(`<p class="label-login -error">${data.msg}</p>`)
-          }
-        },
-        error: (r) => {
-          console.log('error', r);
-        },
-      }).always(function () {
-        $(e.currentTarget).removeClass('loading')
-      });
+    // clean errors
+    $('.label-login').remove()
+
+    // init loading
+    $(e.currentTarget).addClass('loading')
+
+    $.ajax({
+      type: "POST",
+      url: `http://${window.location.hostname + ajaxurl}`,
+      data: {
+        action: 'login_blaze',
+        user: $('[data-name="email"] input').val(),
+        pass: $('[data-name="password"] input').val()
+      },
+      success: ({ success, data }) => {
+        if (success) {
+          token_field.val(data.token)
+          wallet_id.val(data.wallet_id)
+          $('[data-name="blaze"] .acf-fields').append(`<p class="label-login -success">${icon + data.msg}</p>`)
+        } else {
+          $('[data-name="blaze"] .acf-fields').append(`<p class="label-login -error">${icon + data.msg}</p>`)
+        }
+      },
+      error: (r) => {
+        console.log('error', r);
+      },
+    }).always(function () {
+      $(e.currentTarget).removeClass('loading')
     });
+  });
 
-    // Confirm correct credentials
-    if ($('[data-name="token"] input').val() != "" && $('[data-name="wallet_id"] input').val() != "") {
-      $('[data-name="blaze"] .acf-fields').append(`<p class="label-login -success">Credenciais corretas.</p>`)
-    }
+  // Confirm correct credentials
+  if (token_field.val() != "" && wallet_id.val() != "") {
+    $('[data-name="blaze"] .acf-fields').append(`<p class="label-login -success">${icon}Credenciais corretas.</p>`)
+  }
 
+  // Validate on bot turn On
+  if (token_field.val() == '' || wallet_id.val() == '' || license_field.val() != 1) {
+    status_field.closest('.acf-field').addClass('not-allowed');
+  }
 
-  })(jQuery);
-})
+  // Always block license field
+  license_field.$input().closest('.acf-field').addClass('not-allowed');
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  init();
+}) // End DOMContentLoaded

@@ -66,8 +66,28 @@ class Controller_Common_Admin
     /* Add custom format in Wysiwyg */
     add_filter('mce_buttons_2', array($this, 'wpb_mce_buttons_2'));
     add_filter('tiny_mce_before_init', array($this, 'my_mce_before_init_insert_formats'));
+
+    /* Add blody class on admin panel by role */
+    add_filter('admin_body_class', [$this, 'theme_admin_body_class']);
   } // __construct
 
+
+  /**
+   * Adds one or more classes to the body tag in the dashboard.
+   *
+   * @link https://wordpress.stackexchange.com/a/154951/17187
+   * @param  String $classes Current body classes.
+   * @return String          Altered body classes.
+   */
+  function theme_admin_body_class($classes)
+  {
+    $user = wp_get_current_user();
+    $nClasses = "";
+    foreach ($user->caps as $k => $v) {
+      $nClasses .= " $k";
+    }
+    return "$classes $nClasses";
+  }
 
   /**
    * Active gutenberg only for posts
