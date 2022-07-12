@@ -8,6 +8,8 @@
 
 TelethonUpdates[https://t.me/TelethonUpdates]
 
+`pip3 install -U https://github.com/LonamiWebs/Telethon/archive/v1.24.zip`
+
 #### User for WP Admin requests
 
 ```

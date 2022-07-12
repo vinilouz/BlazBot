@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # A simple script to print some messages.
+from ast import Str
 import os
 import sys
 import time
 import configparser
 import requests
-import json
 
 from telethon import TelegramClient, events, utils
 
@@ -16,7 +16,9 @@ config.read("config.ini")
 # Setting configuration values
 api_id = config['Telegram']['api_id']
 api_hash = config['Telegram']['api_hash']
+api_hash = str(api_hash)
 username = config['Telegram']['username']
+phone = config['Telegram']['phone']
 wp_user = config['WP']['username']
 wp_pass = config['WP']['password']
 
@@ -34,7 +36,9 @@ def get_env(name, message, cast=str):
 
 
 proxy = None  # https://github.com/Anorov/PySocks
-client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
+client = TelegramClient(username, api_id, api_hash,
+                        proxy=proxy).start()
+
 channels_list = [
     1299783467,  # Blaze Tech
     # 1750202189,  # FireBot
@@ -59,7 +63,7 @@ async def handler(event):
     }
 
     r = requests.post(
-        url='http://localhost.robot2/wp-json/blaze/v1/signals', data=data, headers=headers)
+        url='https://blazerobot.vip/wp-json/blaze/v1/signals', data=data, headers=headers)
 
     print(event.text)
     print("=================================================================================")
