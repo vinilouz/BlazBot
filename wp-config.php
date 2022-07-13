@@ -80,20 +80,38 @@ $table_prefix = 'rb_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define('WP_DEBUG', true);
+define('WP_DEBUG',  true);
+// Tell WordPress to log everything to /wp-content/debug.log
 define('WP_DEBUG_LOG', true);
 define('WP_DEBUG_DISPLAY', true);
+@ini_set('display_errors', 0);
 
-/* Add any custom values between this line and the "stop editing" line. */
+define('WP_MEMORY_LIMIT', '512M');
 
-define('WP_ENVIRONMENT_TYPE', 'local');
+define('DISALLOW_FILE_EDIT', true);
 
-/* That's all, stop editing! Happy publishing. */
+/** Setando URLs para não consultar a base em busca delas */
+// define('WP_HOME', 'http://localhost.exit');
+define('WP_HOME', 'http://' . $_SERVER['SERVER_NAME']);
 
-/** Absolute path to the WordPress directory. */
+define('WP_SITEURL', WP_HOME);
+
+/** Alterando localização do diretório wp-content */
+define('WP_CONTENT_DIR', __DIR__ . '/site');
+define('WP_CONTENT_URL', WP_HOME . '/site');
+
+/** Alterando localização do diretório de plugins */
+define('WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins');
+define('WP_PLUGIN_URL', WP_CONTENT_URL . '/plugins');
+
+define('UPLOADS', 'site/' . 'uploads');
+
+/* Isto é tudo, pode parar de editar! :) */
+
+/** Caminho absoluto para o diretório WordPress. */
 if (!defined('ABSPATH')) {
 	define('ABSPATH', __DIR__ . '/');
 }
 
-/** Sets up WordPress vars and included files. */
+/** Configura as variáveis e arquivos do WordPress. */
 require_once ABSPATH . 'wp-settings.php';

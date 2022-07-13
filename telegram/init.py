@@ -62,10 +62,16 @@ async def handler(event):
         'message': event.text,
     }
 
-    r = requests.post(
-        url='https://blazerobot.vip/wp-json/blaze/v1/signals', data=data, headers=headers)
+    # r = requests.post( url='https://blazerobot.vip/wp-json/blaze/v1/signals', data=data, headers=headers)
 
     print(event.text)
+
+    r = requests.post(
+        url='http://localhost.robot2/wp-json/blaze/v1/signals', data=data, headers=headers)
+
+    print('r== ')
+    print(r.text)
+
     print("=================================================================================")
 
 with client:

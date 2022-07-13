@@ -115,7 +115,8 @@ class Controller_Scripts
       'menu_slug'  => 'signals-list',
       'update_button'   => __('Atualizar', 'blazerobot'),
       'updated_message' => __("Informações Atualizadas", 'blazerobot'),
-      'capability' => 'edit_posts'
+      'capability' => 'edit_posts',
+      'icon_url' => 'dashicons-feedback',
     ));
   }
 }

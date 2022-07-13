@@ -145,4 +145,34 @@ get_header() ?>
   <?php endif ?>
 </main>
 
+<?php
+$user_id = get_current_user_id();
+
+$s_win  = get_field('stop', "user_$user_id")['win'];
+$s_loss = get_field('stop', "user_$user_id")['loss'];
+$token  = get_field('blaze', "user_$user_id")['token'];
+$balance = CTR_Blaze::wallet($token)->balance;
+
+pre($s_win);
+pre($s_loss);
+pre($token);
+pre($balance);
+
+if (
+  ($token != '') &&
+  ($s_loss == '' || ($s_loss != '' && $s_loss < $balance)) &&
+  ($s_win == '' || ($s_win != '' && $s_win > $balance))
+) {
+  echo 'entrou no if';
+  /**
+   * @TODO
+   * Simular função make_bet
+   */
+  // $results[$k]['bet'] = CTR_Blaze::make_bet($current_user, $signal, $turn);
+}
+
+pre($results);
+
+?>
+
 <?php get_footer() ?>

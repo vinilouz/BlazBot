@@ -38,7 +38,7 @@ class CTR_Blaze
     // Validate credentials
     $fields = ['username' => $data['user'], 'password' => $data['pass']];
     $url = 'https://blaze.com/api/auth/password';
-    $curl = $this->blaze($url, 'PUT', $fields);
+    $curl = self::blaze($url, 'PUT', $fields);
     @$token = $curl->access_token;
 
     // on invalid
@@ -64,9 +64,12 @@ class CTR_Blaze
     ]);
   }
 
-  static function trigger_bets($signal, int $turn = 0)
+  public static function trigger_bets($signal, int $turn = 0)
   {
-    $users = get_users([
+
+    $results = [];
+
+    $users_list = get_users([
       'relation' => 'AND',
       [
         'key'     => 'status',
@@ -80,11 +83,12 @@ class CTR_Blaze
       ],
     ]);
 
-    foreach ($users as $user) {
-      $gale = get_field('gales', "user_$user->id");
-      $s_win  = get_field('stop', "user_$user->id")['win'];
-      $s_loss = get_field('stop', "user_$user->id")['loss'];
-      $token   = get_field('blaze', "user_$user->id")['token'];
+    foreach ($users_list as $k => $current_user) {
+      $results[$k]['user_id'] = $current_user->id;
+      $gale = get_field('gales', "user_$current_user->id");
+      $s_win  = get_field('stop', "user_$current_user->id")['win'];
+      $s_loss = get_field('stop', "user_$current_user->id")['loss'];
+      $token   = get_field('blaze', "user_$current_user->id")['token'];
       $balance = self::wallet($token)->balance;
 
       if ($turn > $gale) continue;
@@ -95,20 +99,24 @@ class CTR_Blaze
         ($s_loss == '' || ($s_loss != '' && $s_loss < $balance)) &&
         ($s_win == '' || ($s_win != '' && $s_win > $balance))
       ) {
-        self::make_bet($user, $signal, $turn);
+        $results[$k]['bet'] = self::make_bet($current_user, $signal, $turn);
       }
 
       // Turn bot off on reach stop
       if ($turn == $gale) {
         $balance = self::wallet($token)->balance;
         if ($s_loss >= $balance || $s_win <= $balance)
-          update_field('status', 0, "user_$user->id");
+          update_field('status', 0, "user_$current_user->id");
       }
+
+      return $results;
     }
   }
 
-  function make_bet($user, $signal, $gale)
+  public static function make_bet($user, $signal, $gale)
   {
+    $result = null;
+
     $color = $signal['color'] == 'VERMELHO' ? 1 : 2;
     $wallet_id = get_field('blaze', "user_$user->id")['wallet_id'];
     switch ($gale) {
@@ -138,9 +146,11 @@ class CTR_Blaze
           'wallet_id' => $wallet_id
         );
         $url = 'https://blaze.com/api/roulette_bets';
-        $curl = $this->blaze($url, 'POST', $fields);
+        $curl = self::blaze($url, 'POST', $fields);
 
-        if (@$curl->id) $success = true;
+        if (@$curl->id)
+          $success = true;
+        $result['color'] = true;
       }
     }
 
@@ -155,15 +165,19 @@ class CTR_Blaze
           'wallet_id' => $wallet_id
         );
         $url = 'https://blaze.com/api/roulette_bets';
-        $curl = $this->blaze($url, 'POST', $fields);
+        $curl = self::blaze($url, 'POST', $fields);
 
-        if (@$curl->id) $success = true;
+        if (@$curl->id)
+          $success = true;
+        $result['white'] = true;
       }
     }
     /** ========================== FIM ENTRADA BLAZE */
+
+    return $result;
   }
 
-  function blaze($url, $method, $fields)
+  public static function blaze($url, $method, $fields)
   {
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);

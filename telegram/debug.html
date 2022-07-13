@@ -1,0 +1,372 @@
+<br />
+<font size='1'>
+  <table class='xdebug-error xe-notice' dir='ltr' border='1' cellspacing='0' cellpadding='1'>
+    <tr>
+      <th align='left' bgcolor='#f57900' colspan="5"><span
+          style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( ! )</span> Notice: Undefined
+        variable: r in D:\Programas\wamp64\www\robot2\site\themes\blazerobot\functions\controllers\ctr-telegram.php on
+        line <i>94</i></th>
+    </tr>
+    <tr>
+      <th align='left' bgcolor='#e9b96e' colspan='5'>Call Stack</th>
+    </tr>
+    <tr>
+      <th align='center' bgcolor='#eeeeec'>#</th>
+      <th align='left' bgcolor='#eeeeec'>Time</th>
+      <th align='left' bgcolor='#eeeeec'>Memory</th>
+      <th align='left' bgcolor='#eeeeec'>Function</th>
+      <th align='left' bgcolor='#eeeeec'>Location</th>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>1</td>
+      <td bgcolor='#eeeeec' align='center'>0.0003</td>
+      <td bgcolor='#eeeeec' align='right'>363304</td>
+      <td bgcolor='#eeeeec'>{main}( )</td>
+      <td title='D:\Programas\wamp64\www\robot2\index.php' bgcolor='#eeeeec'>...\index.php<b>:</b>0</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>2</td>
+      <td bgcolor='#eeeeec' align='center'>0.0003</td>
+      <td bgcolor='#eeeeec' align='right'>363584</td>
+      <td bgcolor='#eeeeec'>require( <font color='#00bb00'>'D:\Programas\wamp64\www\robot2\wp-blog-header.php</font> )
+      </td>
+      <td title='D:\Programas\wamp64\www\robot2\index.php' bgcolor='#eeeeec'>...\index.php<b>:</b>17</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>3</td>
+      <td bgcolor='#eeeeec' align='center'>0.1297</td>
+      <td bgcolor='#eeeeec' align='right'>8303680</td>
+      <td bgcolor='#eeeeec'>wp( <span>$query_vars = </span>??? )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-blog-header.php' bgcolor='#eeeeec'>...\wp-blog-header.php<b>:</b>16
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>4</td>
+      <td bgcolor='#eeeeec' align='center'>0.1297</td>
+      <td bgcolor='#eeeeec' align='right'>8303712</td>
+      <td bgcolor='#eeeeec'>WP->main( <span>$query_args = </span><span>&#39;&#39;</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\functions.php' bgcolor='#eeeeec'>
+        ...\functions.php<b>:</b>1330</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>5</td>
+      <td bgcolor='#eeeeec' align='center'>0.1297</td>
+      <td bgcolor='#eeeeec' align='right'>8303712</td>
+      <td bgcolor='#eeeeec'>WP->parse_request( <span>$extra_query_vars = </span><span>&#39;&#39;</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\class-wp.php' bgcolor='#eeeeec'>...\class-wp.php<b>:</b>770
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>6</td>
+      <td bgcolor='#eeeeec' align='center'>0.1299</td>
+      <td bgcolor='#eeeeec' align='right'>8326952</td>
+      <td bgcolor='#eeeeec'>do_action_ref_array( <span>$hook_name = </span><span>&#39;parse_request&#39;</span>,
+        <span>$args = </span><span>[0 =&gt; class
+          WP { public $public_query_vars = [...]; public $private_query_vars = [...]; public $extra_query_vars = [...];
+          public $query_vars = [...]; public $query_string = &#39;&#39;; public $request =
+          &#39;wp-json/blaze/v1/signals&#39;; public $matched_rule = &#39;^wp-json/(.*)?&#39;; public $matched_query =
+          &#39;rest_route=/blaze%2Fv1%2Fsignals&#39;; public $did_permalink = TRUE }]</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\class-wp.php' bgcolor='#eeeeec'>...\class-wp.php<b>:</b>398
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>7</td>
+      <td bgcolor='#eeeeec' align='center'>0.1299</td>
+      <td bgcolor='#eeeeec' align='right'>8326952</td>
+      <td bgcolor='#eeeeec'>WP_Hook->do_action( <span>$args = </span><span>[0 =&gt; class WP { public $public_query_vars
+          = [...]; public $private_query_vars = [...]; public $extra_query_vars = [...]; public $query_vars = [...];
+          public $query_string = &#39;&#39;; public $request = &#39;wp-json/blaze/v1/signals&#39;; public $matched_rule
+          = &#39;^wp-json/(.*)?&#39;; public $matched_query = &#39;rest_route=/blaze%2Fv1%2Fsignals&#39;; public
+          $did_permalink = TRUE }]</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\plugin.php' bgcolor='#eeeeec'>...\plugin.php<b>:</b>524</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>8</td>
+      <td bgcolor='#eeeeec' align='center'>0.1299</td>
+      <td bgcolor='#eeeeec' align='right'>8326952</td>
+      <td bgcolor='#eeeeec'>WP_Hook->apply_filters( <span>$value = </span><span>&#39;&#39;</span>, <span>$args =
+        </span><span>[0 =&gt; class WP { public $public_query_vars = [...]; public $private_query_vars = [...]; public
+          $extra_query_vars = [...]; public $query_vars = [...]; public $query_string = &#39;&#39;; public $request =
+          &#39;wp-json/blaze/v1/signals&#39;; public $matched_rule = &#39;^wp-json/(.*)?&#39;; public $matched_query =
+          &#39;rest_route=/blaze%2Fv1%2Fsignals&#39;; public $did_permalink = TRUE }]</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\class-wp-hook.php' bgcolor='#eeeeec'>
+        ...\class-wp-hook.php<b>:</b>331</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>9</td>
+      <td bgcolor='#eeeeec' align='center'>0.1299</td>
+      <td bgcolor='#eeeeec' align='right'>8328080</td>
+      <td bgcolor='#eeeeec'>rest_api_loaded( <span>class WP { public $public_query_vars = [0 =&gt; &#39;m&#39;, 1 =&gt;
+          &#39;p&#39;, 2 =&gt; &#39;posts&#39;, 3 =&gt; &#39;w&#39;, 4 =&gt; &#39;cat&#39;, 5 =&gt;
+          &#39;withcomments&#39;, 6 =&gt; &#39;withoutcomments&#39;, 7 =&gt; &#39;s&#39;, 8 =&gt; &#39;search&#39;, 9
+          =&gt; &#39;exact&#39;, 10 =&gt; &#39;sentence&#39;, 11 =&gt; &#39;calendar&#39;, 12 =&gt; &#39;page&#39;, 13
+          =&gt; &#39;paged&#39;, 14 =&gt; &#39;more&#39;, 15 =&gt; &#39;tb&#39;, 16 =&gt; &#39;pb&#39;, 17 =&gt;
+          &#39;author&#39;, 18 =&gt; &#39;order&#39;, 19 =&gt; &#39;orderby&#39;, 20 =&gt; &#39;year&#39;, 21 =&gt;
+          &#39;monthnum&#39;, 22 =&gt; &#39;day&#39;, 23 =&gt; &#39;hour&#39;, 24 =&gt; &#39;minute&#39;, 25 =&gt;
+          &#39;second&#39;, 26 =&gt; &#39;name&#39;, 27 =&gt; &#39;category_name&#39;, 28 =&gt; &#39;tag&#39;, 29 =&gt;
+          &#39;feed&#39;, 30 =&gt; &#39;author_name&#39;, 31 =&gt; &#39;pagename&#39;, 32 =&gt; &#39;page_id&#39;, 33
+          =&gt; &#39;error&#39;, 34 =&gt; &#39;attachment&#39;, 35 =&gt; &#39;attachment_id&#39;, 36 =&gt;
+          &#39;subpost&#39;, 37 =&gt; &#39;subpost_id&#39;, 38 =&gt; &#39;preview&#39;, 39 =&gt; &#39;robots&#39;, 40
+          =&gt; &#39;favicon&#39;, 41 =&gt; &#39;taxonomy&#39;, 42 =&gt; &#39;term&#39;, 43 =&gt; &#39;cpage&#39;, 44
+          =&gt; &#39;post_type&#39;, 45 =&gt; &#39;embed&#39;, 46 =&gt; &#39;post_format&#39;, 47 =&gt;
+          &#39;rest_route&#39;, 48 =&gt; &#39;sitemap&#39;, 49 =&gt; &#39;sitemap-subtype&#39;, 50 =&gt;
+          &#39;sitemap-stylesheet&#39;]; public $private_query_vars = [0 =&gt; &#39;offset&#39;, 1 =&gt;
+          &#39;posts_per_page&#39;, 2 =&gt; &#39;posts_per_archive_page&#39;, 3 =&gt; &#39;showposts&#39;, 4 =&gt;
+          &#39;nopaging&#39;, 5 =&gt; &#39;post_type&#39;, 6 =&gt; &#39;post_status&#39;, 7 =&gt;
+          &#39;category__in&#39;, 8 =&gt; &#39;category__not_in&#39;, 9 =&gt; &#39;category__and&#39;, 10 =&gt;
+          &#39;tag__in&#39;, 11 =&gt; &#39;tag__not_in&#39;, 12 =&gt; &#39;tag__and&#39;, 13 =&gt;
+          &#39;tag_slug__in&#39;, 14 =&gt; &#39;tag_slug__and&#39;, 15 =&gt; &#39;tag_id&#39;, 16 =&gt;
+          &#39;post_mime_type&#39;, 17 =&gt; &#39;perm&#39;, 18 =&gt; &#39;comments_per_page&#39;, 19 =&gt;
+          &#39;post__in&#39;, 20 =&gt; &#39;post__not_in&#39;, 21 =&gt; &#39;post_parent&#39;, 22 =&gt;
+          &#39;post_parent__in&#39;, 23 =&gt; &#39;post_parent__not_in&#39;, 24 =&gt; &#39;title&#39;, 25 =&gt;
+          &#39;fields&#39;]; public $extra_query_vars = []; public $query_vars = [&#39;rest_route&#39; =&gt;
+          &#39;/blaze/v1/signals&#39;]; public $query_string = &#39;&#39;; public $request =
+          &#39;wp-json/blaze/v1/signals&#39;; public $matched_rule = &#39;^wp-json/(.*)?&#39;; public $matched_query =
+          &#39;rest_route=/blaze%2Fv1%2Fsignals&#39;; public $did_permalink = TRUE }</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\class-wp-hook.php' bgcolor='#eeeeec'>
+        ...\class-wp-hook.php<b>:</b>307</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>10</td>
+      <td bgcolor='#eeeeec' align='center'>0.1474</td>
+      <td bgcolor='#eeeeec' align='right'>9489784</td>
+      <td bgcolor='#eeeeec'>WP_REST_Server->serve_request( <span>$path = </span><span>&#39;/blaze/v1/signals&#39;</span>
+        )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\rest-api.php' bgcolor='#eeeeec'>...\rest-api.php<b>:</b>394
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>11</td>
+      <td bgcolor='#eeeeec' align='center'>0.1480</td>
+      <td bgcolor='#eeeeec' align='right'>9497920</td>
+      <td bgcolor='#eeeeec'>WP_REST_Server->dispatch( <span>$request = </span><span>class WP_REST_Request { protected
+          $method = &#39;POST&#39;; protected
+          $params = [&#39;URL&#39; =&gt; [...], &#39;GET&#39; =&gt; [...], &#39;POST&#39; =&gt; [...], &#39;FILES&#39;
+          =&gt; [...], &#39;JSON&#39; =&gt; NULL, &#39;defaults&#39; =&gt; [...]]; protected $headers =
+          [&#39;authorization&#39; =&gt; [...], &#39;host&#39; =&gt; [...], &#39;user_agent&#39; =&gt; [...],
+          &#39;accept_encoding&#39; =&gt; [...], &#39;accept&#39; =&gt; [...], &#39;connection&#39; =&gt; [...],
+          &#39;username&#39; =&gt; [...],
+          &#39;password&#39; =&gt; [...], &#39;content_length&#39; =&gt; [...], &#39;content_type&#39; =&gt; [...]];
+          protected $body =
+          &#39;id=1299783467&amp;title=%F0%9F%A4%96+BLAZE+TECH%F0%9F%9A%A6%5BVIP%5D+%F0%9F%A4%91&amp;message=%F0%9F%A5%81+Poss%C3%ADvel+oportunidade&#39;;
+          protected $route = &#39;/blaze/v1/signals&#39;; protected $attributes = [&#39;methods&#39; =&gt; [...],
+          &#39;accept_json&#39; =&gt; FALSE, &#39;accept_raw&#39; =&gt; FALSE, &#39;show_in_index&#39; =&gt; TRUE,
+          &#39;args&#39; =&gt; [...], &#39;callback&#39; =&gt; [...], &#39;permission_callback&#39; =&gt;
+          &#39;__return_true&#39;]; protected $parsed_json = TRUE; protected $parsed_body = FALSE }</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\rest-api\class-wp-rest-server.php' bgcolor='#eeeeec'>
+        ...\class-wp-rest-server.php<b>:</b>414</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>12</td>
+      <td bgcolor='#eeeeec' align='center'>0.1484</td>
+      <td bgcolor='#eeeeec' align='right'>9522408</td>
+      <td bgcolor='#eeeeec'>WP_REST_Server->respond_to_request( <span>$request = </span><span>class WP_REST_Request {
+          protected $method = &#39;POST&#39;;
+          protected $params = [&#39;URL&#39; =&gt; [...], &#39;GET&#39; =&gt; [...], &#39;POST&#39; =&gt; [...],
+          &#39;FILES&#39; =&gt; [...], &#39;JSON&#39; =&gt; NULL, &#39;defaults&#39; =&gt; [...]]; protected $headers =
+          [&#39;authorization&#39; =&gt; [...], &#39;host&#39; =&gt; [...], &#39;user_agent&#39; =&gt; [...],
+          &#39;accept_encoding&#39; =&gt; [...], &#39;accept&#39; =&gt; [...], &#39;connection&#39; =&gt; [...],
+          &#39;username&#39; =&gt; [...], &#39;password&#39; =&gt; [...], &#39;content_length&#39; =&gt; [...],
+          &#39;content_type&#39; =&gt; [...]]; protected $body =
+          &#39;id=1299783467&amp;title=%F0%9F%A4%96+BLAZE+TECH%F0%9F%9A%A6%5BVIP%5D+%F0%9F%A4%91&amp;message=%F0%9F%A5%81+Poss%C3%ADvel+oportunidade&#39;;
+          protected $route = &#39;/blaze/v1/signals&#39;; protected $attributes = [&#39;methods&#39; =&gt; [...],
+          &#39;accept_json&#39; =&gt; FALSE, &#39;accept_raw&#39; =&gt; FALSE, &#39;show_in_index&#39; =&gt; TRUE,
+          &#39;args&#39; =&gt; [...], &#39;callback&#39; =&gt; [...], &#39;permission_callback&#39; =&gt;
+          &#39;__return_true&#39;]; protected $parsed_json = TRUE; protected $parsed_body = FALSE }</span>, <span>$route
+          = </span><span>&#39;/blaze/v1/signals&#39;</span>, <span>$handler = </span><span>[&#39;methods&#39; =&gt;
+          [&#39;POST&#39; =&gt; TRUE], &#39;accept_json&#39; =&gt; FALSE, &#39;accept_raw&#39; =&gt; FALSE,
+          &#39;show_in_index&#39; =&gt; TRUE, &#39;args&#39; =&gt; [], &#39;callback&#39; =&gt; [0 =&gt; class
+          CTR_Telegram { ... }, 1 =&gt; &#39;handler_set_signals&#39;], &#39;permission_callback&#39; =&gt;
+          &#39;__return_true&#39;]</span>, <span>$response = </span><span>NULL</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\rest-api\class-wp-rest-server.php' bgcolor='#eeeeec'>
+        ...\class-wp-rest-server.php<b>:</b>990</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>13</td>
+      <td bgcolor='#eeeeec' align='center'>0.1485</td>
+      <td bgcolor='#eeeeec' align='right'>9522408</td>
+      <td bgcolor='#eeeeec'>CTR_Telegram->handler_set_signals( <span>$request = </span><span>class WP_REST_Request {
+          protected $method = &#39;POST&#39;; protected $params = [&#39;URL&#39; =&gt; [...], &#39;GET&#39; =&gt; [...],
+          &#39;POST&#39; =&gt; [...], &#39;FILES&#39; =&gt; [...], &#39;JSON&#39;
+          =&gt; NULL, &#39;defaults&#39; =&gt; [...]]; protected $headers = [&#39;authorization&#39; =&gt; [...],
+          &#39;host&#39; =&gt; [...], &#39;user_agent&#39; =&gt; [...], &#39;accept_encoding&#39; =&gt; [...],
+          &#39;accept&#39; =&gt; [...], &#39;connection&#39; =&gt; [...], &#39;username&#39; =&gt; [...],
+          &#39;password&#39; =&gt; [...], &#39;content_length&#39; =&gt; [...], &#39;content_type&#39; =&gt; [...]];
+          protected $body =
+          &#39;id=1299783467&amp;title=%F0%9F%A4%96+BLAZE+TECH%F0%9F%9A%A6%5BVIP%5D+%F0%9F%A4%91&amp;message=%F0%9F%A5%81+Poss%C3%ADvel+oportunidade&#39;;
+          protected $route = &#39;/blaze/v1/signals&#39;; protected $attributes = [&#39;methods&#39; =&gt; [...],
+          &#39;accept_json&#39; =&gt; FALSE, &#39;accept_raw&#39; =&gt; FALSE, &#39;show_in_index&#39; =&gt; TRUE,
+          &#39;args&#39; =&gt; [...], &#39;callback&#39; =&gt; [...], &#39;permission_callback&#39; =&gt;
+          &#39;__return_true&#39;]; protected $parsed_json = TRUE; protected $parsed_body = FALSE }</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\rest-api\class-wp-rest-server.php' bgcolor='#eeeeec'>
+        ...\class-wp-rest-server.php<b>:</b>1143</td>
+    </tr>
+  </table>
+</font>
+<br />
+<font size='1'>
+  <table class='xdebug-error xe-warning' dir='ltr' border='1' cellspacing='0' cellpadding='1'>
+    <tr>
+      <th align='left' bgcolor='#f57900' colspan="5"><span
+          style='background-color: #cc0000; color: #fce94f; font-size: x-large;'>( ! )</span> Warning: Cannot modify
+        header information - headers already sent by (output started at
+        D:\Programas\wamp64\www\robot2\site\themes\blazerobot\functions\controllers\ctr-telegram.php:94) in
+        D:\Programas\wamp64\www\robot2\wp-includes\rest-api\class-wp-rest-server.php on line <i>1717</i></th>
+    </tr>
+    <tr>
+      <th align='left' bgcolor='#e9b96e' colspan='5'>Call Stack</th>
+    </tr>
+    <tr>
+      <th align='center' bgcolor='#eeeeec'>#</th>
+      <th align='left' bgcolor='#eeeeec'>Time</th>
+      <th align='left' bgcolor='#eeeeec'>Memory</th>
+      <th align='left' bgcolor='#eeeeec'>Function</th>
+      <th align='left' bgcolor='#eeeeec'>Location</th>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>1</td>
+      <td bgcolor='#eeeeec' align='center'>0.0003</td>
+      <td bgcolor='#eeeeec' align='right'>363304</td>
+      <td bgcolor='#eeeeec'>{main}( )</td>
+      <td title='D:\Programas\wamp64\www\robot2\index.php' bgcolor='#eeeeec'>...\index.php<b>:</b>0</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>2</td>
+      <td bgcolor='#eeeeec' align='center'>0.0003</td>
+      <td bgcolor='#eeeeec' align='right'>363584</td>
+      <td bgcolor='#eeeeec'>require( <font color='#00bb00'>'D:\Programas\wamp64\www\robot2\wp-blog-header.php</font> )
+      </td>
+      <td title='D:\Programas\wamp64\www\robot2\index.php' bgcolor='#eeeeec'>...\index.php<b>:</b>17</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>3</td>
+      <td bgcolor='#eeeeec' align='center'>0.1297</td>
+      <td bgcolor='#eeeeec' align='right'>8303680</td>
+      <td bgcolor='#eeeeec'>wp( <span>$query_vars = </span>??? )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-blog-header.php' bgcolor='#eeeeec'>...\wp-blog-header.php<b>:</b>16
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>4</td>
+      <td bgcolor='#eeeeec' align='center'>0.1297</td>
+      <td bgcolor='#eeeeec' align='right'>8303712</td>
+      <td bgcolor='#eeeeec'>WP->main( <span>$query_args = </span><span>&#39;&#39;</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\functions.php' bgcolor='#eeeeec'>
+        ...\functions.php<b>:</b>1330</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>5</td>
+      <td bgcolor='#eeeeec' align='center'>0.1297</td>
+      <td bgcolor='#eeeeec' align='right'>8303712</td>
+      <td bgcolor='#eeeeec'>WP->parse_request( <span>$extra_query_vars = </span><span>&#39;&#39;</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\class-wp.php' bgcolor='#eeeeec'>...\class-wp.php<b>:</b>770
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>6</td>
+      <td bgcolor='#eeeeec' align='center'>0.1299</td>
+      <td bgcolor='#eeeeec' align='right'>8326952</td>
+      <td bgcolor='#eeeeec'>do_action_ref_array( <span>$hook_name = </span><span>&#39;parse_request&#39;</span>,
+        <span>$args = </span><span>[0 =&gt; class
+          WP { public $public_query_vars = [...]; public $private_query_vars = [...]; public $extra_query_vars = [...];
+          public $query_vars = [...]; public $query_string = &#39;&#39;; public $request =
+          &#39;wp-json/blaze/v1/signals&#39;; public $matched_rule = &#39;^wp-json/(.*)?&#39;; public $matched_query =
+          &#39;rest_route=/blaze%2Fv1%2Fsignals&#39;; public $did_permalink = TRUE }]</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\class-wp.php' bgcolor='#eeeeec'>...\class-wp.php<b>:</b>398
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>7</td>
+      <td bgcolor='#eeeeec' align='center'>0.1299</td>
+      <td bgcolor='#eeeeec' align='right'>8326952</td>
+      <td bgcolor='#eeeeec'>WP_Hook->do_action( <span>$args = </span><span>[0 =&gt; class WP { public $public_query_vars
+          = [...]; public $private_query_vars = [...]; public $extra_query_vars = [...]; public $query_vars = [...];
+          public $query_string = &#39;&#39;; public $request = &#39;wp-json/blaze/v1/signals&#39;; public $matched_rule
+          = &#39;^wp-json/(.*)?&#39;; public $matched_query = &#39;rest_route=/blaze%2Fv1%2Fsignals&#39;; public
+          $did_permalink = TRUE }]</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\plugin.php' bgcolor='#eeeeec'>...\plugin.php<b>:</b>524</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>8</td>
+      <td bgcolor='#eeeeec' align='center'>0.1299</td>
+      <td bgcolor='#eeeeec' align='right'>8326952</td>
+      <td bgcolor='#eeeeec'>WP_Hook->apply_filters( <span>$value = </span><span>&#39;&#39;</span>, <span>$args =
+        </span><span>[0 =&gt; class WP { public $public_query_vars = [...]; public $private_query_vars = [...]; public
+          $extra_query_vars = [...]; public $query_vars = [...]; public $query_string = &#39;&#39;; public $request =
+          &#39;wp-json/blaze/v1/signals&#39;; public $matched_rule = &#39;^wp-json/(.*)?&#39;; public $matched_query =
+          &#39;rest_route=/blaze%2Fv1%2Fsignals&#39;; public $did_permalink = TRUE }]</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\class-wp-hook.php' bgcolor='#eeeeec'>
+        ...\class-wp-hook.php<b>:</b>331</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>9</td>
+      <td bgcolor='#eeeeec' align='center'>0.1299</td>
+      <td bgcolor='#eeeeec' align='right'>8328080</td>
+      <td bgcolor='#eeeeec'>rest_api_loaded( <span>class WP { public $public_query_vars = [0 =&gt; &#39;m&#39;, 1 =&gt;
+          &#39;p&#39;, 2 =&gt; &#39;posts&#39;, 3 =&gt; &#39;w&#39;, 4 =&gt; &#39;cat&#39;, 5 =&gt;
+          &#39;withcomments&#39;, 6 =&gt; &#39;withoutcomments&#39;, 7 =&gt; &#39;s&#39;, 8 =&gt; &#39;search&#39;, 9
+          =&gt; &#39;exact&#39;, 10 =&gt; &#39;sentence&#39;, 11 =&gt; &#39;calendar&#39;, 12 =&gt; &#39;page&#39;, 13
+          =&gt; &#39;paged&#39;, 14 =&gt; &#39;more&#39;, 15 =&gt; &#39;tb&#39;, 16 =&gt; &#39;pb&#39;, 17 =&gt;
+          &#39;author&#39;, 18 =&gt; &#39;order&#39;, 19 =&gt; &#39;orderby&#39;, 20 =&gt; &#39;year&#39;, 21 =&gt;
+          &#39;monthnum&#39;, 22 =&gt; &#39;day&#39;, 23 =&gt; &#39;hour&#39;, 24 =&gt; &#39;minute&#39;, 25 =&gt;
+          &#39;second&#39;, 26 =&gt; &#39;name&#39;, 27 =&gt; &#39;category_name&#39;, 28 =&gt; &#39;tag&#39;, 29 =&gt;
+          &#39;feed&#39;, 30 =&gt; &#39;author_name&#39;, 31 =&gt; &#39;pagename&#39;, 32 =&gt; &#39;page_id&#39;, 33
+          =&gt; &#39;error&#39;, 34 =&gt; &#39;attachment&#39;, 35 =&gt; &#39;attachment_id&#39;, 36 =&gt;
+          &#39;subpost&#39;, 37 =&gt; &#39;subpost_id&#39;, 38 =&gt; &#39;preview&#39;, 39 =&gt; &#39;robots&#39;, 40
+          =&gt; &#39;favicon&#39;, 41 =&gt; &#39;taxonomy&#39;, 42 =&gt; &#39;term&#39;, 43 =&gt; &#39;cpage&#39;, 44
+          =&gt; &#39;post_type&#39;, 45 =&gt; &#39;embed&#39;, 46 =&gt; &#39;post_format&#39;, 47 =&gt;
+          &#39;rest_route&#39;, 48 =&gt; &#39;sitemap&#39;, 49 =&gt; &#39;sitemap-subtype&#39;, 50 =&gt;
+          &#39;sitemap-stylesheet&#39;]; public $private_query_vars = [0 =&gt; &#39;offset&#39;, 1 =&gt;
+          &#39;posts_per_page&#39;, 2 =&gt; &#39;posts_per_archive_page&#39;, 3 =&gt; &#39;showposts&#39;, 4 =&gt;
+          &#39;nopaging&#39;, 5 =&gt; &#39;post_type&#39;, 6 =&gt; &#39;post_status&#39;, 7 =&gt;
+          &#39;category__in&#39;, 8 =&gt; &#39;category__not_in&#39;, 9 =&gt; &#39;category__and&#39;, 10 =&gt;
+          &#39;tag__in&#39;, 11 =&gt; &#39;tag__not_in&#39;, 12 =&gt; &#39;tag__and&#39;, 13 =&gt;
+          &#39;tag_slug__in&#39;, 14 =&gt; &#39;tag_slug__and&#39;, 15 =&gt; &#39;tag_id&#39;, 16 =&gt;
+          &#39;post_mime_type&#39;, 17 =&gt; &#39;perm&#39;, 18 =&gt; &#39;comments_per_page&#39;, 19 =&gt;
+          &#39;post__in&#39;, 20 =&gt; &#39;post__not_in&#39;, 21 =&gt; &#39;post_parent&#39;, 22 =&gt;
+          &#39;post_parent__in&#39;, 23 =&gt; &#39;post_parent__not_in&#39;, 24 =&gt; &#39;title&#39;, 25 =&gt;
+          &#39;fields&#39;]; public $extra_query_vars = []; public $query_vars = [&#39;rest_route&#39; =&gt;
+          &#39;/blaze/v1/signals&#39;]; public $query_string = &#39;&#39;; public $request =
+          &#39;wp-json/blaze/v1/signals&#39;; public $matched_rule = &#39;^wp-json/(.*)?&#39;; public $matched_query =
+          &#39;rest_route=/blaze%2Fv1%2Fsignals&#39;; public $did_permalink = TRUE }</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\class-wp-hook.php' bgcolor='#eeeeec'>
+        ...\class-wp-hook.php<b>:</b>307</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>10</td>
+      <td bgcolor='#eeeeec' align='center'>0.1474</td>
+      <td bgcolor='#eeeeec' align='right'>9489784</td>
+      <td bgcolor='#eeeeec'>WP_REST_Server->serve_request( <span>$path = </span><span>&#39;/blaze/v1/signals&#39;</span>
+        )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\rest-api.php' bgcolor='#eeeeec'>...\rest-api.php<b>:</b>394
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>11</td>
+      <td bgcolor='#eeeeec' align='center'>0.1522</td>
+      <td bgcolor='#eeeeec' align='right'>9580000</td>
+      <td bgcolor='#eeeeec'>WP_REST_Server->send_headers( <span>$headers = </span><span>[&#39;Allow&#39; =&gt; &#39;GET,
+          POST&#39;]</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\rest-api\class-wp-rest-server.php' bgcolor='#eeeeec'>
+        ...\class-wp-rest-server.php<b>:</b>447</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>12</td>
+      <td bgcolor='#eeeeec' align='center'>0.1522</td>
+      <td bgcolor='#eeeeec' align='right'>9580000</td>
+      <td bgcolor='#eeeeec'>WP_REST_Server->send_header( <span>$key = </span><span>&#39;Allow&#39;</span>, <span>$value
+          = </span><span>&#39;GET, POST&#39;</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\rest-api\class-wp-rest-server.php' bgcolor='#eeeeec'>
+        ...\class-wp-rest-server.php<b>:</b>1729</td>
+    </tr>
+    <tr>
+      <td bgcolor='#eeeeec' align='center'>13</td>
+      <td bgcolor='#eeeeec' align='center'>0.1522</td>
+      <td bgcolor='#eeeeec' align='right'>9580360</td>
+      <td bgcolor='#eeeeec'><a href='http://www.php.net/function.header' target='_new'>header</a>( <span>$header =
+        </span><span>&#39;Allow: GET, POST&#39;</span> )</td>
+      <td title='D:\Programas\wamp64\www\robot2\wp-includes\rest-api\class-wp-rest-server.php' bgcolor='#eeeeec'>
+        ...\class-wp-rest-server.php<b>:</b>1717</td>
+    </tr>
+  </table>
+</font>
