@@ -6,7 +6,7 @@ if (!defined('WPINC')) {
 
 // Get custom fields
 // $cf = CTR_Home::get_content();
-
+if (!current_user_can('administrator')) exit;
 
 get_header() ?>
 
@@ -146,33 +146,18 @@ get_header() ?>
 </main>
 
 <?php
-$user_id = get_current_user_id();
+/**
+ * WARNING
+ * SIMULATE BLAZE BET
+ * WARNING
+ */
+// $signal['color'] = 'VERMELHO';
+// $current_user = wp_get_current_user();
+// $turn = 0;
 
-$s_win  = get_field('stop', "user_$user_id")['win'];
-$s_loss = get_field('stop', "user_$user_id")['loss'];
-$token  = get_field('blaze', "user_$user_id")['token'];
-$balance = CTR_Blaze::wallet($token)->balance;
-
-pre($s_win);
-pre($s_loss);
-pre($token);
-pre($balance);
-
-if (
-  ($token != '') &&
-  ($s_loss == '' || ($s_loss != '' && $s_loss < $balance)) &&
-  ($s_win == '' || ($s_win != '' && $s_win > $balance))
-) {
-  echo 'entrou no if';
-  /**
-   * @TODO
-   * Simular função make_bet
-   */
-  // $results[$k]['bet'] = CTR_Blaze::make_bet($current_user, $signal, $turn);
-}
-
-pre($results);
-
+// $r = CTR_Blaze::make_bet($current_user->ID, $signal['color'], $turn);
+// pre($r);
 ?>
 
+<br><br><br>
 <?php get_footer() ?>

@@ -64,9 +64,8 @@ class CTR_Blaze
     ]);
   }
 
-  public static function trigger_bets($signal, int $turn = 0)
+  public static function trigger_bets($signal, $turn = 0)
   {
-
     $results = [];
 
     $users_list = get_users([
@@ -84,11 +83,11 @@ class CTR_Blaze
     ]);
 
     foreach ($users_list as $k => $current_user) {
-      $results[$k]['user_id'] = $current_user->id;
-      $gale = get_field('gales', "user_$current_user->id");
-      $s_win  = get_field('stop', "user_$current_user->id")['win'];
-      $s_loss = get_field('stop', "user_$current_user->id")['loss'];
-      $token   = get_field('blaze', "user_$current_user->id")['token'];
+      $results[$k]['user_id'] = $current_user->ID;
+      $gale = get_field('gales', "user_$current_user->ID") ?: 0;
+      $s_win  = get_field('stop', "user_$current_user->ID")['win'];
+      $s_loss = get_field('stop', "user_$current_user->ID")['loss'];
+      $token   = get_field('blaze', "user_$current_user->ID")['token'];
       $balance = self::wallet($token)->balance;
 
       if ($turn > $gale) continue;
@@ -99,38 +98,39 @@ class CTR_Blaze
         ($s_loss == '' || ($s_loss != '' && $s_loss < $balance)) &&
         ($s_win == '' || ($s_win != '' && $s_win > $balance))
       ) {
-        $results[$k]['bet'] = self::make_bet($current_user, $signal, $turn);
+        $results[$k]['bet'] = self::make_bet($current_user->ID, $signal['color'], $turn);
       }
 
       // Turn bot off on reach stop
       if ($turn == $gale) {
         $balance = self::wallet($token)->balance;
         if ($s_loss >= $balance || $s_win <= $balance)
-          update_field('status', 0, "user_$current_user->id");
+          update_field('status', 0, "user_$current_user->ID");
       }
-
-      return $results;
     }
+
+    return $results;
   }
 
-  public static function make_bet($user, $signal, $gale)
+  public static function make_bet($user_id, $signal_color, $gale)
   {
     $result = null;
 
-    $color = $signal['color'] == 'VERMELHO' ? 1 : 2;
-    $wallet_id = get_field('blaze', "user_$user->id")['wallet_id'];
+    $color = $signal_color == 'VERMELHO' ? 1 : 2;
+    $token     = get_field('blaze', "user_$user_id")['token'];
+    $wallet_id = get_field('blaze', "user_$user_id")['wallet_id'];
     switch ($gale) {
       case 1:
-        $bet_value = get_field('bet_2', "user_$user->id")['color'];
-        $bet_white = get_field('bet_2', "user_$user->id")['white'];
+        $bet_value = get_field('bet_2', "user_$user_id")['color'];
+        $bet_white = get_field('bet_2', "user_$user_id")['white'];
         break;
       case 2:
-        $bet_value = get_field('bet_3', "user_$user->id")['color'];
-        $bet_white = get_field('bet_3', "user_$user->id")['white'];
+        $bet_value = get_field('bet_3', "user_$user_id")['color'];
+        $bet_white = get_field('bet_3', "user_$user_id")['white'];
         break;
       default:
-        $bet_value = get_field('bet_1', "user_$user->id")['color'];
-        $bet_white = get_field('bet_1', "user_$user->id")['white'];
+        $bet_value = get_field('bet_1', "user_$user_id")['color'];
+        $bet_white = get_field('bet_1', "user_$user_id")['white'];
         break;
     }
 
@@ -146,7 +146,7 @@ class CTR_Blaze
           'wallet_id' => $wallet_id
         );
         $url = 'https://blaze.com/api/roulette_bets';
-        $curl = self::blaze($url, 'POST', $fields);
+        $curl = self::blaze($url, 'POST', $fields, $token);
 
         if (@$curl->id)
           $success = true;
@@ -165,7 +165,7 @@ class CTR_Blaze
           'wallet_id' => $wallet_id
         );
         $url = 'https://blaze.com/api/roulette_bets';
-        $curl = self::blaze($url, 'POST', $fields);
+        $curl = self::blaze($url, 'POST', $fields, $token);
 
         if (@$curl->id)
           $success = true;
@@ -177,12 +177,19 @@ class CTR_Blaze
     return $result;
   }
 
-  public static function blaze($url, $method, $fields)
+  public static function blaze($url, $method, $fields, $token = null)
   {
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     $data_string = json_encode($fields);
-    $headers = ['Content-Type: application/json'];
+    if ($token) {
+      $headers = [
+        'Authorization: Bearer ' . $token,
+        'Content-Type: application/json'
+      ];
+    } else {
+      $headers = ['Content-Type: application/json'];
+    }
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)');
