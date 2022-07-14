@@ -6,7 +6,6 @@ import sys
 import time
 import configparser
 import requests
-
 from telethon import TelegramClient, events, utils
 
 # Reading Configs
@@ -60,17 +59,19 @@ async def handler(event):
         'id': sender.id,
         'title': title,
         'message': event.text,
+        'date': event.date.timestamp(),
     }
-
-    # r = requests.post( url='https://blazerobot.vip/wp-json/blaze/v1/signals', data=data, headers=headers)
 
     print(event.text)
 
     r = requests.post(
         url='http://localhost.robot2/wp-json/blaze/v1/signals', data=data, headers=headers)
 
-    print('r== ')
-    print(r.text)
+    pr = 'r==' + r.text
+    pd = 'date==' + event.date.strftime("%d/%m/%Y, %H:%M:%S")
+    print(pr)
+    print("- - -")
+    print(pd)
 
     print("=================================================================================")
 

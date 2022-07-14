@@ -50,7 +50,7 @@ class CTR_Telegram
       $signal = [
         'id'      => $res['id'],
         'title'   => $res['title'],
-        'date'    => date("d-m-Y H:i:s"),
+        'date'    => date('d/m/Y H:i:s', $res['date']),
         'color'   => $color,
       ];
 

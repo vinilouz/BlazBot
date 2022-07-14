@@ -98,7 +98,7 @@ class CTR_Blaze
         ($s_loss == '' || ($s_loss != '' && $s_loss < $balance)) &&
         ($s_win == '' || ($s_win != '' && $s_win > $balance))
       ) {
-        $results[$k]['bet'] = self::make_bet($current_user->ID, $signal['color'], $turn);
+        // $results[$k]['bet'] = self::make_bet($current_user->ID, $signal['color'], $turn);
       }
 
       // Turn bot off on reach stop
