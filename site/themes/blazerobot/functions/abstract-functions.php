@@ -59,9 +59,9 @@ class Abstract_Functions
     $pre = "<pre style='all:revert;background:#3e3e3e;color:#fff;padding:20px;z-index:999;position:relative;overflow:auto;text-align:left;'>";
     $pre .= print_r($variable, true);
     $pre .= "</pre>";
-    if (current_user_can('administrator')) {
-      echo $pre;
-    }
+    // if (current_user_can('administrator')) {
+    echo $pre;
+    // }
   }
 
   /**

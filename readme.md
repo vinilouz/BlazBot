@@ -8,7 +8,12 @@
 
 TelethonUpdates[https://t.me/TelethonUpdates]
 
-`pip3 install -U https://github.com/LonamiWebs/Telethon/archive/v1.24.zip`
+## Dependencies
+
+- `pip3 install time`
+- `pip3 install requests`
+- `pip3 install configparser`
+- `pip3 install -U https://github.com/LonamiWebs/Telethon/archive/v1.24.zip`
 
 #### User for WP Admin requests
 

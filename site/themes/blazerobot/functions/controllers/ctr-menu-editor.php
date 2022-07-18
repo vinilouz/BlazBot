@@ -22,30 +22,44 @@ class CTR_Menu_Editor
 
   public function editor_menu()
   {
+    global $menu;
+    // Perfil label
+    $menu[70][0] = 'Configurações';
+
+    // == // == // == // == // == //
+
     $user = get_user_by('id', get_current_user_id());
     $role = array_shift($user->roles);
 
-    // Custom menu
-    // add_menu_page('Home', 'Home', 'edit_pages', 'post.php?post=2&action=edit', '', 'dashicons-admin-home');
-
     remove_menu_page('edit-comments.php');                  // Comentários
-
-    // if ($role != 'editor')
-    //   return;
-
-    global $menu;
-
-    // Main menus
-    // remove_menu_page('options-general.php');                // Configurações
-    // remove_menu_page('edit.php?post_type=acf-field-group'); // ACF
-    // remove_menu_page('plugins.php');                        // Plugins
     remove_menu_page('edit.php');                           // Blog posts
 
-    // Sub menus
-    // remove_submenu_page('themes.php', 'customize.php?return=%2Fwp-admin%2F'); // Personalizar
-    // remove_submenu_page('themes.php', 'themes.php');                          // Temas
-
     unset($GLOBALS['submenu']['pages'][0]);
+
+    if ($role == 'editor' || $role == 'subscriber') {
+      // Main menus
+      // remove_menu_page('options-general.php');                // Configurações
+      // remove_menu_page('edit.php?post_type=acf-field-group'); // ACF
+      remove_menu_page('index.php');                             // Ferramentas
+      remove_menu_page('tools.php');                             // Ferramentas
+      remove_menu_page('edit.php?post_type=page');               // Páginas
+      remove_menu_page('upload.php');                            // Mídia
+      remove_menu_page('edit.php?post_type=acf-field-group');    // ACF
+      remove_menu_page('uip-content');                           // Conteúdos
+      remove_menu_page('edit.php?post_type=uip-admin-page');     // Dashboard
+
+      // Sub menus
+      // remove_submenu_page('themes.php', 'customize.php?return=%2Fwp-admin%2F'); // Personalizar
+      remove_submenu_page('options-general.php', 'options-general.php');      // Temas
+      remove_submenu_page('options-general.php', 'options-writing.php');      // Temas
+      remove_submenu_page('options-general.php', 'options-reading.php');      // Temas
+      remove_submenu_page('options-general.php', 'options-discussion.php');   // Temas
+      remove_submenu_page('options-general.php', 'options-media.php');        // Temas
+      remove_submenu_page('options-general.php', 'options-permalink.php');    // Temas
+      remove_submenu_page('options-general.php', 'options-privacy.php');      // Temas
+      remove_submenu_page('options-general.php', 'svg-support');              // Temas
+      remove_submenu_page('options-general.php', 'uip-menu-creator');         // Temas
+    }
   }
 
   public function custom_menu_order($menu_ord)
@@ -56,6 +70,7 @@ class CTR_Menu_Editor
 
     return array(
       'index.php',                          // Dashboard
+      'uip-overview',                          // Dashboard
       'signals-list',                       // Sinais
       'edit.php?post_type=page',            // Pages
       'users.php',                          // Usuários

@@ -25,13 +25,15 @@ const init = () => {
 
     $.ajax({
       type: "POST",
-      url: `http://${window.location.hostname + ajaxurl}`,
+      url: `https://${window.location.hostname + ajaxurl}`,
       data: {
         action: 'login_blaze',
         user: $('[data-name="email"] input').val(),
         pass: $('[data-name="password"] input').val()
       },
       success: ({ success, data }) => {
+        console.log('success', success);
+        console.log('data', data);
         if (success) {
           token_field.val(data.token)
           wallet_id.val(data.wallet_id)
@@ -55,7 +57,7 @@ const init = () => {
 
   // Validate on bot turn On
   if (token_field.val() == '' || wallet_id.val() == '' || license_field.val() != 1) {
-    status_field.closest('.acf-field').addClass('not-allowed');
+    $(status_field).closest('.acf-field').addClass('not-allowed');
   }
 
   // Always block license field

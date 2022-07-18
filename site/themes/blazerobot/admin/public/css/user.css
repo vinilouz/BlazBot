@@ -54,3 +54,108 @@
 .not-allowed .acf-true-false {
   opacity: 0.4;
 }
+
+/* Default fields to hide */
+body:not(.administrator).toplevel_page_signals-list #wpcontent,
+body:not(.administrator) #wp-admin-bar-site-name,
+body:not(.administrator) #wp-admin-bar-site-name a.ab-item {
+  pointer-events: none;
+}
+
+body:not(.administrator) tr.user-comment-shortcuts-wrap,
+body:not(.administrator) tr.user-rich-editing-wrap,
+body:not(.administrator) li#wp-admin-bar-wp-logo,
+body:not(.administrator) form#your-profile h2,
+body:not(.administrator) tr.user-admin-color-wrap,
+body:not(.administrator) tr.show-admin-bar.user-admin-bar-front-wrap,
+body:not(.administrator) tr.user-language-wrap,
+/* body:not(.administrator) tr.user-user-login-wrap,
+body:not(.administrator) tr.user-first-name-wrap,
+body:not(.administrator) tr.user-last-name-wrap, */
+body:not(.administrator) tr.user-nickname-wrap,
+body:not(.administrator) tr.user-display-name-wrap,
+body:not(.administrator) tr.user-url-wrap,
+body:not(.administrator) tr.user-description-wrap,
+body:not(.administrator) tr.user-profile-picture,
+body:not(.administrator) div#application-passwords-section,
+body:not(.administrator) li#wp-admin-bar-comments,
+body:not(.administrator) li#wp-admin-bar-new-content,
+body:not(.administrator) table.form-table[role="presentation"]:nth-of-type(6),
+body:not(.administrator)
+  span.material-icons-outlined.uip-background-icon.uip-padding-xxs.uip-border-round.hover\:uip-background-grey.uip-cursor-pointer,
+body:not(.administrator)
+  .uip-background-dark.uip-padding-xxs.uip-padding-left-xs.uip-padding-right-xs.uip-border-round.hover\:uip-background-secondary.uip-cursor-pointer.uip-flex.uip-flex-center.uip-text-inverse,
+body:not(.administrator)
+  a.material-icons-outlined.uip-background-icon.uip-padding-xxs.uip-border-round.hover\:uip-background-grey.uip-cursor-pointer.uip-toolbar-link.uip-no-underline.uip-no-outline.uip-margin-left-xs,
+body:not(.administrator) tr.user-capabilities-wrap {
+  display: none;
+}
+
+body:not(.administrator)
+  .uip-w-500.uip-background-default.uip-padding-m.uip-max-h-viewport.uip-overflow-auto
+  > div
+  > div:last-child
+  > div:last-child
+  > div:nth-of-type(2),
+body:not(.administrator)
+  .uip-w-500.uip-background-default.uip-padding-m.uip-max-h-viewport.uip-overflow-auto
+  > div
+  > div:last-child
+  > div:last-child
+  > div:nth-of-type(3) {
+  display: none;
+}
+
+body:not(.administrator) .uip-legacy-admin.uip-flex-grow {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body:not(.administrator) div#uip-toolbar {
+  background: transparent !important;
+}
+
+html[data-theme="dark"] table.form-table label {
+  color: var(--uip-text-color-normal) !important;
+}
+
+html[data-theme="dark"] table.form-table .acf-fields.-border {
+  border: var(--uip-border-width) solid var(--uip-border-color);
+  background: var(--uip-menu-secondary-color);
+}
+
+html[data-theme="dark"] table.form-table .acf-switch .acf-switch-slider {
+  border-color: var(--uip-background-grey);
+}
+
+html:not([data-theme="dark"]) table.form-table .acf-switch .acf-switch-on {
+  text-shadow: var(--uip-background-grey);
+}
+
+html:not([data-theme="dark"]) table.form-table .acf-switch.-on {
+  background: var(--uip-button-primary-hover-bg);
+  border-color: var(--uip-background-grey);
+}
+
+html:not([data-theme="dark"]) table.form-table .acf-switch:hover,
+html:not([data-theme="dark"]) table.form-table .acf-switch.-focus {
+  border-color: var(--uip-button-primary-bg);
+  color: var(--uip-button-primary-bg);
+}
+
+html:not([data-theme="dark"]) table.form-table .acf-switch:hover .acf-switch-slider,
+html:not([data-theme="dark"]) table.form-table .acf-switch.-focus .acf-switch-slider {
+  border-color: var(--uip-button-primary-bg);
+}
+
+html[data-theme="dark"] .label-login.-error {
+  color: white;
+  background-color: #0f1922;
+  border: 1px solid #f20024;
+}
+
+html[data-theme="dark"] .label-login.-success {
+  color: white;
+  background-color: #0f1922;
+  border: 1px solid #228b22;
+}

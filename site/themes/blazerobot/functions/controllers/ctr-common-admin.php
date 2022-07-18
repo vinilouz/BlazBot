@@ -63,6 +63,8 @@ class Controller_Common_Admin
     /* Remove admin separators */
     add_action('admin_menu', array($this, 'remove_separators'), 999);
 
+    add_filter('admin_footer_text', array($this, 'footer_admin'));
+
     /* Add custom format in Wysiwyg */
     add_filter('mce_buttons_2', array($this, 'wpb_mce_buttons_2'));
     add_filter('tiny_mce_before_init', array($this, 'my_mce_before_init_insert_formats'));
@@ -71,6 +73,18 @@ class Controller_Common_Admin
     add_filter('admin_body_class', [$this, 'theme_admin_body_class']);
   } // __construct
 
+
+  /**
+   * Alterar texto do rodapé da área de administração do WP
+   */
+  public function footer_admin()
+  {
+
+    $footer_text = '&copy; ' . date('Y') . ' - ' . get_bloginfo('name');
+    $footer_text .=  " | Criado por <a href='https://louz.com.br' target='_blank'>Louzada's team </a>";
+
+    echo $footer_text;
+  } // footer_admin
 
   /**
    * Adds one or more classes to the body tag in the dashboard.

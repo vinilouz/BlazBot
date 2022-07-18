@@ -23,7 +23,7 @@ class CTR_Blaze
 
   function create_button_login_blaze($hook)
   {
-    if ('profile.php' !== $hook) return;
+    // if ('profile.php' !== $hook) return;
     wp_enqueue_script('user_blaze_script', theme_url('admin/public/js/user.js'), ['jquery'], date('his'));
     wp_enqueue_style('user_blaze_style', theme_url('admin/public/css/user.css'), false, date('his'));
   }
@@ -40,7 +40,6 @@ class CTR_Blaze
     $url = 'https://blaze.com/api/auth/password';
     $curl = self::blaze($url, 'PUT', $fields);
     @$token = $curl->access_token;
-
     // on invalid
     if (!$token) return wp_send_json_error(['msg' => __('Dados incorretos ou conta inexistente.', 'blazerobot')]);
 
@@ -68,26 +67,34 @@ class CTR_Blaze
   {
     $results = [];
 
-    $users_list = get_users([
+    $users_args = ['meta_query' => [[
       'relation' => 'AND',
       [
-        'key'     => 'status',
-        'value'   => 1,
-        'compare' => '='
+        'key' => 'status',
+        'value' => 1,
+        'compare' => "=",
+        'type' => 'numeric'
       ],
       [
-        'key'     => 'subscription',
-        'value'   => 1,
-        'compare' => '='
+        'key' => 'subscription',
+        'value' => 1,
+        'compare' => "=",
+        'type' => 'numeric'
       ],
-    ]);
+      [
+        'key' => 'blaze_token',
+        'value' => '',
+        'compare' => "!=",
+      ],
+    ]]];
 
+    $users_list =  get_users($users_args);
     foreach ($users_list as $k => $current_user) {
       $results[$k]['user_id'] = $current_user->ID;
       $gale = get_field('gales', "user_$current_user->ID") ?: 0;
-      $s_win  = get_field('stop', "user_$current_user->ID")['win'];
-      $s_loss = get_field('stop', "user_$current_user->ID")['loss'];
-      $token   = get_field('blaze', "user_$current_user->ID")['token'];
+      $s_win  = get_field('stop', "user_$current_user->ID") ? get_field('stop', "user_$current_user->ID")['win'] : 0;
+      $s_loss = get_field('stop', "user_$current_user->ID") ? get_field('stop', "user_$current_user->ID")['loss'] : 0;
+      $token   =  get_field('blaze', "user_$current_user->ID")['token'];
       $balance = self::wallet($token)->balance;
 
       if ($turn > $gale) continue;
@@ -95,18 +102,18 @@ class CTR_Blaze
       // Validate user
       if (
         ($token != '') &&
-        ($s_loss == '' || ($s_loss != '' && $s_loss < $balance)) &&
-        ($s_win == '' || ($s_win != '' && $s_win > $balance))
+        ($s_loss == 0 || ($s_loss != 0 && $s_loss < $balance)) &&
+        ($s_win == 0 || ($s_win != 0 && $s_win > $balance))
       ) {
-        // $results[$k]['bet'] = self::make_bet($current_user->ID, $signal['color'], $turn);
+        $results[$k]['bet'] = self::make_bet($current_user->ID, $signal['color'], $turn);
       }
 
       // Turn bot off on reach stop
-      if ($turn == $gale) {
-        $balance = self::wallet($token)->balance;
-        if ($s_loss >= $balance || $s_win <= $balance)
-          update_field('status', 0, "user_$current_user->ID");
-      }
+      // if ($turn == $gale) {
+      //   $balance = self::wallet($token)->balance;
+      //   if ($s_loss >= $balance || $s_win <= $balance)
+      //     update_field('status', 0, "user_$current_user->ID");
+      // }
     }
 
     return $results;
@@ -159,7 +166,7 @@ class CTR_Blaze
       while (!$success) {
         $fields = array(
           'amount' => $bet_white,
-          'color' => $color,
+          'color' => 0,
           'currency_type' => 'BRL',
           'free_bet' => false,
           'wallet_id' => $wallet_id

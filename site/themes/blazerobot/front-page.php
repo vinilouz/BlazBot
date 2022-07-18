@@ -4,26 +4,19 @@ if (!defined('WPINC')) {
   exit;
 }
 
+header("Location: https://blazerobot.vip/login");
+die();
+
 // Get custom fields
 // $cf = CTR_Home::get_content();
-if (!current_user_can('administrator')) exit;
+// if (!current_user_can('administrator')) {
+// }
 
 get_header() ?>
 
 <main class="main-home">
-  <section class="s-hero-home">
-    <?php
-    // $users = get_users([
-    //   'meta_key' => 'status',
-    //   'meta_value' => 1
-    // ]);
-    // $list = get_field('signals_list', 'option');
-    // $last_row = end($list);
-    // pre($last_row);
-    ?>
-  </section>
-
-  <?php $list = get_field('signals_list', 'option');
+  <?php 
+  $list = get_field('signals_list', 'option');
   if ($list) : ?>
     <section class="s-hero-home">
       <div class="row">
@@ -88,9 +81,10 @@ get_header() ?>
           $bg1 = 0;
           $bg2 = 0;
           $loss = 0;
-          $active = false;
+          $active = 0;
           foreach ($list as $k => $signal) {
-            if ($active) {
+            // pre($active);
+            if ($active == 2) {
               if ($signal['white']) {
                 switch ($signal['result']) {
                   case 'SG':
@@ -121,11 +115,7 @@ get_header() ?>
               }
             }
 
-            if ($signal['result']  == "LOSS") {
-              $active = true;
-            } else {
-              $active = false;
-            }
+            $active = $signal['result']  == "LOSS" ? ++$active : 0;
           }
           ?>
           <h1>Estrategia pós 1 loss:</h1>
@@ -144,20 +134,6 @@ get_header() ?>
     </section>
   <?php endif ?>
 </main>
-
-<?php
-/**
- * WARNING
- * SIMULATE BLAZE BET
- * WARNING
- */
-// $signal['color'] = 'VERMELHO';
-// $current_user = wp_get_current_user();
-// $turn = 0;
-
-// $r = CTR_Blaze::make_bet($current_user->ID, $signal['color'], $turn);
-// pre($r);
-?>
 
 <br><br><br>
 <?php get_footer() ?>

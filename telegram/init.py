@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # A simple script to print some messages.
-from ast import Str
 import os
 import sys
 import time
@@ -35,13 +34,12 @@ def get_env(name, message, cast=str):
 
 
 proxy = None  # https://github.com/Anorov/PySocks
-client = TelegramClient(username, api_id, api_hash,
-                        proxy=proxy).start()
+client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
 
 channels_list = [
     1299783467,  # Blaze Tech
     # 1750202189,  # FireBot
-    1785180053  # Buzz Sinais Free
+    1785180053  # Buzz Teste api
 ]
 
 
@@ -59,16 +57,17 @@ async def handler(event):
         'id': sender.id,
         'title': title,
         'message': event.text,
-        'date': event.date.timestamp(),
+        'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
     }
 
     print(event.text)
 
+    # url='http://localhost.robot2/wp-json/blaze/v1/signals', data=data, headers=headers)
     r = requests.post(
-        url='http://localhost.robot2/wp-json/blaze/v1/signals', data=data, headers=headers)
+        url='https://blazerobot.vip/wp-json/blaze/v1/signals', data=data, headers=headers)
 
     pr = 'r==' + r.text
-    pd = 'date==' + event.date.strftime("%d/%m/%Y, %H:%M:%S")
+    pd = 'date==' + event.date.strftime("%H:%M - %d/%m/%Y")
     print(pr)
     print("- - -")
     print(pd)

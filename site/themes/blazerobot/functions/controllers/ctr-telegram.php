@@ -47,10 +47,13 @@ class CTR_Telegram
       preg_match_all($re, $res['message'], $matches, PREG_SET_ORDER, 0);
       $color = $matches[0][0];
 
+      $date = new DateTime($res['date'], new DateTimeZone('UTC'));
+      $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+
       $signal = [
         'id'      => $res['id'],
         'title'   => $res['title'],
-        'date'    => date('d/m/Y H:i:s', $res['date']),
+        'date'    => $date->format('d/m/Y g:i a'),
         'color'   => $color,
       ];
 
