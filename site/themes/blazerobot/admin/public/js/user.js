@@ -62,6 +62,61 @@ const init = () => {
 
   // Always block license field
   license_field.$input().closest('.acf-field').addClass('not-allowed');
+
+
+  /**
+   * Popup
+   */
+  $(status_field.$input()).on('change', () => {
+    const value = status_field.val()
+    if (token_field.val() == '' || wallet_id.val() == '') {
+      openModal('sua conta não esta validada');
+      $(document).on("closeCustomModal", function(e){$("#acf-field_62c65d03a74bb").trigger('click')});
+    } else if (license_field.val() != 1) {
+      openModal('sua licença não esta em dia');
+      $(document).on("closeCustomModal", function(e){$("#acf-field_62c65d03a74bb").trigger('click')});
+    } else if (value == 1) {
+      openModal('Seu robô foi ligado, agora é só esperar que os sinais irão direto para sua conta')
+    }
+  });
+
+  // Create modal
+  let popupDOM = `
+  <div id="custom-popup" class="popup">
+    <div class="popup-wrapper">
+      <span class="close">x</span>
+      <p class="msg"></p>
+    </div>
+  </div>`
+  $('body').append(popupDOM);
+
+  // Close function
+  $("#custom-popup .close").on("click", function () {
+    closeModal();
+  });
+  $(document).mouseup(function (e) {
+    let container = $(".popup-wrapper");
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+      closeModal();
+    }
+  });
+
+
+  function openModal(msg) {
+    let modal = $("#custom-popup");
+    modal.find('.msg').text(msg)
+    $(document).trigger("openCustomModal");
+    modal.addClass("active");
+  }
+
+  function closeModal(msg) {
+    let modal = $("#custom-popup");
+    // setTimeout(() => {
+        $(document).trigger("closeCustomModal");
+      // }, 100);
+
+      modal.removeClass("active");
+  }
 };
 
 document.addEventListener("DOMContentLoaded", () => {

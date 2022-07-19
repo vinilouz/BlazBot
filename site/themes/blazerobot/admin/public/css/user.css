@@ -46,13 +46,11 @@
   cursor: not-allowed;
 }
 
-.not-allowed label,
-.not-allowed .acf-true-false {
+body:not(.administrator) .not-allowed label,
+body:not(.administrator) .not-allowed .acf-true-false,
+body:not(.administrator) .not-allowed label,
+body:not(.administrator) .not-allowed .acf-true-false {
   pointer-events: none;
-}
-
-.not-allowed .acf-true-false {
-  opacity: 0.4;
 }
 
 /* Default fields to hide */
@@ -62,32 +60,26 @@ body:not(.administrator) #wp-admin-bar-site-name a.ab-item {
   pointer-events: none;
 }
 
-body:not(.administrator) tr.user-comment-shortcuts-wrap,
-body:not(.administrator) tr.user-rich-editing-wrap,
-body:not(.administrator) li#wp-admin-bar-wp-logo,
-body:not(.administrator) form#your-profile h2,
-body:not(.administrator) tr.user-admin-color-wrap,
-body:not(.administrator) tr.show-admin-bar.user-admin-bar-front-wrap,
-body:not(.administrator) tr.user-language-wrap,
-/* body:not(.administrator) tr.user-user-login-wrap,
-body:not(.administrator) tr.user-first-name-wrap,
-body:not(.administrator) tr.user-last-name-wrap, */
-body:not(.administrator) tr.user-nickname-wrap,
-body:not(.administrator) tr.user-display-name-wrap,
-body:not(.administrator) tr.user-url-wrap,
-body:not(.administrator) tr.user-description-wrap,
-body:not(.administrator) tr.user-profile-picture,
-body:not(.administrator) div#application-passwords-section,
-body:not(.administrator) li#wp-admin-bar-comments,
-body:not(.administrator) li#wp-admin-bar-new-content,
-body:not(.administrator) table.form-table[role="presentation"]:nth-of-type(6),
-body:not(.administrator)
-  span.material-icons-outlined.uip-background-icon.uip-padding-xxs.uip-border-round.hover\:uip-background-grey.uip-cursor-pointer,
-body:not(.administrator)
-  .uip-background-dark.uip-padding-xxs.uip-padding-left-xs.uip-padding-right-xs.uip-border-round.hover\:uip-background-secondary.uip-cursor-pointer.uip-flex.uip-flex-center.uip-text-inverse,
-body:not(.administrator)
-  a.material-icons-outlined.uip-background-icon.uip-padding-xxs.uip-border-round.hover\:uip-background-grey.uip-cursor-pointer.uip-toolbar-link.uip-no-underline.uip-no-outline.uip-margin-left-xs,
-body:not(.administrator) tr.user-capabilities-wrap {
+form#your-profile h2,
+li#wp-admin-bar-wp-logo,
+li#wp-admin-bar-comments,
+li#wp-admin-bar-new-content,
+div#application-passwords-section,
+tr.user-url-wrap,
+tr.user-language-wrap,
+tr.user-nickname-wrap,
+tr.user-profile-picture,
+tr.user-admin-color-wrap,
+tr.user-description-wrap,
+tr.user-display-name-wrap,
+tr.user-capabilities-wrap,
+tr.user-rich-editing-wrap,
+tr.user-comment-shortcuts-wrap,
+tr.show-admin-bar.user-admin-bar-front-wrap,
+table.form-table[role="presentation"]:nth-of-type(6),
+span.material-icons-outlined.uip-background-icon.uip-padding-xxs.uip-border-round.hover\:uip-background-grey.uip-cursor-pointer,
+.uip-background-dark.uip-padding-xxs.uip-padding-left-xs.uip-padding-right-xs.uip-border-round.hover\:uip-background-secondary.uip-cursor-pointer.uip-flex.uip-flex-center.uip-text-inverse,
+a.material-icons-outlined.uip-background-icon.uip-padding-xxs.uip-border-round.hover\:uip-background-grey.uip-cursor-pointer.uip-toolbar-link.uip-no-underline.uip-no-outline.uip-margin-left-xs {
   display: none;
 }
 
@@ -114,6 +106,10 @@ body:not(.administrator) .uip-legacy-admin.uip-flex-grow {
 body:not(.administrator) div#uip-toolbar {
   background: transparent !important;
 }
+
+/*
+ * Ajustes da cor do tema
+ */
 
 html[data-theme="dark"] table.form-table label {
   color: var(--uip-text-color-normal) !important;
@@ -158,4 +154,57 @@ html[data-theme="dark"] .label-login.-success {
   color: white;
   background-color: #0f1922;
   border: 1px solid #228b22;
+}
+
+/* popup */
+.popup {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 99999;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  background: transparent;
+  transition: all 0.3s;
+}
+.popup.active {
+  opacity: 1;
+  pointer-events: unset;
+  background: rgba(0, 0, 0, .7);
+}
+.popup-wrapper {
+  position: relative;
+}
+.popup-wrapper img {
+  max-height: calc(100vh - 40px);
+  max-width: calc(100vw - 30px);
+}
+.popup-wrapper .close {
+  position: absolute;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: center;
+  background: #fff;
+  border-radius: 50px;
+  font-family: cursive;
+  transform: translate(50%, -50%);
+  box-shadow: rgba(0, 0, 0, .2) 0px 8px 24px;
+  cursor: pointer;
+}
+.popup-wrapper p{
+  margin: 20px;
+    background:var(--uip-menu-background);
+    padding: 20px;
+    border-radius: 5px;
+    color: var(--uip-text-color-normal);
+    font-size: 15px;
+    font-weight: 400;
 }

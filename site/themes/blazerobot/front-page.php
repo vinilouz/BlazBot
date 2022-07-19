@@ -4,15 +4,68 @@ if (!defined('WPINC')) {
   exit;
 }
 
-header("Location: https://blazerobot.vip/login");
-die();
+
 
 // Get custom fields
 // $cf = CTR_Home::get_content();
-// if (!current_user_can('administrator')) {
-// }
+if (!current_user_can('administrator')) {
+  header("Location: https://blazerobot.vip/login");
+  die();
+}
 
 get_header() ?>
+
+<div id="custom-popup" class="popup">
+  <div class="popup-wrapper">
+    <span class="close">x</span>
+      <p></p>
+  </div>
+</div>
+<style>
+  
+.popup {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 99999;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  background: transparent;
+  transition: all 0.3s;
+}
+.popup.active {
+  opacity: 1;
+  pointer-events: unset;
+  background: rgba(0, 0, 0, .7);
+}
+.popup-wrapper {
+  position: relative;
+}
+.popup-wrapper img {
+  max-height: calc(100vh - 40px);
+  max-width: calc(100vw - 30px);
+}
+.popup-wrapper .close {
+  position: absolute;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: center;
+  background: #fff;
+  border-radius: 50px;
+  font-family: cursive;
+  transform: translate(50%, -50%);
+  box-shadow: rgba(0, 0, 0, .2) 0px 8px 24px;
+  cursor: pointer;
+}
+</style>
 
 <main class="main-home">
   <?php 
