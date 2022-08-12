@@ -231,7 +231,7 @@ class Controller_AJAX {
 			$reset = false;
 			foreach ($user->get_error_codes() as $code) {
 				if ($code == 'invalid_username' || $code == 'invalid_email' || $code == 'incorrect_password' || $code == 'authentication_failed') {
-					$errors[] = wp_kses(sprintf(__('<strong>ERROR</strong>: The username or password you entered is incorrect. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-2fa'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())));
+					$errors[] = wp_kses(sprintf(__('<strong>ERROR</strong>: O nome de usuário ou senha que você digitou está incorreto. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-2fa'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())));
 				}
 				else {
 					if ($code == 'wfls_twofactor_invalid') {
@@ -263,7 +263,7 @@ class Controller_AJAX {
 			}
 		}
 		
-		self::send_json(array('error' => wp_kses(sprintf(__('<strong>ERROR</strong>: The username or password you entered is incorrect. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-2fa'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())))));
+		self::send_json(array('error' => wp_kses(sprintf(__('<strong>ERROR</strong>: O nome de usuário ou senha que você digitou está incorreto. <a href="%s" title="Password Lost and Found">Lost your password</a>?', 'wordfence-2fa'), wp_lostpassword_url()), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array())))));
 	}
 	
 	public function _ajax_register_support_callback() {

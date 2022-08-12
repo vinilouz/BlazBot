@@ -2737,7 +2737,7 @@ SQL
 				else { //Code path for old method, invalid password the second time
 					self::$authError = $authUser;
 					if (is_wp_error(self::$authError) && (self::$authError->get_error_code() == 'invalid_username' || $authUser->get_error_code() == 'invalid_email' || self::$authError->get_error_code() == 'incorrect_password' || $authUser->get_error_code() == 'authentication_failed') && wfConfig::get('loginSec_maskLoginErrors')) {
-						self::$authError = new WP_Error('incorrect_password', sprintf(/* translators: 1. WordPress username. 2. Password reset URL. */ wp_kses(__('<strong>ERROR</strong>: The username or password you entered is incorrect. <a href="%2$s" title="Password Lost and Found">Lost your password</a>?', 'wordfence'), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array()))), $username, wp_lostpassword_url()));
+						self::$authError = new WP_Error('incorrect_password', sprintf(/* translators: 1. WordPress username. 2. Password reset URL. */ wp_kses(__('<strong>ERRO</strong>: O nome de usuário ou senha que você digitou está incorreto. <a href="%2$s" title="Password Lost and Found">Lost your password</a>?', 'wordfence'), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array()))), $username, wp_lostpassword_url()));
 					}
 					
 					return self::processBruteForceAttempt(self::$authError, $username, $passwd);
@@ -3187,7 +3187,7 @@ SQL
 		if(is_wp_error($authUser) && ($authUser->get_error_code() == 'invalid_username' || $authUser->get_error_code() == 'invalid_email' || $authUser->get_error_code() == 'incorrect_password') && wfConfig::get('loginSec_maskLoginErrors')){
 			return new WP_Error( 'incorrect_password', sprintf(
 				/* translators: 1. WordPress username. 2. Reset password URL. */
-				wp_kses(__( '<strong>ERROR</strong>: The username or password you entered is incorrect. <a href="%2$s" title="Password Lost and Found">Lost your password</a>?', 'wordfence' ), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array()))), $username, wp_lostpassword_url() ) );
+				wp_kses(__( '<strong>ERROR</strong>: O nome de usuário ou senha que você digitou está incorreto. <a href="%2$s" title="Password Lost and Found">Lost your password</a>?', 'wordfence' ), array('strong'=>array(), 'a'=>array('href'=>array(), 'title'=>array()))), $username, wp_lostpassword_url() ) );
 		}
 		
 		return $authUser;

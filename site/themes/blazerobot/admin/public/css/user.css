@@ -103,8 +103,8 @@ body:not(.administrator) .uip-legacy-admin.uip-flex-grow {
   pointer-events: none;
 }
 
-body:not(.administrator) div#uip-toolbar {
-  background: transparent !important;
+.uip-flex.uip-flex-center.uip-flex-between.uip-border-round.uip-background-muted.hover\:uip-background-grey.uip-cursor-pointer.uip-padding-xs {
+  display: none;
 }
 
 /*
@@ -207,4 +207,14 @@ html[data-theme="dark"] .label-login.-success {
     color: var(--uip-text-color-normal);
     font-size: 15px;
     font-weight: 400;
+}
+
+/* teste */
+tr.user-sessions-wrap.hide-if-no-js,
+tr.user-first-name-wrap,
+tr.user-last-name-wrap,
+tr.user-user-login-wrap,
+tr.user-email-wrap,
+tr#password {
+  display: none;
 }
