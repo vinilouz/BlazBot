@@ -37,8 +37,9 @@ proxy = None  # https://github.com/Anorov/PySocks
 client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
 
 channels_list = [
-    1299783467,  # Blaze Tech
-    # 1750202189,  # FireBot
+    # 1750202189, # FireBot
+    # 1299783467, # Blaze Tech
+    1577414274, # BOT DOUBLE SEM GALE
     1785180053  # Buzz Teste api
 ]
 
@@ -60,18 +61,15 @@ async def handler(event):
         'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
     }
 
-    print(event.text)
 
     # url='http://localhost.robot2/wp-json/blaze/v1/signals', data=data, headers=headers)
     r = requests.post(
         url='https://blazerobot.vip/wp-json/blaze/v1/signals', data=data, headers=headers)
 
-    pr = 'r==' + r.text
-    pd = 'date==' + event.date.strftime("%H:%M - %d/%m/%Y")
-    print(pr)
-    print("- - -")
+    
+    print(event.text)
+    pd = 'date=' + event.date.strftime("%H:%M - %d/%m/%Y")
     print(pd)
-
     print("=================================================================================")
 
 with client:
