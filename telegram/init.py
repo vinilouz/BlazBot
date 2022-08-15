@@ -37,13 +37,14 @@ proxy = None  # https://github.com/Anorov/PySocks
 client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
 
 channels_list = [
-    # 1750202189, # FireBot
     # 1299783467, # Blaze Tech
-    1577414274, # BOT DOUBLE SEM GALE
-    1785180053  # Buzz Teste api
+    # 1577414274, # BOT DOUBLE SEM GALE
+    1695064830, # VIP DOUBLE/SEM GALE 🐔
+    # 1785180053, # Buzz Teste api
+    # 5043500873, # Mãe do rapha
 ]
 
-
+# 
 @client.on(events.NewMessage(incoming=True, from_users=channels_list))
 async def handler(event):
     sender = await event.get_sender()
@@ -61,16 +62,19 @@ async def handler(event):
         'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
     }
 
-
     # url='http://localhost.robot2/wp-json/blaze/v1/signals', data=data, headers=headers)
     r = requests.post(
         url='https://blazerobot.vip/wp-json/blaze/v1/signals', data=data, headers=headers)
 
-    
+    # print(sender.id)
+    # print(title)
+
     print(event.text)
     pd = 'date=' + event.date.strftime("%H:%M - %d/%m/%Y")
     print(pd)
     print("=================================================================================")
+    # for attr in event.message.sticker.attributes:
+    #     print(attr.DocumentAttributeSticker)
 
 with client:
     print('(Press Ctrl+C to stop this)')

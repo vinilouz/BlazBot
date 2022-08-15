@@ -6,9 +6,9 @@ if (!defined('WPINC')) {
 
 // Get custom fields
 // $cf = CTR_Home::get_content();
+header("Location: https://blazerobot.vip/login");
+die();
 if (!current_user_can('administrator')) {
-  header("Location: https://blazerobot.vip/login");
-  die();
 }
 
 get_header() ?>
@@ -40,7 +40,6 @@ get_header() ?>
 <br><br><br>
 <?php 
 // CTR_Blaze::make_double_bet(1, $signal['color'], $turn);
-
 ?>
 <br><br><br>
 

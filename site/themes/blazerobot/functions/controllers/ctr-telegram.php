@@ -34,15 +34,19 @@ class CTR_Telegram
     return rest_ensure_response($response);
   }
 
-  function handler_set_signals(WP_REST_Request $request)
+  /**
+   * CONFIG FOR VIP DOUBLE/SEM GALE 🐔
+   * @see id 
+   */
+  function handler_set_signals_session_nogale(WP_REST_Request $request)
   {
     $res = $request->get_body_params();
 
     $r = null;
 
     // BOT DOUBLE SEM GALE
-    if (strpos($res['message'], "Apostar no") !== false) {
-      $re = '/(?<=Apostar no ).*(?= após)/m';
+    if (strpos($res['message'], "ENTRADA CONFIRMADA") !== false) {
+      $re = '/(?<=MARCAR PRETO ).*/m';
       preg_match_all($re, $res['message'], $matches, PREG_SET_ORDER, 0);
       $color = $matches[0][0] == '🔴' ? 'VERMELHO' : 'PRETO';
 
@@ -66,6 +70,9 @@ class CTR_Telegram
       $list = get_field('signals_list', 'option');
       $last_signal = end($list);
       $last_signal['result'] = 'WIN';
+      if (strpos($res['message'], "BRANCO") !== false) {
+        $last_signal['white'] = true;
+      }
       update_row('signals_list', count($list), $last_signal, 'option');
     } elseif (strpos($res['message'], "LOSS") !== false) {
       // Update with loss
@@ -79,9 +86,58 @@ class CTR_Telegram
   }
 
   /**
-   * CONFIG FOR BLAZE TECH WITH GALES
+   * CONFIG FOR BLAZE BOT DOUBLE SEM GALE
+   * @see id 1577414274
    */
-  // function handler_set_signals(WP_REST_Request $request)
+  // function handler_set_signals_no_gale(WP_REST_Request $request)
+  // {
+  //   $res = $request->get_body_params();
+
+  //   $r = null;
+
+  //   // BOT DOUBLE SEM GALE
+  //   if (strpos($res['message'], "Apostar no") !== false) {
+  //     $re = '/(?<=Apostar no ).*(?= após)/m';
+  //     preg_match_all($re, $res['message'], $matches, PREG_SET_ORDER, 0);
+  //     $color = $matches[0][0] == '🔴' ? 'VERMELHO' : 'PRETO';
+
+  //     $date = new DateTime($res['date'], new DateTimeZone('UTC'));
+  //     $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+
+  //     $signal = [
+  //       'id'      => $res['id'],
+  //       'title'   => $res['title'],
+  //       'date'    => $date->format('d/m/Y g:i a'),
+  //       'color'   => $color,
+  //     ];
+
+  //     // Run the signal on Blaze
+  //     $r = CTR_Blaze::trigger_bets($signal);
+
+  //     // Save Signal
+  //     add_row('signals_list', $signal, 'option');
+  //   } elseif (strpos($res['message'], "WIN") !== false) {
+  //     // Update with win
+  //     $list = get_field('signals_list', 'option');
+  //     $last_signal = end($list);
+  //     $last_signal['result'] = 'WIN';
+  //     update_row('signals_list', count($list), $last_signal, 'option');
+  //   } elseif (strpos($res['message'], "LOSS") !== false) {
+  //     // Update with loss
+  //     $list = get_field('signals_list', 'option');
+  //     $last_signal = end($list);
+  //     $last_signal['result'] = 'LOSS';
+  //     update_row('signals_list', count($list), $last_signal, 'option');
+  //   }
+
+  //   return rest_ensure_response($r);
+  // }
+
+  /**
+   * CONFIG FOR BLAZE TECH WITH GALES
+   * @see id 1299783467
+   */
+  // function handler_set_signals_tech_gale(WP_REST_Request $request)
   // {
   //   $res = $request->get_body_params();
 
