@@ -46,10 +46,8 @@
   cursor: not-allowed;
 }
 
-body:not(.administrator) .not-allowed label,
-body:not(.administrator) .not-allowed .acf-true-false,
-body:not(.administrator) .not-allowed label,
-body:not(.administrator) .not-allowed .acf-true-false {
+body:not(.administrator):not(.editor) .not-allowed label,
+body:not(.administrator):not(.editor) .not-allowed .acf-true-false {
   pointer-events: none;
 }
 
@@ -110,6 +108,9 @@ body:not(.administrator) .uip-legacy-admin.uip-flex-grow {
 /*
  * Ajustes da cor do tema
  */
+ html[data-theme="dark"] .acf-field-message {
+  color: #fff;
+}
 
 html[data-theme="dark"] table.form-table label {
   color: var(--uip-text-color-normal) !important;

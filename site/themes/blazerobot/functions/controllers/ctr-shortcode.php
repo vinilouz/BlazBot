@@ -10,6 +10,31 @@ class CTR_Shortcode
     add_shortcode('results', [$this, 'handler_results_no_gale']);
     // add_shortcode('strategy_1', [$this, 'handler_results_no_gale']);
     // add_shortcode('strategy_2', [$this, 'handler_strategy_l2']);
+
+    add_shortcode('mensal_fixo', [$this, 'handler_mensal']);
+  }
+
+  function handler_mensal()
+  {
+    $html = <<<EOD
+      <div style="display: flex;flex-direction: column;">
+        <span>Dia 01; 33 ✅️ × 25 ❌️ × 10 ⚪️✅️</span></ br>
+        <span>Dia 02; 52 ✅️ × 41 ❌️ × 8 ⚪️✅️</span></ br>
+        <span>Dia 03; 37 ✅️ × 21 ❌️ × 7 ⚪️✅️</span></ br>
+        <span>Dia 04; 33 ✅️ × 21 ❌️ × 1 ⚪️✅️</span></ br>
+        <span>Dia 05; 33 ✅️ × 20 ❌️ × 4 ⚪️✅️</span></ br>
+        <span>Dia 06; 37 ✅️ × 23 ❌️ × 4 ⚪️✅️</span></ br>
+        <span>Dia 08; 36 ✅️ × 21 ❌️ × 11 ⚪️✅️</span></ br>
+        <span>Dia 09; 37 ✅️ × 32 ❌️ × 5 ⚪️✅️</span></ br>
+        <span>Dia 10; 36 ✅️ × 26 ❌️ × 5 ⚪️✅️</span></ br>
+        <span>Dia 11; 42 ✅️ × 24 ❌️ × 3 ⚪️✅️</span></ br>
+        <span>Dia 12; 44 ✅️ × 27 ❌️ × 9 ⚪️✅️</span></ br>
+        <span>Dia 13; 32 ✅️ × 21 ❌️ × 8 ⚪️✅️</span></ br>
+        <span>Dia 15; 43 ✅️ × 30 ❌️ × 9 ⚪️✅️</span></ br>
+      </div>
+    EOD;
+
+    return $html;
   }
 
   function handler_results_no_gale($atts, $content = null)
@@ -18,7 +43,7 @@ class CTR_Shortcode
     $default = ['date' => 'today', 'strategy' => '1loss'];
     $filter = shortcode_atts($default, $atts);
 
-    $green = $loss = 0;
+    $green = $loss = $white = 0;
     $list = get_field('signals_list', 'option');
 
     switch ($filter['date']) {
@@ -47,6 +72,7 @@ class CTR_Shortcode
           switch ($signal['result']) {
             case 'WIN':
               $green++;
+              if ($signal['white']) $white++;
               break;
             case 'LOSS':
               $loss++;
@@ -57,7 +83,9 @@ class CTR_Shortcode
 
     $html = <<<EOD
       <div style="display: flex;">
-        <span>GREEN: $green</span>&nbsp;&nbsp;x&nbsp;&nbsp;<span>LOSS: $loss</span>
+        <span>GREEN: $green</span>&nbsp;&nbsp;x&nbsp;&nbsp;
+        <span>LOSS: $loss</span>&nbsp;&nbsp;x&nbsp;&nbsp;
+        <span>LOSS: $white</span>
       </div>
     EOD;
 

@@ -21,7 +21,7 @@ class CTR_Telegram
       ],
       [
         'methods'  => WP_REST_Server::CREATABLE,
-        'callback' => [$this, 'handler_set_signals'],
+        'callback' => [$this, 'handler_set_signals_session_nogale'],
         'permission_callback' => '__return_true',
       ],
     ]);
@@ -45,8 +45,8 @@ class CTR_Telegram
     $r = null;
 
     // BOT DOUBLE SEM GALE
-    if (strpos($res['message'], "ENTRADA CONFIRMADA") !== false) {
-      $re = '/(?<=MARCAR PRETO ).*/m';
+    if (strpos($res['message'], "𝘌𝘕𝘛𝘙𝘈𝘋𝘈 𝘊𝘖𝘕𝘍𝘐𝘙𝘔𝘈𝘋𝘈") !== false) {
+      $re = '/(?<=𝘔𝘈𝘙𝘊𝘈𝘙 𝘗𝘙𝘌𝘛𝘖 ).*/m';
       preg_match_all($re, $res['message'], $matches, PREG_SET_ORDER, 0);
       $color = $matches[0][0] == '🔴' ? 'VERMELHO' : 'PRETO';
 
@@ -65,16 +65,16 @@ class CTR_Telegram
 
       // Save Signal
       add_row('signals_list', $signal, 'option');
-    } elseif (strpos($res['message'], "WIN") !== false) {
+    } elseif (strpos($res['message'], "𝗪𝗜𝗡") !== false) {
       // Update with win
       $list = get_field('signals_list', 'option');
       $last_signal = end($list);
       $last_signal['result'] = 'WIN';
-      if (strpos($res['message'], "BRANCO") !== false) {
+      if (strpos($res['message'], "𝗕𝗥𝗔𝗡𝗖𝗢") !== false) {
         $last_signal['white'] = true;
       }
       update_row('signals_list', count($list), $last_signal, 'option');
-    } elseif (strpos($res['message'], "LOSS") !== false) {
+    } elseif (strpos($res['message'], "𝗟𝗢𝗦𝗦") !== false) {
       // Update with loss
       $list = get_field('signals_list', 'option');
       $last_signal = end($list);

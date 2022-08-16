@@ -38,10 +38,11 @@ class CTR_Blaze
     // Validate credentials
     $fields = ['username' => $data['user'], 'password' => $data['pass']];
     $url = 'https://blaze.com/api/auth/password';
-    $curl = self::blaze($url, 'PUT', $fields);
+    // $curl = self::blaze($url, 'PUT', $fields);
+    $curl = self::blazeLogin($fields);
     @$token = $curl->access_token;
     // on invalid
-    if (!$token) return wp_send_json_error(['msg' => __('Dados incorretos ou conta inexistente.', 'blazerobot')]);
+    if (!$token) return wp_send_json_error(['msg' => __('Dados incorretos ou conta inexistente.', 'blazerobot'), 'data' => $curl]);
 
     $wallet_id = $this->wallet($token)->id;
     if (!$wallet_id) return wp_send_json_error(['msg' => __('Erro ao obter dados', 'blazerobot')]);
@@ -273,6 +274,40 @@ class CTR_Blaze
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); //IMP if the url has https and you don't want to verify source certificate
+    $curl_response = curl_exec($curl);
+    $response = json_decode($curl_response);
+    curl_close($curl);
+    return $response;
+  }
+
+  public static function blazeLogin($fields)
+  {
+    $data_string = json_encode($fields);
+
+    $curl = curl_init();
+    curl_setopt_array($curl, [
+      CURLOPT_URL => "https://blaze.com/api/auth/password",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => "",
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "PUT",
+      CURLOPT_POSTFIELDS => $data_string,
+      CURLOPT_HTTPHEADER => [
+        "accept: application/json, text/plain, */*",
+        "accept-encoding: gzip, deflate, br",
+        "accept-language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+        "content-type: application/json;charset=UTF-8",
+        "origin: https://blaze.com",
+        "referer: https://blaze.com/pt/?modal=auth&tab=login",
+        "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36",
+        "x-captcha-response: undefined",
+        "x-client-language: pt",
+        "x-client-version: c9d9c023"
+      ],
+    ]);
+
     $curl_response = curl_exec($curl);
     $response = json_decode($curl_response);
     curl_close($curl);
