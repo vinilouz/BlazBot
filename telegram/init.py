@@ -32,7 +32,7 @@ def get_env(name, message, cast=str):
         except ValueError as e:
             print(e, file=sys.stderr)
             time.sleep(1)
-
+            
 
 proxy = None  # https://github.com/Anorov/PySocks
 client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
@@ -40,7 +40,7 @@ client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
 channels_list = [
     # 1299783467, # Blaze Tech
     # 1577414274, # BOT DOUBLE SEM GALE
-    # 1785180053, # Buzz Teste api
+    1785180053, # Buzz Teste api
     1695064830, # VIP DOUBLE/SEM GALE 🐔
     1515446435, # 💥𝙑𝙄𝙋 𝙁𝙐𝙉𝙄𝙇 𝘽𝙇𝘼𝙕𝙀💥
 ]
@@ -63,7 +63,6 @@ async def handler(event):
 
     # CRASH
     if(event.message.sticker):
-        crashMessage = ''
         StickerID = event.message.sticker.attributes[1].stickerset.id
         # Debug
         print(StickerID)

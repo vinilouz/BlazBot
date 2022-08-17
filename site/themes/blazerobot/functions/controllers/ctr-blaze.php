@@ -249,7 +249,7 @@ class CTR_Blaze
 
     $token     = get_field('blaze', "user_$user_id")['token'];
     $wallet_id = get_field('blaze', "user_$user_id")['wallet_id'];
-    $bet_value = get_field('bet_crash_1', "user_$user_id")['color'];
+    $bet_value = get_field('bet_crash_1', "user_$user_id");
 
     /** ========================== ENTRADA CRASH BLAZE */
 
