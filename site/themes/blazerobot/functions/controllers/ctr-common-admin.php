@@ -71,8 +71,23 @@ class Controller_Common_Admin
 
     /* Add blody class on admin panel by role */
     add_filter('admin_body_class', [$this, 'theme_admin_body_class']);
+
+    /* Ajax para notificação */
+    add_action('wp_ajax_nopriv_bet_notification', [$this, 'handler_bet_notification']);
+    add_action('wp_ajax_bet_notification', [$this, 'handler_bet_notification']);
   } // __construct
 
+  public function handler_bet_notification(){
+    $list = get_field('signals_crash_list', 'option');
+    if ($list) {
+      $last_signal = end($list);
+      if (!$last_signal['result']) {
+        return wp_send_json_success(['notify' => true]);
+      } else {
+        return wp_send_json_error(['notify' => false]);
+      }
+    }
+  }
 
   /**
    * Alterar texto do rodapé da área de administração do WP

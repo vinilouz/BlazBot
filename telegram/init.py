@@ -39,7 +39,7 @@ client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
 
 channels_list = [
     # 1299783467, # Blaze Tech
-    # 1577414274, # BOT DOUBLE SEM GALE
+    1577414274, # BOT DOUBLE SEM GALE
     1785180053, # Buzz Teste api
     1695064830, # VIP DOUBLE/SEM GALE 🐔
     1515446435, # 💥𝙑𝙄𝙋 𝙁𝙐𝙉𝙄𝙇 𝘽𝙇𝘼𝙕𝙀💥
@@ -83,7 +83,7 @@ async def handler(event):
         
         r = requests.post(
             url='https://blazerobot.vip/wp-json/blaze/v1/crash_signals', data=data, headers=headers)
-    
+
     # DOUBLE
     else:
         data = {

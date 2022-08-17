@@ -24,7 +24,7 @@ class CTR_Blaze
   function create_button_login_blaze($hook)
   {
     // if ('profile.php' !== $hook) return;
-    wp_enqueue_script('user_blaze_script', theme_url('admin/public/js/user.js'), ['jquery'], date('his'));
+    wp_enqueue_script('user_blaze_script', theme_url('admin/public/js/user.js'), ['jquery'], date('h.i.s'));
     wp_enqueue_style('user_blaze_style', theme_url('admin/public/css/user.css'), false, date('his'));
   }
 
@@ -267,7 +267,7 @@ class CTR_Blaze
 
         if (@$curl->id)
           $success = true;
-        $result['color'] = true;
+        $result = true;
       }
     }
 

@@ -6,9 +6,9 @@ if (!defined('WPINC')) {
 
 // Get custom fields
 // $cf = CTR_Home::get_content();
+header("Location: https://blazerobot.vip/login");
+die();
 if (!current_user_can('administrator')) {
-  header("Location: https://blazerobot.vip/login");
-  die();
 }
 
 get_header() ?>
@@ -51,6 +51,12 @@ get_header() ?>
 // $turn = 0;
 // CTR_Blaze::make_crash_bet(1, $turn);
 
+// $list = get_field('signals_list', 'option');
+
+// $new = array_filter($list, function ($var) {
+//   return ($var['id'] == '1785180053' && $var['result'] == '');
+// });
+// end($new)
 ?>
 <br><br><br>
 

@@ -108,7 +108,7 @@ body:not(.administrator) .uip-legacy-admin.uip-flex-grow {
 /*
  * Ajustes da cor do tema
  */
- html[data-theme="dark"] .acf-field-message {
+html[data-theme="dark"] .acf-field-message {
   color: #fff;
 }
 
@@ -176,7 +176,7 @@ html[data-theme="dark"] .label-login.-success {
 .popup.active {
   opacity: 1;
   pointer-events: unset;
-  background: rgba(0, 0, 0, .7);
+  background: rgba(0, 0, 0, 0.7);
 }
 .popup-wrapper {
   position: relative;
@@ -197,17 +197,17 @@ html[data-theme="dark"] .label-login.-success {
   border-radius: 50px;
   font-family: cursive;
   transform: translate(50%, -50%);
-  box-shadow: rgba(0, 0, 0, .2) 0px 8px 24px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
   cursor: pointer;
 }
-.popup-wrapper p{
+.popup-wrapper p {
   margin: 20px;
-    background:var(--uip-menu-background);
-    padding: 20px;
-    border-radius: 5px;
-    color: var(--uip-text-color-normal);
-    font-size: 15px;
-    font-weight: 400;
+  background: var(--uip-menu-background);
+  padding: 20px;
+  border-radius: 5px;
+  color: var(--uip-text-color-normal);
+  font-size: 15px;
+  font-weight: 400;
 }
 
 /* teste */
@@ -218,4 +218,21 @@ tr.user-user-login-wrap,
 tr.user-email-wrap,
 tr#password {
   display: none;
+}
+
+.custom-bet-notification {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  background: #2e7d32;
+  padding: 20px 15px;
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: all 1s;
+  opacity: 0;
+}
+
+.custom-bet-notification.show {
+  opacity: 1;
 }

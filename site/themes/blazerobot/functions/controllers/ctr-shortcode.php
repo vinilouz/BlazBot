@@ -8,16 +8,16 @@ class CTR_Shortcode
   function __construct()
   {
     add_shortcode('results', [$this, 'handler_results_no_gale']);
+    add_shortcode('mensal_fixo', [$this, 'handler_mensal']);
+
     // add_shortcode('strategy_1', [$this, 'handler_results_no_gale']);
     // add_shortcode('strategy_2', [$this, 'handler_strategy_l2']);
-
-    add_shortcode('mensal_fixo', [$this, 'handler_mensal']);
   }
 
   function handler_mensal()
   {
     $html = <<<EOD
-      <div style="display: flex;flex-direction: column;">
+      <div style="display: flex;flex-direction: column; margin-top:-30px;">
         <span>Dia 01; 33 ✅️ × 25 ❌️ × 10 ⚪️✅️</span></ br>
         <span>Dia 02; 52 ✅️ × 41 ❌️ × 8 ⚪️✅️</span></ br>
         <span>Dia 03; 37 ✅️ × 21 ❌️ × 7 ⚪️✅️</span></ br>
@@ -31,6 +31,7 @@ class CTR_Shortcode
         <span>Dia 12; 44 ✅️ × 27 ❌️ × 9 ⚪️✅️</span></ br>
         <span>Dia 13; 32 ✅️ × 21 ❌️ × 8 ⚪️✅️</span></ br>
         <span>Dia 15; 43 ✅️ × 30 ❌️ × 9 ⚪️✅️</span></ br>
+        <span>Dia 16; 34 ✅️ × 21 ❌️ × 4 ⚪️✅️</span></ br>
       </div>
     EOD;
 
@@ -40,7 +41,7 @@ class CTR_Shortcode
   function handler_results_no_gale($atts, $content = null)
   {
     date_default_timezone_set('America/Sao_Paulo');
-    $default = ['date' => 'today', 'strategy' => '1loss'];
+    $default = ['date' => 'today', 'id' => ''];
     $filter = shortcode_atts($default, $atts);
 
     $green = $loss = $white = 0;
@@ -66,6 +67,8 @@ class CTR_Shortcode
     }
 
     foreach ($list as $signal) {
+      if($signal['id'] != $filter['id']) continue;
+
       $match_date = date_create_from_format('d/m/Y g:i a', $signal['date']);
       $match_date = $match_date->format('dmY');
       if ($match_date >= $dataIni && $match_date <= $dataFim) {
@@ -80,12 +83,13 @@ class CTR_Shortcode
           }
       }
     }
-
+    
+    $whiteDom = $white > 0 ? "<span>⚪️ BRANCO: $white</span>" : '';
     $html = <<<EOD
-      <div style="display: flex;">
-        <span>GREEN: $green</span>&nbsp;&nbsp;x&nbsp;&nbsp;
-        <span>LOSS: $loss</span>&nbsp;&nbsp;x&nbsp;&nbsp;
-        <span>BRANCO: $white</span>
+      <div style="display:flex;flex-direction:column;margin-top:-30px;">
+        <span>✅️ ACERTOS: $green</span>
+        <span>❌️ PERDAS: $loss</span>
+        $whiteDom
       </div>
     EOD;
 

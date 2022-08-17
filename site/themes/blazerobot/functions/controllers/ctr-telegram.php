@@ -13,7 +13,8 @@ class CTR_Telegram
 
   public function create_routes()
   {
-    register_rest_route('blaze/v1', 'double_signals', [
+    // https://blazerobot.vip/blaze/v1/double_signals
+    register_rest_route('blaze/v1', '/double_signals', [
       [
         'methods'  => WP_REST_Server::READABLE,
         'callback' => [$this, 'handler_get_double_signals'],
@@ -26,7 +27,8 @@ class CTR_Telegram
       ],
     ]);
 
-    register_rest_route('blaze/v1', 'crash_signals', [
+    // https://blazerobot.vip/blaze/v1/crash_signals
+    register_rest_route('blaze/v1', '/crash_signals', [
       [
         'methods'  => WP_REST_Server::READABLE,
         'callback' => [$this, 'handler_get_crash_signals'],
@@ -37,6 +39,16 @@ class CTR_Telegram
         'callback' => [$this, 'handler_set_crash_signals'],
         'permission_callback' => '__return_true',
       ],
+    ]);
+
+    
+    // https://blazerobot.vip/blaze/v1/notifications
+    register_rest_route('blaze/v1', '/notifications', [
+      [
+        'methods'  => 'GET',
+        'callback' => [$this, 'handler_set_crash_signals'],
+        'permission_callback' => '__return_true',
+      ]
     ]);
   }
 
@@ -54,72 +66,22 @@ class CTR_Telegram
     return rest_ensure_response($response);
   }
 
-  /**
-   * BOT DOUBLE SEM GALE
-   * @see id 
-   */
+
   function handler_set_signals(WP_REST_Request $request)
   {
     $res = $request->get_body_params();
-
     $r = null;
 
-    // BOT DOUBLE SEM GALE
-    if (strpos($res['message'], "Apostar no") !== false) {
-      $re = '/(?<=Apostar no ).*(?= após)/m';
-      preg_match_all($re, $res['message'], $matches, PREG_SET_ORDER, 0);
-      $color = $matches[0][0] == '🔴' ? 'VERMELHO' : 'PRETO';
+    $date = new DateTime($res['date'], new DateTimeZone('UTC'));
+    $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
 
-      $date = new DateTime($res['date'], new DateTimeZone('UTC'));
-      $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
-
-      $signal = [
-        'id'      => $res['id'],
-        'title'   => $res['title'],
-        'date'    => $date->format('d/m/Y g:i a'),
-        'color'   => $color,
-      ];
-
-      // Run the signal on Blaze
-      $r = CTR_Blaze::trigger_double_bets($signal);
-
-      // Save Signal
-      add_row('signals_list', $signal, 'option');
-    } elseif (strpos($res['message'], "WIN") !== false) {
-      // Update with win
-      $list = get_field('signals_list', 'option');
-      $last_signal = end($list);
-      $last_signal['result'] = 'WIN';
-      update_row('signals_list', count($list), $last_signal, 'option');
-    } elseif (strpos($res['message'], "LOSS") !== false) {
-      // Update with loss
-      $list = get_field('signals_list', 'option');
-      $last_signal = end($list);
-      $last_signal['result'] = 'LOSS';
-      update_row('signals_list', count($list), $last_signal, 'option');
-    }
-
-    return rest_ensure_response($r);
-  }
-
-  /**
-   * CONFIG FOR VIP DOUBLE/SEM GALE 🐔
-   * @see id 
-   */
-  function handler_set_signals_session_nogale(WP_REST_Request $request)
-  {
-    $res = $request->get_body_params();
-
-    $r = null;
-
-    // BOT DOUBLE SEM GALE
-    if (strpos($res['message'], "𝘌𝘕𝘛𝘙𝘈𝘋𝘈 𝘊𝘖𝘕𝘍𝘐𝘙𝘔𝘈𝘋𝘈") !== false) {
-
-      $date = new DateTime($res['date'], new DateTimeZone('UTC'));
-      $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
-      
+    /**
+     * CONFIG FOR VIP DOUBLE/SEM GALE 🐔
+     * @see id 1695064830
+     */
+    if (strpos($res['message'], "𝘌𝘕𝘛𝘙𝘈𝘋𝘈 𝘊𝘖𝘕𝘍𝘐𝘙𝘔𝘈𝘋𝘈") !== false) {  
       $color = str_contains($res['message'], '🔴') ? 'VERMELHO' : 'PRETO';
-      
+
       $signal = [
         'id'      => $res['id'],
         'title'   => $res['title'],
@@ -135,8 +97,12 @@ class CTR_Telegram
     } elseif (strpos($res['message'], "𝗪𝗜𝗡") !== false) {
       // Update with win
       $list = get_field('signals_list', 'option');
-      $last_signal = end($list);
+      $search = array_filter($list, function ($var) {
+        return ($var['id'] == '1695064830' && $var['result'] == '');
+      });
+      $last_signal = end($search);
       $last_signal['result'] = 'WIN';
+
       if (strpos($res['message'], "𝗕𝗥𝗔𝗡𝗖𝗢") !== false) {
         $last_signal['white'] = true;
       }
@@ -144,8 +110,55 @@ class CTR_Telegram
     } elseif (strpos($res['message'], "𝗟𝗢𝗦𝗦") !== false) {
       // Update with loss
       $list = get_field('signals_list', 'option');
-      $last_signal = end($list);
+      $search = array_filter($list, function ($var) {
+        return ($var['id'] == '1695064830' && $var['result'] == '');
+      });
+      $last_signal = end($search);
       $last_signal['result'] = 'LOSS';
+      update_row('signals_list', count($list), $last_signal, 'option');
+    }
+
+    /**
+     * BOT DOUBLE SEM GALE
+     * @see id 1577414274
+     */
+    if (strpos($res['message'], "Apostar no") !== false) {
+      $color = str_contains($res['message'], '🔴') ? 'VERMELHO' : 'PRETO';
+      $signal = [
+        'id'      => $res['id'],
+        'title'   => $res['title'],
+        'date'    => $date->format('d/m/Y g:i a'),
+        'color'   => $color,
+      ];
+
+      // Run the signal on Blaze
+      // $r = CTR_Blaze::trigger_double_bets($signal);
+
+      // Save Signal
+      add_row('signals_list', $signal, 'option');
+    } elseif (strpos($res['message'], "WIN") !== false) {
+
+      // Update with win
+      $list = get_field('signals_list', 'option');
+      $search = array_filter($list, function ($var) {
+        return ($var['id'] == '1577414274' && $var['result'] == '');
+      });
+      $last_signal = end($search);
+      $last_signal['result'] = 'WIN';
+
+      update_row('signals_list', count($list), $last_signal, 'option');
+
+    } elseif (strpos($res['message'], "LOSS") !== false) {
+
+      // Update with loss
+      $list = get_field('signals_list', 'option');
+      
+      $search = array_filter($list, function ($var) {
+        return ($var['id'] == '1577414274' && $var['result'] == '');
+      });
+      $last_signal = end($search);
+      $last_signal['result'] = 'LOSS';
+      
       update_row('signals_list', count($list), $last_signal, 'option');
     }
 
@@ -158,13 +171,13 @@ class CTR_Telegram
    */
   function handler_set_crash_signals(WP_REST_Request $request)
   {
-    $res = $request->get_body_params();
     $r = null;
+    $res = $request->get_body_params();
+    $list = get_field('signals_crash_list', 'option');
+    $last_signal = end($list);
 
     if (str_contains($res['message'], '8977794405394022401')) {
-      $list = get_field('signals_crash_list', 'option');
-      $last_signal = end($list);
-      if ($last_signal['result'] == '') {
+      if ($last_signal['result']) {
         $date = new DateTime($res['date'], new DateTimeZone('UTC'));
         $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
   
@@ -180,16 +193,13 @@ class CTR_Telegram
   
         // Save Signal
         add_row('signals_crash_list', $signal, 'option');
-      } // End if trigger
-      else {
+      } else {
         // Update with win
         $last_signal['result'] = 'WIN';
         update_row('signals_crash_list', count($list), $last_signal, 'option');
       }
     } elseif (str_contains($res['message'], '4573473239128342603')) {
       // Update with loss
-      $list = get_field('signals_crash_list', 'option');
-      $last_signal = end($list);
       $last_signal['result'] = 'LOSS';
       update_row('signals_crash_list', count($list), $last_signal, 'option');
     }
@@ -201,7 +211,6 @@ class CTR_Telegram
    * CONFIG FOR BLAZE TECH WITH GALES
    * @see id 1299783467
    */
-  // function handler_set_signals_tech_gale(WP_REST_Request $request)
   // {
   //   $res = $request->get_body_params();
 
