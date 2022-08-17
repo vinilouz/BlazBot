@@ -85,7 +85,7 @@ class CTR_Shortcode
       <div style="display: flex;">
         <span>GREEN: $green</span>&nbsp;&nbsp;x&nbsp;&nbsp;
         <span>LOSS: $loss</span>&nbsp;&nbsp;x&nbsp;&nbsp;
-        <span>LOSS: $white</span>
+        <span>BRANCO: $white</span>
       </div>
     EOD;
 

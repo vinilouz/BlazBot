@@ -70,8 +70,9 @@ class CTR_Menu_Editor
 
     return array(
       'index.php',                          // Dashboard
-      'uip-overview',                          // Dashboard
+      'uip-overview',                       // Dashboard
       'signals-list',                       // Sinais
+      'crash-signals-list',                 // Sinais
       'edit.php?post_type=page',            // Pages
       'users.php',                          // Usuários
       'edit.php?post_type=page',            // Pages

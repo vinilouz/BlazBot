@@ -5,6 +5,7 @@ import sys
 import time
 import configparser
 import requests
+import json
 from telethon import TelegramClient, events, utils
 
 # Reading Configs
@@ -39,9 +40,9 @@ client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
 channels_list = [
     # 1299783467, # Blaze Tech
     # 1577414274, # BOT DOUBLE SEM GALE
-    1695064830, # VIP DOUBLE/SEM GALE 🐔
     # 1785180053, # Buzz Teste api
-    # 5043500873, # Mãe do rapha
+    1695064830, # VIP DOUBLE/SEM GALE 🐔
+    1515446435, # 💥𝙑𝙄𝙋 𝙁𝙐𝙉𝙄𝙇 𝘽𝙇𝘼𝙕𝙀💥
 ]
 
 # 
@@ -55,26 +56,52 @@ async def handler(event):
         'Password': wp_pass
     }
 
-    data = {
-        'id': sender.id,
-        'title': title,
-        'message': event.text,
-        'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
-    }
+    print(title)
+    print(sender.id)
+    # Debug
+    print('==')
 
-    # url='http://localhost.robot2/wp-json/blaze/v1/signals', data=data, headers=headers)
-    r = requests.post(
-        url='https://blazerobot.vip/wp-json/blaze/v1/signals', data=data, headers=headers)
+    # CRASH
+    if(event.message.sticker):
+        crashMessage = ''
+        StickerID = event.message.sticker.attributes[1].stickerset.id
+        # Debug
+        print(StickerID)
 
-    # print(sender.id)
-    # print(title)
+        # if(StickerID == 8977794405394022401):
+        #     crashMessage = 'Entrar agora'
+        # elif(StickerID == 8977794405394022401):
+        #     crashMessage = 'WIN'
+        # elif(StickerID == 4573473239128342603):
+        #     crashMessage = 'LOSS'
+        
+        data = {
+            'id': sender.id,
+            'title': title,
+            'message': str(StickerID),
+            'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
+        }
+        
+        r = requests.post(
+            url='https://blazerobot.vip/wp-json/blaze/v1/crash_signals', data=data, headers=headers)
+    
+    # DOUBLE
+    else:
+        data = {
+            'id': sender.id,
+            'title': title,
+            'message': event.text,
+            'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
+        }
 
-    print(event.text)
+        r = requests.post(
+            url='https://blazerobot.vip/wp-json/blaze/v1/double_signals', data=data, headers=headers)
+
+    print(r.text)
+
     pd = 'date=' + event.date.strftime("%H:%M - %d/%m/%Y")
     print(pd)
     print("=================================================================================")
-    # for attr in event.message.sticker.attributes:
-    #     print(attr.DocumentAttributeSticker)
 
 with client:
     print('(Press Ctrl+C to stop this)')
