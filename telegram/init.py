@@ -43,6 +43,7 @@ channels_list = [
     1785180053, # Buzz Teste api
     1695064830, # VIP DOUBLE/SEM GALE 🐔
     1515446435, # 💥𝙑𝙄𝙋 𝙁𝙐𝙉𝙄𝙇 𝘽𝙇𝘼𝙕𝙀💥
+    1612607467, # BOT CRASH SEM GALE
 ]
 
 # 
@@ -56,23 +57,11 @@ async def handler(event):
         'Password': wp_pass
     }
 
-    print(title)
-    print(sender.id)
-    # Debug
-    print('==')
-
-    # CRASH
+    # STICKER
     if(event.message.sticker):
         StickerID = event.message.sticker.attributes[1].stickerset.id
         # Debug
         print(StickerID)
-
-        # if(StickerID == 8977794405394022401):
-        #     crashMessage = 'Entrar agora'
-        # elif(StickerID == 8977794405394022401):
-        #     crashMessage = 'WIN'
-        # elif(StickerID == 4573473239128342603):
-        #     crashMessage = 'LOSS'
         
         data = {
             'id': sender.id,
@@ -84,7 +73,7 @@ async def handler(event):
         r = requests.post(
             url='https://blazerobot.vip/wp-json/blaze/v1/crash_signals', data=data, headers=headers)
 
-    # DOUBLE
+    # TEXT
     else:
         data = {
             'id': sender.id,
@@ -93,13 +82,23 @@ async def handler(event):
             'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
         }
 
-        r = requests.post(
-            url='https://blazerobot.vip/wp-json/blaze/v1/double_signals', data=data, headers=headers)
+        # CRASH
+        if(sender.id == 1612607467):
+            r = requests.post(
+                url='https://blazerobot.vip/wp-json/blaze/v1/crash_signals', data=data, headers=headers)
+        else:
+            # DOUBLE
+            r = requests.post(
+                url='https://blazerobot.vip/wp-json/blaze/v1/double_signals', data=data, headers=headers)
 
+
+    # Debug
+    print(title)
+    print(sender.id)
     print(r.text)
-
-    pd = 'date=' + event.date.strftime("%H:%M - %d/%m/%Y")
-    print(pd)
+    print(r)
+    print("----------------------------------------------")
+    print(event.date.strftime("%H:%M - %d/%m/%Y"))
     print("=================================================================================")
 
 with client:

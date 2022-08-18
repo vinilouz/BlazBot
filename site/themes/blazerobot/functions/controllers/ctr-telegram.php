@@ -40,16 +40,6 @@ class CTR_Telegram
         'permission_callback' => '__return_true',
       ],
     ]);
-
-    
-    // https://blazerobot.vip/blaze/v1/notifications
-    register_rest_route('blaze/v1', '/notifications', [
-      [
-        'methods'  => 'GET',
-        'callback' => [$this, 'handler_set_crash_signals'],
-        'permission_callback' => '__return_true',
-      ]
-    ]);
   }
 
   function handler_get_double_signals()
@@ -79,7 +69,7 @@ class CTR_Telegram
      * CONFIG FOR VIP DOUBLE/SEM GALE 🐔
      * @see id 1695064830
      */
-    if (strpos($res['message'], "𝘌𝘕𝘛𝘙𝘈𝘋𝘈 𝘊𝘖𝘕𝘍𝘐𝘙𝘔𝘈𝘋𝘈") !== false) {  
+    if (strpos($res['message'], "𝘌𝘕𝘛𝘙𝘈𝘋𝘈 𝘊𝘖𝘕𝘍𝘐𝘙𝘔𝘈𝘋𝘈") !== false) {
       $color = str_contains($res['message'], '🔴') ? 'VERMELHO' : 'PRETO';
 
       $signal = [
@@ -147,18 +137,17 @@ class CTR_Telegram
       $last_signal['result'] = 'WIN';
 
       update_row('signals_list', count($list), $last_signal, 'option');
-
     } elseif (strpos($res['message'], "LOSS") !== false) {
 
       // Update with loss
       $list = get_field('signals_list', 'option');
-      
+
       $search = array_filter($list, function ($var) {
         return ($var['id'] == '1577414274' && $var['result'] == '');
       });
       $last_signal = end($search);
       $last_signal['result'] = 'LOSS';
-      
+
       update_row('signals_list', count($list), $last_signal, 'option');
     }
 
@@ -173,14 +162,47 @@ class CTR_Telegram
   {
     $r = null;
     $res = $request->get_body_params();
-    $list = get_field('signals_crash_list', 'option');
-    $last_signal = end($list);
 
-    if (str_contains($res['message'], '8977794405394022401')) {
-      if ($last_signal['result']) {
-        $date = new DateTime($res['date'], new DateTimeZone('UTC'));
-        $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+    $date = new DateTime($res['date'], new DateTimeZone('UTC'));
+    $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
+    $list = get_field('signals_crash_list', 'option');
+
+    if ($res['id'] == 1515446435) {
+      if (str_contains($res['message'], '8977794405394022401')) {
+        $search = array_filter($list, function ($var) {
+          return ($var['id'] == '1515446435' && $var['result'] == '');
+        });
+        $last_signal = end($search);
+        if ($last_signal['result']) {
   
+          $signal = [
+            'id'      => $res['id'],
+            'title'   => $res['title'],
+            'message' => $res['message'],
+            'date'    => $date->format('d/m/Y g:i a')
+          ];
+  
+          // Run the signal on Blaze
+          $r = CTR_Blaze::trigger_crash_bets();
+  
+          // Save Signal
+          add_row('signals_crash_list', $signal, 'option');
+        } else {
+          // Update with win
+          $search = array_filter($list, function ($var) {
+            return ($var['id'] == '1515446435' && $var['result'] == '');
+          });
+          $last_signal = end($search);
+          $last_signal['result'] = 'WIN';
+          update_row('signals_crash_list', count($list), $last_signal, 'option');
+        }
+      } elseif (str_contains($res['message'], '4573473239128342603')) {
+        // Update with loss
+        $last_signal['result'] = 'LOSS';
+        update_row('signals_crash_list', count($list), $last_signal, 'option');
+      }
+    } elseif($res['id'] == 1612607467) {
+      if (strpos($res['message'], "Apostar em") !== false) {
         $signal = [
           'id'      => $res['id'],
           'title'   => $res['title'],
@@ -189,19 +211,27 @@ class CTR_Telegram
         ];
   
         // Run the signal on Blaze
-        $r = CTR_Blaze::trigger_crash_bets();
+        // $r = CTR_Blaze::trigger_crash_bets();
   
         // Save Signal
-        add_row('signals_crash_list', $signal, 'option');
-      } else {
+        $r['signal'] = add_row('signals_crash_list', $signal, 'option');
+      } elseif (str_contains($res['message'], 'WIN')) {
         // Update with win
+        $search = array_filter($list, function ($var) {
+          return ($var['id'] == '1612607467' && $var['result'] == '');
+        });
+        $last_signal = end($search);
         $last_signal['result'] = 'WIN';
-        update_row('signals_crash_list', count($list), $last_signal, 'option');
+        $r['win'] = update_row('signals_crash_list', count($list), $last_signal, 'option');
+      } elseif (str_contains($res['message'], 'LOSS')) {
+        // Update with loss
+        $search = array_filter($list, function ($var) {
+          return ($var['id'] == '1612607467' && $var['result'] == '');
+        });
+        $last_signal = end($search);
+        $last_signal['result'] = 'LOSS';
+        $r['loss'] = update_row('signals_crash_list', count($list), $last_signal, 'option');
       }
-    } elseif (str_contains($res['message'], '4573473239128342603')) {
-      // Update with loss
-      $last_signal['result'] = 'LOSS';
-      update_row('signals_crash_list', count($list), $last_signal, 'option');
     }
 
     return rest_ensure_response($r);
