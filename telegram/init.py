@@ -38,12 +38,8 @@ proxy = None  # https://github.com/Anorov/PySocks
 client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
 
 channels_list = [
-    # 1299783467, # Blaze Tech
-    1577414274, # BOT DOUBLE SEM GALE
     1785180053, # Buzz Teste api
-    1695064830, # VIP DOUBLE/SEM GALE 🐔
     1515446435, # 💥𝙑𝙄𝙋 𝙁𝙐𝙉𝙄𝙇 𝘽𝙇𝘼𝙕𝙀💥
-    1612607467, # BOT CRASH SEM GALE
 ]
 
 # 
@@ -56,12 +52,17 @@ async def handler(event):
         'Username': wp_user,
         'Password': wp_pass
     }
+    
+    print(title)
+    print(sender.id)
 
     # STICKER
     if(event.message.sticker):
-        StickerID = event.message.sticker.attributes[1].stickerset.id
+        # StickerID = event.message.sticker.attributes[1].stickerset.id
+        StickerID = event.message.media.document.id
         # Debug
         print(StickerID)
+        
         
         data = {
             'id': sender.id,
@@ -82,24 +83,18 @@ async def handler(event):
             'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
         }
 
-        # CRASH
-        if(sender.id == 1612607467):
-            r = requests.post(
-                url='https://blazerobot.vip/wp-json/blaze/v1/crash_signals', data=data, headers=headers)
-        else:
-            # DOUBLE
-            r = requests.post(
-                url='https://blazerobot.vip/wp-json/blaze/v1/double_signals', data=data, headers=headers)
+        r = requests.post(
+            url='https://blazerobot.vip/wp-json/blaze/v1/crash_signals', data=data, headers=headers)
 
 
     # Debug
-    print(title)
-    print(sender.id)
     print(r.text)
-    print(r)
-    print("----------------------------------------------")
+    # print(r)
+    # print(event)
+    print("---------------------------------")
     print(event.date.strftime("%H:%M - %d/%m/%Y"))
-    print("=================================================================================")
+    print("=================================================================")
+
 
 with client:
     print('(Press Ctrl+C to stop this)')
