@@ -4,14 +4,15 @@ if (!defined('WPINC')) {
   exit;
 }
 
-// Get custom fields
-// $cf = CTR_Home::get_content();
-if (!current_user_can('administrator')) {
-  header("Location: https://blazerobot.vip/login");
-  die();
+if (!is_user_logged_in()) {
+  wp_redirect(wp_login_url());
+} else {
+  $panel_link = get_permalink(get_page_by_template('panel'));
+  wp_redirect($panel_link);
 }
 
-get_header() ?>
+exit;
+?>
 
 
 <main class="main-home">

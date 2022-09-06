@@ -150,7 +150,7 @@ class Abstract_Functions
     $pages = get_pages(
       array(
         'meta_key' => '_wp_page_template',
-        'meta_value' => $template_name . '.php'
+        'meta_value' => 'page-' . $template_name . '.php'
       )
     );
 

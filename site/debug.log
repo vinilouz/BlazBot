@@ -1,0 +1,26 @@
+[06-Sep-2022 23:10:22 UTC] PHP Notice:  Trying to get property 'first_name' of non-object in D:\Programas\wamp64\www\robot2\site\themes\blazerobot\page-panel.php on line 29
+[06-Sep-2022 23:10:22 UTC] PHP Stack trace:
+[06-Sep-2022 23:10:22 UTC] PHP   1. {main}() D:\Programas\wamp64\www\robot2\index.php:0
+[06-Sep-2022 23:10:22 UTC] PHP   2. require() D:\Programas\wamp64\www\robot2\index.php:17
+[06-Sep-2022 23:10:22 UTC] PHP   3. require_once() D:\Programas\wamp64\www\robot2\wp-blog-header.php:19
+[06-Sep-2022 23:10:22 UTC] PHP   4. include() D:\Programas\wamp64\www\robot2\wp-includes\template-loader.php:106
+[06-Sep-2022 23:31:31 UTC] PHP Notice:  Trying to get property 'first_name' of non-object in D:\Programas\wamp64\www\robot2\site\themes\blazerobot\page-panel.php on line 34
+[06-Sep-2022 23:31:31 UTC] PHP Stack trace:
+[06-Sep-2022 23:31:31 UTC] PHP   1. {main}() D:\Programas\wamp64\www\robot2\index.php:0
+[06-Sep-2022 23:31:31 UTC] PHP   2. require() D:\Programas\wamp64\www\robot2\index.php:17
+[06-Sep-2022 23:31:31 UTC] PHP   3. require_once() D:\Programas\wamp64\www\robot2\wp-blog-header.php:19
+[06-Sep-2022 23:31:31 UTC] PHP   4. include() D:\Programas\wamp64\www\robot2\wp-includes\template-loader.php:106
+[06-Sep-2022 23:46:15 UTC] PHP Warning:  array_flip() expects parameter 1 to be array, bool given in D:\Programas\wamp64\www\robot2\wp-admin\includes\menu.php on line 294
+[06-Sep-2022 23:46:15 UTC] PHP Stack trace:
+[06-Sep-2022 23:46:15 UTC] PHP   1. {main}() D:\Programas\wamp64\www\robot2\wp-admin\index.php:0
+[06-Sep-2022 23:46:15 UTC] PHP   2. require_once() D:\Programas\wamp64\www\robot2\wp-admin\index.php:10
+[06-Sep-2022 23:46:15 UTC] PHP   3. require() D:\Programas\wamp64\www\robot2\wp-admin\admin.php:158
+[06-Sep-2022 23:46:15 UTC] PHP   4. require_once() D:\Programas\wamp64\www\robot2\wp-admin\menu.php:394
+[06-Sep-2022 23:46:15 UTC] PHP   5. array_flip($arg = TRUE) D:\Programas\wamp64\www\robot2\wp-admin\includes\menu.php:294
+[06-Sep-2022 23:46:25 UTC] PHP Warning:  array_flip() expects parameter 1 to be array, bool given in D:\Programas\wamp64\www\robot2\wp-admin\includes\menu.php on line 294
+[06-Sep-2022 23:46:25 UTC] PHP Stack trace:
+[06-Sep-2022 23:46:25 UTC] PHP   1. {main}() D:\Programas\wamp64\www\robot2\wp-admin\index.php:0
+[06-Sep-2022 23:46:25 UTC] PHP   2. require_once() D:\Programas\wamp64\www\robot2\wp-admin\index.php:10
+[06-Sep-2022 23:46:25 UTC] PHP   3. require() D:\Programas\wamp64\www\robot2\wp-admin\admin.php:158
+[06-Sep-2022 23:46:25 UTC] PHP   4. require_once() D:\Programas\wamp64\www\robot2\wp-admin\menu.php:394
+[06-Sep-2022 23:46:25 UTC] PHP   5. array_flip($arg = TRUE) D:\Programas\wamp64\www\robot2\wp-admin\includes\menu.php:294

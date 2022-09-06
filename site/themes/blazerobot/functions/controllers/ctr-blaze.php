@@ -4,6 +4,7 @@ class CTR_Blaze
 {
 
   // https://api-v2.blaze.com/roulette_games/recent
+  // https://api-v2.blaze.com/crash_games/recent
   // 0 - Branco
   // 1 - Vermelho
   // 2 - Preto
@@ -14,54 +15,61 @@ class CTR_Blaze
   function __construct()
   {
     /* Create Button on user profile */
-    add_action('admin_enqueue_scripts', [$this, 'create_button_login_blaze']);
+    // add_action('admin_enqueue_scripts', [$this, 'create_button_on_admin']);
 
     /* Login on blaze */
-    add_action('wp_ajax_nopriv_login_blaze', [$this, 'login_blaze']);
-    add_action('wp_ajax_login_blaze', [$this, 'login_blaze']);
+    add_action('wp_ajax_nopriv_connect_blaze', [$this, 'connect_blaze']);
+    add_action('wp_ajax_connect_blaze', [$this, 'connect_blaze']);
   }
 
-  function create_button_login_blaze($hook)
+  function create_button_on_admin($hook)
   {
     // if ('profile.php' !== $hook) return;
     wp_enqueue_script('user_blaze_script', theme_url('admin/public/js/user.js'), ['jquery'], date('h.i.s'));
     wp_enqueue_style('user_blaze_style', theme_url('admin/public/css/user.css'), false, date('his'));
   }
 
-  function login_blaze()
+  function connect_blaze()
   {
     $data = $_POST;
+    $user = $data['email_blaze'];
+    $pass = $data['password_blaze'];
+    // $user = $data['user'];
+    // $pass = $data['pass'];
+    return wp_send_json_error($_POST);
 
-    if (empty($data['user']) || empty($data['pass']))
-      return wp_send_json_error(['msg' => __('Preencha o email e senha', 'blazerobot')]);
 
-    // Validate credentials
-    $fields = ['username' => $data['user'], 'password' => $data['pass']];
-    $url = 'https://blaze.com/api/auth/password';
-    // $curl = self::blaze($url, 'PUT', $fields);
-    $curl = self::blazeLogin($fields);
-    @$token = $curl->access_token;
-    // on invalid
-    if (!$token) return wp_send_json_error(['msg' => __('Dados incorretos ou conta inexistente.', 'blazerobot'), 'data' => $curl]);
+    // if (empty($user) || empty($pass))
+    //   return wp_send_json_error(['msg' => __('Preencha o email e senha', 'blazerobot')]);
 
-    $wallet_id = $this->wallet($token)->id;
-    if (!$wallet_id) return wp_send_json_error(['msg' => __('Erro ao obter dados', 'blazerobot')]);
+    // // Validate credentials
+    // $fields = ['username' => $user, 'password' => $pass];
+    // $url = 'https://blaze.com/api/auth/password';
+    // // $curl = self::blaze($url, 'PUT', $fields);
+    // $curl = self::blazeLogin($fields);
+    // @$token = $curl->access_token;
+    // // on invalid
+    // return wp_send_json_error($curl);
+    // if (!$token) return wp_send_json_error(['msg' => __('Dados incorretos ou conta inexistente.', 'blazerobot'), 'data' => $curl]);
 
-    // On success
-    $uid = get_current_user_id();
-    $blaze = [
-      'email'     => $data['user'],
-      'password'  => $data['pass'],
-      'token'     => $token,
-      'wallet_id' => $wallet_id
-    ];
-    update_field('blaze', $blaze, "user_$uid");
+    // $wallet_id = $this->wallet($token)->id;
+    // if (!$wallet_id) return wp_send_json_error(['msg' => __('Erro ao obter dados', 'blazerobot')]);
 
-    return wp_send_json_success([
-      'token' => $token,
-      'wallet_id' => $wallet_id,
-      'msg' => __('Credenciais corretas.', 'blazerobot')
-    ]);
+    // // On success
+    // $uid = get_current_user_id();
+    // $blaze = [
+    //   'email'     => $user,
+    //   'password'  => $pass,
+    //   'token'     => $token,
+    //   'wallet_id' => $wallet_id
+    // ];
+    // update_field('blaze', $blaze, "user_$uid");
+
+    // return wp_send_json_success([
+    //   'token' => $token,
+    //   'wallet_id' => $wallet_id,
+    //   'msg' => __('Credenciais corretas.', 'blazerobot')
+    // ]);
   }
 
   public static function trigger_double_bets($signal, $turn = 0)
@@ -260,7 +268,7 @@ class CTR_Blaze
           "type"      => "BRL",
           "amount"    => $bet_value,
           "wallet_id" => $wallet_id,
-          "auto_cashout_at" => "2.00",
+          "auto_cashout_at" => "1.80",
         ];
         $url = 'https://blaze.com/api/crash/round/enter';
         $curl = self::blaze($url, 'POST', $fields, $token);
@@ -326,7 +334,7 @@ class CTR_Blaze
         "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36",
         "x-captcha-response: undefined",
         "x-client-language: pt",
-        "x-client-version: c9d9c023"
+        "x-client-version: e762fe3a3"
       ],
     ]);
 

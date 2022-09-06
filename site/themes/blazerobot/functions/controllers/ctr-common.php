@@ -29,9 +29,31 @@ class Controller_Common
 
     add_filter('jpeg_quality', array($this, 'setJPEGQuality'));
 
-
     add_filter('wpseo_breadcrumb_separator', array($this, 'filter_wpseo_breadcrumb_separator'), 10, 1);
+
+    add_action('admin_init', [$this, 'blockusers_init']);
   } // __construct
+
+  /**
+   * Redireciona usuários assinantes
+   */
+  function blockusers_init()
+  {
+    if (is_admin() && !current_user_can('administrator') && !(defined('DOING_AJAX') && DOING_AJAX)) {
+      wp_redirect(home_url());
+      exit;
+    }
+  }
+
+  function checking_current_user()
+  {
+    global $current_user;
+    $roles = array_keys($current_user->caps);
+    if (is_admin() && (in_array('subscriber', $roles))) {
+      wp_safe_redirect(site_url('/painel'));
+      exit;
+    }
+  }
 
   /**
    * Yoast separator
@@ -95,8 +117,7 @@ class Controller_Common
      */
     add_theme_support('title-tag');
 
-    remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
-
+    remove_action('shutdown', 'wp_ob_end_flush_all', 1);
   } // setup_features
 
   // -----------------------------------------------------------------------------

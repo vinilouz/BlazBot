@@ -1,22 +1,24 @@
 const { src, dest, watch, series } = require("gulp");
-const sass = require("gulp-sass");
+const sass = require('gulp-sass')(require('sass'));
 const postcss = require("gulp-postcss");
 const cssnano = require("cssnano");
 const terser = require("gulp-terser")
-var gcmq = require('gulp-group-css-media-queries')
+const cleanCss = require('gulp-clean-css');
+const combineMedia = require('gulp-combine-media');
 
 const paths = {
   srcSASS: "src/scss",
   srcJS: "src/js",
-  distCSS: "site/themes/exit/public/css",
-  distJS: "site/themes/exit/public/js",
+  distCSS: "site/themes/blazerobot/public/css",
+  distJS: "site/themes/blazerobot/public/js",
 };
 
 // Sass Task
 function scssTask() {
   return src(`${paths["srcSASS"]}/style.scss`, { sourcemaps: true })
     .pipe(sass())
-    .pipe(gcmq())
+    // .pipe(cleanCss({ level: { 2: { restructureRules: true } } }))
+    // .pipe(combineMedia())
     .pipe(postcss([cssnano()]))
     .pipe(dest(`${paths["distCSS"]}`, { sourcemaps: "." }));
 }

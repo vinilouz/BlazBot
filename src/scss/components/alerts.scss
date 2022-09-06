@@ -1,0 +1,32 @@
+
+.label-login {
+  padding: 3px 8px;
+  margin: 0 12px 12px 12px !important;
+  display: inline-flex;
+  order: 1;
+  align-items: center;
+  border-radius: 5px;
+  font-weight: 600;
+  display: block;
+  width: 100%;
+}
+
+.label-login svg {
+  width: 12px;
+  top: 1px;
+  position: relative;
+  margin-right: 5px;
+  fill: currentColor;
+}
+
+.label-login.-error {
+  color: #942220;
+  background-color: #ffeeed;
+  border: 1px solid #942220;
+}
+
+.label-login.-success {
+  color: #217662;
+  background-color: #f0fcf6;
+  border: 1px solid #217662;
+}

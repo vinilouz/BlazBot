@@ -1,0 +1,2 @@
+const init=()=>{let o=jQuery.noConflict();const n=o("#form-connect-blaze");n.on("submit",(e=>{e.preventDefault(),console.log("init loading"),o.ajax({type:"POST",url:n.attr("action"),data:n.serialize(),success:o=>{console.log("r",o)},error:o=>{console.log("error",o)}}).always((function(){console.log("end loading")}))}))};document.addEventListener("DOMContentLoaded",(()=>{init()}));
+//# sourceMappingURL=script.js.map

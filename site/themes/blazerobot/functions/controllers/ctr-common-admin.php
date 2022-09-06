@@ -78,11 +78,11 @@ class Controller_Common_Admin
   } // __construct
 
   public function handler_bet_notification(){
+    return wp_send_json_success(['notify' => true]);
     $list = get_field('signals_crash_list', 'option');
     if ($list) {
       $last_signal = end($list);
       if (!$last_signal['result']) {
-        return wp_send_json_success(['notify' => true]);
       } else {
         return wp_send_json_error(['notify' => false]);
       }

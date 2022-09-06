@@ -33,25 +33,26 @@ class Controller_Scripts
     wp_dequeue_style('wp-block-library');
     wp_dequeue_style('wp-block-library-theme');
     wp_dequeue_style('wc-blocks-style'); // Remove WooCommerce block CSS
-    // wp_enqueue_style('swiper-css', 'https://unpkg.com/swiper@8/swiper-bundle.min.css');
+    wp_enqueue_style('bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css');
     // wp_enqueue_style('toasty-css', 'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css');
     // wp_enqueue_style('aos-css', 'https://unpkg.com/aos@2.3.1/dist/aos.css');
     // wp_enqueue_style('locomotive-css', 'https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css');
-    // wp_enqueue_style('theme-style', get_theme_file_uri('/public/css/style.css'), [], date('his'));
+    wp_enqueue_style('theme-style', get_theme_file_uri('/public/css/style.css'), [], date('his'));
+    wp_localize_script('theme-style','wp',['ajaxurl' => admin_url('admin-ajax.php')]);
 
     /**
      * JS
      */
     wp_deregister_script('jquery');
-    // wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.2.1.min.js', array(), null);
-    // wp_enqueue_script('swiper-js', 'https://unpkg.com/swiper@8/swiper-bundle.min.js', [], '1.0.0');
+    wp_enqueue_script('jquery', 'https://code.jquery.com/jquery-3.6.1.min.js', [], '1.0.0');
+    wp_enqueue_script('bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js', array(), null);
     // wp_enqueue_script('toasty-js', 'https://cdn.jsdelivr.net/npm/toastify-js', [], '1.0.0');
     // wp_enqueue_script('aos-js', 'https://unpkg.com/aos@2.3.1/dist/aos.js', [], '1.0.0');
     // wp_enqueue_script('gsap', "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js", [], '1.0.0');
     // wp_enqueue_script('ScrollTrigger', "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js", [], '1.0.0');
     // wp_enqueue_script('locomotive', "https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js", [], '1.0.0');
     // wp_enqueue_script('isotope', 'https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js', [], '1.0.0');
-    // wp_enqueue_script('theme-script', get_theme_file_uri('/public/js/script.js'), array('jquery'), date('his'));
+    wp_enqueue_script('theme-script', get_theme_file_uri('/public/js/script.js'), ['jquery'], date('his'));
   }
 
   public function custom_gutenberg_script()

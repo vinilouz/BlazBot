@@ -24,7 +24,7 @@ class CTR_Menu_Editor
   {
     global $menu;
     // Perfil label
-    $menu[70][0] = 'Configurações';
+    // $menu[70][0] = 'Configurações';
 
     // == // == // == // == // == //
 
