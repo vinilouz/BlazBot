@@ -202,6 +202,10 @@ class CTR_Shortcode
         $dataIni = date("dmY", strtotime('monday this week'));
         $dataFim = date("dmY", strtotime('sunday this week'));
         break;
+      case 'lastWeek':
+        $dataIni = date("dmY", strtotime('monday last week'));
+        $dataFim = date("dmY", strtotime('sunday last week'));
+        break;
       case 'month':
         $dataIni = date('01mY');
         $dataFim = date('tmY');
@@ -226,7 +230,7 @@ class CTR_Shortcode
     }
     
     $html = <<<EOD
-      <div style="display:flex;flex-direction:column;margin-top:-30px;">
+      <div style="display:flex;flex-direction:column;">
         <span>✅️ ACERTOS: $win</span>
         <span>❌️ PERDAS: $loss</span>
       </div>

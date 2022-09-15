@@ -20,6 +20,8 @@ username = config['Telegram']['username']
 phone = config['Telegram']['phone']
 wp_user = config['WP']['username']
 wp_pass = config['WP']['password']
+api_url = 'http://localhost.robot2/wp-json/blaze/v1/crash_signals';
+# api_url = 'https://blazerobot.vip/wp-json/blaze/v1/crash_signals';
 
 
 def get_env(name, message, cast=str):
@@ -57,41 +59,42 @@ async def handler(event):
     print(sender.id)
 
     # STICKER
-    if(event.message.sticker):
-        # StickerID = event.message.sticker.attributes[1].stickerset.id
-        StickerID = event.message.media.document.id
-        # Debug
-        print(StickerID)
-        
-        
-        data = {
-            'id': sender.id,
-            'title': title,
-            'message': str(StickerID),
-            'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
-        }
-        
-        r = requests.post(
-            url='https://blazerobot.vip/wp-json/blaze/v1/crash_signals', data=data, headers=headers)
+    # if(event.message.sticker):
+    
+    # StickerID = event.message.sticker.attributes[1].stickerset.id
+    StickerID = event.message.media.document.id
+    # Debug
+    print(StickerID)
+    
+    
+    data = {
+        'id': sender.id,
+        'title': title,
+        'message': str(StickerID),
+        'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
+    }
+    
+    r = requests.post(
+        url=api_url, data=data, headers=headers)
 
     # TEXT
-    else:
-        data = {
-            'id': sender.id,
-            'title': title,
-            'message': event.text,
-            'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
-        }
+    # else:
+    #     data = {
+    #         'id': sender.id,
+    #         'title': title,
+    #         'message': event.text,
+    #         'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
+    #     }
 
-        r = requests.post(
-            url='https://blazerobot.vip/wp-json/blaze/v1/crash_signals', data=data, headers=headers)
+    #     r = requests.post(
+    #         url=api_url, data=data, headers=headers)
 
 
     # Debug
     print(r.text)
     # print(r)
     # print(event)
-    print("---------------------------------")
+    # print("---------------------------------")
     print(event.date.strftime("%H:%M - %d/%m/%Y"))
     print("=================================================================")
 

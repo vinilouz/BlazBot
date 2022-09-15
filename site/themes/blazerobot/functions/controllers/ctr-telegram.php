@@ -13,21 +13,23 @@ class CTR_Telegram
 
   public function create_routes()
   {
-    // https://blazerobot.vip/blaze/v1/double_signals
-    register_rest_route('blaze/v1', '/double_signals', [
-      [
-        'methods'  => WP_REST_Server::READABLE,
-        'callback' => [$this, 'handler_get_double_signals'],
-        'permission_callback' => '__return_true',
-      ],
-      [
-        'methods'  => WP_REST_Server::CREATABLE,
-        'callback' => [$this, 'handler_set_signals'],
-        'permission_callback' => '__return_true',
-      ],
-    ]);
+    // https://blazerobot.vip/wp-json/blaze/v1/double_signals
 
-    // https://blazerobot.vip/blaze/v1/crash_signals
+    // register_rest_route('blaze/v1', '/double_signals', [
+    //   [
+    //     'methods'  => WP_REST_Server::READABLE,
+    //     'callback' => [$this, 'handler_get_double_signals'],
+    //     'permission_callback' => '__return_true',
+    //   ],
+    //   [
+    //     'methods'  => WP_REST_Server::CREATABLE,
+    //     'callback' => [$this, 'handler_set_double_signals'],
+    //     'permission_callback' => '__return_true',
+    //   ],
+    // ]);
+
+    // https://blazerobot.vip/wp-json/blaze/v1/crash_signals
+
     register_rest_route('blaze/v1', '/crash_signals', [
       [
         'methods'  => WP_REST_Server::READABLE,
@@ -42,246 +44,83 @@ class CTR_Telegram
     ]);
   }
 
-  function handler_get_double_signals()
-  {
-    $response = get_field('signals_list', 'option');
-
-    return rest_ensure_response($response);
-  }
 
   function handler_get_crash_signals()
   {
-    $response = get_field('signals_crash_list', 'option');
-
+    $args = array(
+      'posts_per_page'   => -1,
+      'post_type'        => 'crash_signal',
+    );
+    $the_query = new WP_Query($args);
+    $response = null;
+    foreach ($the_query->posts as $k => $post) {
+      $response[$k]['room']    = get_field('room', $post->ID);
+      $response[$k]['message'] = get_field('message', $post->ID);
+      $response[$k]['time']    = get_field('time', $post->ID);
+      $response[$k]['result']  = get_field('result', $post->ID);
+    }
     return rest_ensure_response($response);
-  }
-
-
-  function handler_set_signals(WP_REST_Request $request)
-  {
-    $res = $request->get_body_params();
-    $r = null;
-
-    $date = new DateTime($res['date'], new DateTimeZone('UTC'));
-    $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
-
-    /**
-     * CONFIG FOR VIP DOUBLE/SEM GALE 🐔
-     * @see id 1695064830
-     */
-    if (strpos($res['message'], "𝘌𝘕𝘛𝘙𝘈𝘋𝘈 𝘊𝘖𝘕𝘍𝘐𝘙𝘔𝘈𝘋𝘈") !== false) {
-      $color = str_contains($res['message'], '🔴') ? 'VERMELHO' : 'PRETO';
-
-      $signal = [
-        'id'      => $res['id'],
-        'title'   => $res['title'],
-        'date'    => $date->format('d/m/Y g:i a'),
-        'color'   => $color,
-      ];
-
-      // Run the signal on Blaze
-      $r['trigger'] = CTR_Blaze::trigger_double_bets($signal);
-
-      // Save Signal
-      $r['save'] = add_row('signals_list', $signal, 'option');
-    } elseif (strpos($res['message'], "𝗪𝗜𝗡") !== false) {
-      // Update with win
-      $list = get_field('signals_list', 'option');
-      $search = array_filter($list, function ($var) {
-        return ($var['id'] == '1695064830' && $var['result'] == '');
-      });
-      $last_signal = end($search);
-      $last_signal['result'] = 'WIN';
-
-      if (strpos($res['message'], "𝗕𝗥𝗔𝗡𝗖𝗢") !== false) {
-        $last_signal['white'] = true;
-      }
-      $r['WIN'] = update_row('signals_list', count($list), $last_signal, 'option');
-    } elseif (strpos($res['message'], "𝗟𝗢𝗦𝗦") !== false) {
-      // Update with loss
-      $list = get_field('signals_list', 'option');
-      $search = array_filter($list, function ($var) {
-        return ($var['id'] == '1695064830' && $var['result'] == '');
-      });
-      $last_signal = end($search);
-      $last_signal['result'] = 'LOSS';
-      $r['LOSS'] = update_row('signals_list', count($list), $last_signal, 'option');
-    }
-
-    /**
-     * BOT DOUBLE SEM GALE
-     * @see id 1577414274
-     */
-    if (strpos($res['message'], "Apostar no") !== false) {
-      $color = str_contains($res['message'], '🔴') ? 'VERMELHO' : 'PRETO';
-      $signal = [
-        'id'      => $res['id'],
-        'title'   => $res['title'],
-        'date'    => $date->format('d/m/Y g:i a'),
-        'color'   => $color,
-      ];
-
-      // Run the signal on Blaze
-      // $r = CTR_Blaze::trigger_double_bets($signal);
-
-      // Save Signal
-      $r['save'] = add_row('signals_list', $signal, 'option');
-    } elseif (strpos($res['message'], "WIN") !== false) {
-
-      // Update with win
-      $list = get_field('signals_list', 'option');
-      $search = array_filter($list, function ($var) {
-        return ($var['id'] == '1577414274' && $var['result'] == '');
-      });
-      $last_signal = end($search);
-      $last_signal['result'] = 'WIN';
-
-      $r['WIN'] = update_row('signals_list', count($list), $last_signal, 'option');
-    } elseif (strpos($res['message'], "LOSS") !== false) {
-
-      // Update with loss
-      $list = get_field('signals_list', 'option');
-
-      $search = array_filter($list, function ($var) {
-        return ($var['id'] == '1577414274' && $var['result'] == '');
-      });
-      $last_signal = end($search);
-      $last_signal['result'] = 'LOSS';
-
-      $r['LOSS'] = update_row('signals_list', count($list), $last_signal, 'option');
-    }
-
-    return rest_ensure_response($r);
   }
 
 
   function handler_set_crash_signals(WP_REST_Request $request)
   {
-    $r = null;
     $res = $request->get_body_params();
 
     $date = new DateTime($res['date'], new DateTimeZone('UTC'));
     $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
-    $list = get_field('signals_crash_list', 'option');
+    $time = $date->format('d/m/Y H:i:s');
 
     /**
      * CONFIG FOR 💥𝙑𝙄𝙋 𝙁𝙐𝙉𝙄𝙇 𝘽𝙇𝘼𝙕𝙀💥
      * @see id 1515446435
      */
-    // if ($res['id'] == "1785180053") {
-    //   return rest_ensure_response('deu');
-    // } elseif ($res['id'] == "1515446435") {
-      $stickerTrigger = '5177118037744026031';
-      $stickerWin = '5172775546634895973';
-      $stickerLoss = '5172641062618923383';
-      if (str_contains($res['message'], $stickerTrigger)) {
-        $signal = [
-          'id'      => $res['id'],
-          'title'   => $res['title'],
-          'message' => $res['message'],
-          'date'    => $date->format('d/m/Y g:i a')
-        ];
+    // if ($res['id'] == "1515446435") {
+    $stickerTrigger = '5177118037744026031';
+    $stickerWin = '5172775546634895973';
+    $stickerLoss = '5172641062618923383';
 
-        // Run the signal on Blaze
-        $r['trigger'] = CTR_Blaze::trigger_crash_bets();
+    if (str_contains($res['message'], $stickerTrigger)) {
+      // Run the signal on Blaze
+      $r['trigger'] = CTR_Blaze::trigger_crash_bets();
+      $r['save'] = $this->create_crash_signal($res['title'], $res['message'], $time);
+    } elseif (str_contains($res['message'], $stickerWin)) {
 
-        // Save Signal
-        $r['save'] = add_row('signals_crash_list', $signal, 'option');
+      $last_signal = wp_get_recent_posts('numberposts=1&post_type=crash_signal');
+      $_ID = end($last_signal)['ID'];
+      $r['WIN'] = update_field('result', 'WIN', $_ID);
+    } elseif (str_contains($res['message'], $stickerLoss)) {
 
-      } elseif (str_contains($res['message'], $stickerWin)) {
-        // Update with win
-        $search = array_filter($list, function ($var) {
-          return ($var['id'] == '1515446435' && $var['result'] == '');
-        });
-        $last_signal = end($search);
-      
-        $last_signal['result'] = 'WIN';
-        $r['win'] = update_row('signals_crash_list', count($list), $last_signal, 'option');
-      } elseif (str_contains($res['message'], $stickerLoss)) {
-        // Update with loss
-        $search = array_filter($list, function ($var) {
-          return ($var['id'] == '1515446435' && $var['result'] == '');
-        });
-        $last_signal = end($search);
-
-        $last_signal['result'] = 'LOSS';
-        $r['loss'] = update_row('signals_crash_list', count($list), $last_signal, 'option');
-      }
+      $last_signal = wp_get_recent_posts('numberposts=1&post_type=crash_signal');
+      $_ID = end($last_signal)['ID'];
+      $r['LOSS'] = update_field('result', 'LOSS', $_ID);
+    }
     // }
 
     return rest_ensure_response($r);
   }
 
-  /**
-   * CONFIG FOR BLAZE TECH WITH GALES
-   * @see id 1299783467
-   */
-  // {
-  //   $res = $request->get_body_params();
 
-  //   $r = null;
+  function create_crash_signal($title, $message, $time)
+  {
+    $post_title = "$title - $time";
+    $post_id = wp_insert_post(array(
+      'post_type'    => 'crash_signal',
+      'post_title'   => $post_title,
+      'post_content' => $message,
+      'post_status'  => 'publish',
+      'ping_status'  => 'closed',
+      'comment_status' => 'closed',
+    ));
 
-  //   // Blaze Tech && Buzz
-  //   // if ($res['id'] == 1299783467 || $res['id'] == 1785180053) {
-  //   if (strpos($res['message'], "Oportunidade encontrada") !== false) {
-  //     $re = '/(?<=Apostar em ).*(?= )/m';
-  //     preg_match_all($re, $res['message'], $matches, PREG_SET_ORDER, 0);
-  //     $color = $matches[0][0];
+    if ($post_id) {
+      add_post_meta($post_id, 'room', $title);
+      add_post_meta($post_id, 'time', $time);
+      add_post_meta($post_id, 'message', $message);
+    }
 
-  //     $date = new DateTime($res['date'], new DateTimeZone('UTC'));
-  //     $date->setTimezone(new DateTimeZone('America/Sao_Paulo'));
-
-  //     $signal = [
-  //       'id'      => $res['id'],
-  //       'title'   => $res['title'],
-  //       'date'    => $date->format('d/m/Y g:i a'),
-  //       'color'   => $color,
-  //     ];
-
-  //     // Run the signal on Blaze
-  //     $r = CTR_Blaze::trigger_double_bets($signal);
-
-  //     // Save Signal
-  //     add_row('signals_list', $signal, 'option');
-  //   } elseif (strpos($res['message'], "🤞🏻 Façam a primeira proteção") !== false) {
-  //     $list = get_field('signals_list', 'option');
-  //     $last_signal = end($list);
-  //     $last_signal['result'] = 'G1';
-
-  //     $r = CTR_Blaze::trigger_double_bets($last_signal, 1);
-  //     update_row('signals_list', count($list), $last_signal, 'option');
-
-  //   } elseif (strpos($res['message'], "🤞🏻 Façam a segunda proteção") !== false) {
-  //     $list = get_field('signals_list', 'option');
-  //     $last_signal = end($list);
-  //     $last_signal['result'] = 'G2';
-
-  //     $r = CTR_Blaze::trigger_double_bets($last_signal, 2);
-  //     update_row('signals_list', count($list), $last_signal, 'option');
-
-  //   } elseif (strpos($res['message'], "✅✅✅") !== false) {
-  //     $list = get_field('signals_list', 'option');
-  //     $last_signal = end($list);
-  //     $last_signal['result'] = $last_signal['result'] ?: 'SG';
-  //     update_row('signals_list', count($list), $last_signal, 'option');
-
-  //   } elseif (strpos($res['message'], "Não bateu! 😥") !== false) {
-  //     $list = get_field('signals_list', 'option');
-  //     $last_signal = end($list);
-  //     $last_signal['result'] = 'LOSS';
-  //     update_row('signals_list', count($list), $last_signal, 'option');
-  //   }
-
-  //   if (strpos($res['message'], "GREEN NO BRANCO") !== false) {
-  //     $list = get_field('signals_list', 'option');
-  //     $last_signal = end($list);
-  //     $last_signal['white'] = true;
-  //     update_row('signals_list', count($list), $last_signal, 'option');
-  //   }
-  //   // }
-
-  //   return rest_ensure_response($r);
-  // }
+    return $post_id ?: false;
+  }
 }
 
 new CTR_Telegram();

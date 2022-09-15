@@ -101,25 +101,15 @@ class Controller_Scripts
 
   public function acf_start()
   {
-    acf_add_options_page(array(
-      'page_title' => 'Crash Sinais',
-      'menu_title' => 'Crash Sinais',
-      'menu_slug'  => 'crash-signals-list',
-      'update_button'   => __('Atualizar', 'blazerobot'),
-      'updated_message' => __("Informações Atualizadas", 'blazerobot'),
-      'capability' => 'edit_posts',
-      'icon_url' => 'dashicons-feedback',
-    ));
-
-    acf_add_options_page(array(
-      'page_title' => 'Double Sinais',
-      'menu_title' => 'Double Sinais',
-      'menu_slug'  => 'signals-list',
-      'update_button'   => __('Atualizar', 'blazerobot'),
-      'updated_message' => __("Informações Atualizadas", 'blazerobot'),
-      'capability' => 'edit_posts',
-      'icon_url' => 'dashicons-feedback',
-    ));
+    // acf_add_options_page(array(
+    //   'page_title' => 'Sinais',
+    //   'menu_title' => 'Sinais',
+    //   'menu_slug'  => 'signals-list',
+    //   'update_button'   => __('Atualizar', 'blazerobot'),
+    //   'updated_message' => __("Informações Atualizadas", 'blazerobot'),
+    //   'capability' => 'edit_posts',
+    //   'icon_url' => 'dashicons-feedback',
+    // ));
   }
 }
 
