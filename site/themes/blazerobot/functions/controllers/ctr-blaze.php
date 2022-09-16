@@ -241,13 +241,16 @@ class CTR_Blaze
           "type"      => "BRL",
           "amount"    => $bet_value,
           "wallet_id" => $wallet_id,
-          "auto_cashout_at" => "1.80",
+          "auto_cashout_at" => "1.8",
         ];
         $url = 'https://blaze.com/api/crash/round/enter';
         $curl = self::blaze($url, 'POST', $fields, $token);
         
-        if (isset($curl->id))
+        if (isset($curl->id)){
           $success = true;
+        } else {
+          usleep(500);
+        }
       }
     }
 

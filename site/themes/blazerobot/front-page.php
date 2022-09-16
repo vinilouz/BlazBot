@@ -19,15 +19,14 @@ if (!defined('WPINC')) {
  */
 // $results = CTR_Blaze::trigger_crash_bets();
 // pre($results);
-
 ?>
-
 
 <?php
 /**
  * Teste 
  */
-// CTR_Blaze::make_crash_bet(1);
+// $r = CTR_Blaze::make_crash_bet(1);
+// pre($r);
 ?>
 
 <?php get_footer() ?>

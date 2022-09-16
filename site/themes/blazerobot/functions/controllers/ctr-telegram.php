@@ -65,6 +65,7 @@ class CTR_Telegram
 
   function handler_set_crash_signals(WP_REST_Request $request)
   {
+    $r = null;
     $res = $request->get_body_params();
 
     $date = new DateTime($res['date'], new DateTimeZone('UTC'));

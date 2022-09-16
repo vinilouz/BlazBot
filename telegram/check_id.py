@@ -39,66 +39,29 @@ def get_env(name, message, cast=str):
 proxy = None  # https://github.com/Anorov/PySocks
 client = TelegramClient(username, api_id, api_hash, proxy=proxy).start()
 
-channels_list = [
-    1785180053, # Buzz Teste api
-    1515446435, # 💥𝙑𝙄𝙋 𝙁𝙐𝙉𝙄𝙇 𝘽𝙇𝘼𝙕𝙀💥
-]
-
 # 
-@client.on(events.NewMessage(incoming=True, from_users=channels_list))
+@client.on(events.NewMessage(incoming=True))
 async def handler(event):
     sender = await event.get_sender()
     title = utils.get_display_name(sender)
-    headers = {
-        'Authorization': 'Basic '+wp_user+wp_pass,
-        'Username': wp_user,
-        'Password': wp_pass
-    }
-    
+
     print('title: ' + title)
     print('senderId: ' + str(sender.id))
-
+    
     # STICKER
     if(event.message.sticker):
-        
         # StickerID = event.message.sticker.attributes[1].stickerset.id
         StickerID = event.message.media.document.id
 
         print('StickerID: ' + str(StickerID))
-                
-        data = {
-            'id': sender.id,
-            'title': title,
-            'message': str(StickerID),
-            'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
-        }
-        
-        r = requests.post(
-            url=api_url, data=data, headers=headers)
-
+  
     # TEXT
-    # else:
-    #     data = {
-    #         'id': sender.id,
-    #         'title': title,
-    #         'message': event.text,
-    #         'date': event.date.strftime("%Y-%m-%d %H:%M:%S"),
-    #     }
+    else:
+        print('Message: ' + event.text)
 
-    #     r = requests.post(
-    #         url=api_url, data=data, headers=headers)
-
-
-    # Debug
-    print(r.text)
-    print('response: ' + r.text)
-
-    # print(r)
     # print(event)
     # print("---------------------------------")
-    time = event.date.strftime("%H:%M - %d/%m/%Y")
-    print('data: ' + time)
-
+    print(event.date.strftime("%H:%M - %d/%m/%Y"))
     print("=================================================================")
 
 
